@@ -2812,7 +2812,11 @@ body {
   background-position: center;
   background-repeat: repeat-x;
   background-attachment: fixed;
-  background-size: 100% 100%;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  -moz-background-size: cover;
+  -ms-background-size: cover;
 }
 .main-inner {
   opacity: 0.96;
