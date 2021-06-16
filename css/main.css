@@ -2809,6 +2809,7 @@ body {
   background-image: url("/images/bg.png");
   height: 100%;
   width: 100%;
+  background-position: center;
   background-repeat: repeat-x;
   background-attachment: fixed;
   background-size: 100% 100%;
