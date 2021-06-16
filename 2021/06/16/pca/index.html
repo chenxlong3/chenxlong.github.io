@@ -23,12 +23,12 @@
 
 
   <script>
-  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/2397f328.js","daovoice")
   daovoice('init', {
-      app_id: "2397f328"
-    });
-  daovoice('update');
-  </script>
+  app_id: "2397f328"
+});
+daovoice('update');
+</script>
 <meta name="description" content="引言">
 <meta property="og:type" content="article">
 <meta property="og:title" content="纯粹直觉地理解主成分分析 (PCA)">
@@ -36,14 +36,14 @@
 <meta property="og:site_name" content="Xiaolong Chen">
 <meta property="og:description" content="引言">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://chenxlong3.github.io/.io//pca1.jpg">
-<meta property="og:image" content="https://chenxlong3.github.io/.io//pca2.jpg">
+<meta property="og:image" content="https://chenxlong3.github.io/2021/06/16/pca/pca1.jpg">
+<meta property="og:image" content="https://chenxlong3.github.io/2021/06/16/pca/pca2.jpg">
 <meta property="article:published_time" content="2021-06-16T01:50:54.000Z">
-<meta property="article:modified_time" content="2021-06-16T02:20:09.894Z">
+<meta property="article:modified_time" content="2021-06-16T08:18:19.728Z">
 <meta property="article:author" content="Xiaolong Chen">
 <meta property="article:tag" content="Machine Learning">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://chenxlong3.github.io/.io//pca1.jpg">
+<meta name="twitter:image" content="https://chenxlong3.github.io/2021/06/16/pca/pca1.jpg">
 
 
 <link rel="canonical" href="https://chenxlong3.github.io/2021/06/16/pca/">
@@ -233,25 +233,16 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2021-06-16 09:50:54 / Modified: 10:20:09" itemprop="dateCreated datePublished" datetime="2021-06-16T09:50:54+08:00">2021-06-16</time>
+      <time title="Created: 2021-06-16 09:50:54 / Modified: 16:18:19" itemprop="dateCreated datePublished" datetime="2021-06-16T09:50:54+08:00">2021-06-16</time>
     </span>
 
   
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="Symbols count in article">
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
       <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
+        <i class="far fa-eye"></i>
       </span>
-      <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>1.5k</span>
-    </span>
-    <span class="post-meta-item" title="Reading time">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>1 mins.</span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
     </span>
 </div>
 
@@ -263,17 +254,16 @@
     
     <div class="post-body" itemprop="articleBody">
         <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>写这篇blog只是分享一下个人对于PCA的直观理解，并不涉及严谨的数学推导，懒是一个原因，而且自己对线性代数的SVD那些知识掌握得还不够熟练，这里就不班门弄斧了。</p>
-<h1 id="降维的思想"><a href="#降维的思想" class="headerlink" title="降维的思想"></a>降维的思想</h1><p>要了解某个物体，我们往往会关注它的多个特性（或者叫多个维度）。假设这里有n个特性，那么对于每一个样本，我们可以用n维空间的某一个点来表示：<br> $$(x_1, x_2 , \dots, x_n)$$<br> 然而，这些特性中，会存在某一些高度相关的特性，比如在评价一个人时，他/她的总财产和月收入一般是正相关的，那么我们是否可以只用一个数来描述这个人的富有程度呢？显然是可以的。事实上，这样的想法就基本上是降维的思路了。如果按照上述例子的思路，我们就可以把一个n维空间的点，变成一个n-1维空间的点了。</p>
+<h1 id="降维的思想"><a href="#降维的思想" class="headerlink" title="降维的思想"></a>降维的思想</h1><p>要了解某个物体，我们往往会关注它的多个特性（或者叫多个维度）。假设这里有n个特性，那么对于每一个样本，我们可以用n维空间的某一个点来表示：</p>
+<script type="math/tex; mode=display">(x_1, x_2 , \dots, x_n)</script><p> 然而，这些特性中，会存在某一些高度相关的特性，比如在评价一个人时，他/她的总财产和月收入一般是正相关的，那么我们是否可以只用一个数来描述这个人的富有程度呢？显然是可以的。事实上，这样的想法就基本上是降维的思路了。如果按照上述例子的思路，我们就可以把一个n维空间的点，变成一个n-1维空间的点了。</p>
 <h1 id="主成分分析"><a href="#主成分分析" class="headerlink" title="主成分分析"></a>主成分分析</h1><p>事实上，主成分分析的实质就是<strong>坐标轴的变换</strong>，然后舍弃掉贡献较小的变量。</p>
 <p>在这里提一下，很多教程喜欢把中心化(centralizing)放在前面讲，但事实上这个操作只是把坐标原点进行平移而已，并不涉及PCA的实质，暂且不提。</p>
-
-
-<p><img src="/.io//pca1.jpg" alt="axis_rotation"></p>
+<p><img src="/2021/06/16/pca/pca1.jpg" alt="pca1"></p>
 <p>如上图所示，我们用了新的一组变量$(PC_1 , PC_2)$来代替原来的变量$(x_1, x_2)$。显然，在新的坐标下，数据点在$PC_2$方向上的分散较小，若在误差范围内，可以忽略。这样，我们就可以只用$PC_1$一个变量来描述这些数据点了。</p>
 <p>根据线性代数的知识，我们可以知道这里其实就涉及到基变换的知识了。同样地，这也是个非常“数学”的过程，等以后有时间再写。简单来说，新的变量组是旧变量组的线性组合。</p>
-<h1 id="另一种看法"><a href="#另一种看法" class="headerlink" title="另一种看法"></a>另一种看法</h1><p>不难发现，上述对于PCA的理解其实有点类似Linear Regression。现在我们用另外一种角度来考虑PCA。前面提到，新的变量组是旧变量组的线性组合，那就可以写成如下格式：<br>$\begin{cases}  PC_1 = c_{11}x_1 + c_{12}x_2 + \dots +c_{1n}x_n \<br>PC_2 = c_{21}x_1 + c_{22}x_2 + \dots +c_{2n}x_n \ \vdots \<br>PC_n = c_{n1}x_1 + c_{n2}x_2 + \dots +c_{nn}x_n<br>\end{cases}$<br>问题是系数$c_{ii}$的选取，以什么作为原则呢？因为我们最终目的是降维，也就是说要把尽量多的<strong>特征</strong>保留在前几个主成分中。这意味着什么呢？如果两个点投影到一个轴上之后重合成一个点，那么这两个点的区分度就变小了，也就是说，在降维之后，用于描述这两个点的特征变少了。那么直观上怎么样才算是保留了较多的<strong>特征</strong>呢？事实上， 这就是要求样本点在新的轴上的分布尽量分散。很容易联想到，描述样本分散程度的数学量就是方差。所以我们要做的事情也就是使$Var(PC_1)$最大化。</p>
+<h1 id="另一种看法"><a href="#另一种看法" class="headerlink" title="另一种看法"></a>另一种看法</h1><p>不难发现，上述对于PCA的理解其实有点类似Linear Regression。现在我们用另外一种角度来考虑PCA。前面提到，新的变量组是旧变量组的线性组合，那就可以写成如下格式：<br>$\begin{cases}  PC_1 = c_{11}x_1 + c_{12}x_2 + \dots +c_{1n}x_n \\<br>PC_2 = c_{21}x_1 + c_{22}x_2 + \dots +c_{2n}x_n \\ \vdots \\<br>PC_n = c_{n1}x_1 + c_{n2}x_2 + \dots +c_{nn}x_n<br>\end{cases}$<br>问题是系数$c_{ii}$的选取，以什么作为原则呢？因为我们最终目的是降维，也就是说要把尽量多的<strong>特征</strong>保留在前几个主成分中。这意味着什么呢？如果两个点投影到一个轴上之后重合成一个点，那么这两个点的区分度就变小了，也就是说，在降维之后，用于描述这两个点的特征变少了。那么直观上怎么样才算是保留了较多的<strong>特征</strong>呢？事实上， 这就是要求样本点在新的轴上的分布尽量分散。很容易联想到，描述样本分散程度的数学量就是方差。所以我们要做的事情也就是使$Var(PC_1)$最大化。</p>
 <p>这两种看法实际上是一样的，设样本点到新坐标轴的距离为$h$，点 $\overline{x}$ 的坐标为$(\overline{x_1}, \overline{x_2}, \dots, \overline{x<br>_n})$，样本点在新坐标轴上的投影到点 $\overline{x}$ 的距离为$d$。因为样本点到点 $\overline{x}$ 点的距离是一定的，那么根据勾股定理，如果我们要求$h$尽量小，实际上等价于要求$d$尽量大。</p>
-<p><img src="/.io//pca2.jpg" alt="another"></p>
+<p><img src="/2021/06/16/pca/pca2.jpg" alt="another"></p>
 <p>上述的证明默认了新的坐标轴是经过点 $\overline{x}$ 的，其实这也就是中心化。</p>
 <h1 id="碎碎念"><a href="#碎碎念" class="headerlink" title="碎碎念"></a>碎碎念</h1><p>PCA的数学公式推导暂且先留个坑，希望以后会有时间搞一搞。不得不说孔子讲得还真对，温故而知新。线性代数这门学科越是反复看就越是觉得有意思，当然也确实有点难度，等到一切尘埃落定之后会好好整理一下这些知识。</p>
 
@@ -337,19 +327,23 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Xiaolong Chen</span>
 </div>
-<div class="wordcount">
-  <span class="post-meta-item">
-    <span class="post-meta-item-icon">
-      <i class="fa fa-chart-line"></i>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
     </span>
-    <span title="Symbols count total">2k</span>
-  </span>
-  <span class="post-meta-item">
-    <span class="post-meta-item-icon">
-      <i class="fa fa-coffee"></i>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
     </span>
-    <span title="Reading time total">2 mins.</span>
-  </span>
 </div><script color="255,0,120" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
 
 
@@ -366,8 +360,15 @@
 
 
   
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{&quot;enable&quot;:true,&quot;tags&quot;:&quot;none&quot;,&quot;js&quot;:{&quot;url&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;mathjax@3.1.4&#x2F;es5&#x2F;tex-mml-chtml.js&quot;,&quot;integrity&quot;:&quot;sha256-ncNI9OXOS5Ek4tzVYiOMmN&#x2F;KKCPZ6V0Cpv2P&#x2F;zHntiA&#x3D;&quot;}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
 
