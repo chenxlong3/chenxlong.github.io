@@ -2811,10 +2811,10 @@ body {
   width: 100%;
   background-repeat: repeat-x;
   background-attachment: fixed;
-  background-size: cover;
+  background-size: 100% 100%;
 }
 .main-inner {
-  opacity: 0.95;
+  opacity: 0.96;
   border-radius: 25px;
 }
 .post-block {

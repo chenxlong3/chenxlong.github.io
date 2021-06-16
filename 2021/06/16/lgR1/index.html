@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;chenxlong3.github.io&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;}}</script><script src="/js/config.js"></script>
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/2397f328.js","daovoice")
+  daovoice('init', {
+  app_id: "2397f328"
+});
+daovoice('update');
+</script>
+<meta name="description" content="分类">
+<meta property="og:type" content="article">
+<meta property="og:title" content="逻辑回归（一）：0还是1？">
+<meta property="og:url" content="https://chenxlong3.github.io/2021/06/16/lgR1/index.html">
+<meta property="og:site_name" content="Xiaolong Chen">
+<meta property="og:description" content="分类">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://chenxlong3.github.io/2021/06/16/lgR1/lgstR1.jpg">
+<meta property="og:image" content="https://chenxlong3.github.io/2021/06/16/lgR1/LgstR2.png">
+<meta property="og:image" content="https://chenxlong3.github.io/2021/06/16/lgR1/LgstR3pp.jpg">
+<meta property="og:image" content="https://chenxlong3.github.io/2021/06/16/lgR1/LgstR4.jpg">
+<meta property="og:image" content="https://chenxlong3.github.io/2021/06/16/lgR1/LgstR3.png">
+<meta property="og:image" content="https://chenxlong3.github.io/2021/06/16/lgR1/LgstR3.png">
+<meta property="og:image" content="https://chenxlong3.github.io/2021/06/16/lgR1/LgstR4.png">
+<meta property="article:published_time" content="2021-06-16T12:58:47.000Z">
+<meta property="article:modified_time" content="2021-06-16T13:17:27.519Z">
+<meta property="article:author" content="Xiaolong Chen">
+<meta property="article:tag" content="Machine Learning">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chenxlong3.github.io/2021/06/16/lgR1/lgstR1.jpg">
+
+
+<link rel="canonical" href="https://chenxlong3.github.io/2021/06/16/lgR1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;chenxlong3.github.io&#x2F;2021&#x2F;06&#x2F;16&#x2F;lgR1&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;06&#x2F;16&#x2F;lgR1&#x2F;&quot;,&quot;title&quot;:&quot;逻辑回归（一）：0还是1？&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>逻辑回归（一）：0还是1？ | Xiaolong Chen</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Xiaolong Chen</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About Me</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E7%B1%BB"><span class="nav-number">1.</span> <span class="nav-text">分类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1"><span class="nav-number">2.</span> <span class="nav-text">任务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF%E5%92%8C%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">思路和方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%EF%BC%9F"><span class="nav-number">3.1.</span> <span class="nav-text">用线性回归？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%EF%BC%88Logistic-Regression%EF%BC%89"><span class="nav-number">3.2.</span> <span class="nav-text">逻辑回归（Logistic Regression）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%B3%E7%AD%96%E8%BE%B9%E7%95%8C%EF%BC%88Decision-Boundary%EF%BC%89"><span class="nav-number">3.3.</span> <span class="nav-text">决策边界（Decision Boundary）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%EF%BC%88Loss-Function%EF%BC%89"><span class="nav-number">3.4.</span> <span class="nav-text">损失函数（Loss Function）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%95%E8%AF%95%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E7%9A%84Loss-Function%EF%BC%9F"><span class="nav-number">3.4.1.</span> <span class="nav-text">试试线性回归的Loss Function？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Maximum-Likelihood"><span class="nav-number">3.4.2.</span> <span class="nav-text">Maximum Likelihood</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Loss%E5%87%BD%E6%95%B0%E7%9A%84%E4%B8%80%E8%88%AC%E5%BD%A2%E5%BC%8F"><span class="nav-number">3.4.3.</span> <span class="nav-text">Loss函数的一般形式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8B%98%E8%AF%AF%E5%8E%86%E5%8F%B2"><span class="nav-number">5.</span> <span class="nav-text">勘误历史</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Xiaolong Chen"
+      src="/images/sijia.jpg">
+  <p class="site-author-name" itemprop="name">Xiaolong Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="mailto:chenxlong3@outlook.com" title="E-Mail → mailto:chenxlong3@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/weixin_42393947?spm=1000.2115.3001.5343" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;weixin_42393947?spm&#x3D;1000.2115.3001.5343" rel="noopener" target="_blank"><i class="fa fa-blog fa-fw"></i>CSDN</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      More info
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="/file/cv_XiaolongChen.pdf" title="&#x2F;file&#x2F;cv_XiaolongChen.pdf">CV-Eng</a>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenxlong3.github.io/2021/06/16/lgR1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/sijia.jpg">
+      <meta itemprop="name" content="Xiaolong Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xiaolong Chen">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          逻辑回归（一）：0还是1？
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-06-16 20:58:47 / Modified: 21:17:27" itemprop="dateCreated datePublished" datetime="2021-06-16T20:58:47+08:00">2021-06-16</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h1><p>对于人来说，分类是一种很自然的能力。看到猫的照片，我们知道是猫，看到狗的照片，我们知道是狗；根据邮件的内容我们也能很快看出这是不是一封广告/诈骗邮件。既然人能简单地完成这种任务，那我们能不能让计算机也做到呢？显然，当今的社会生活已经给了我们答案。我们今天就介绍一种最为简单的分类思想，逻辑回归（Logistic Regression）。</p>
+<h1 id="任务"><a href="#任务" class="headerlink" title="任务"></a>任务</h1><p>首先，从简单的二分类讲起。</p>
+<ul>
+<li>邮件：是否为诈骗邮件</li>
+<li>肿瘤：良性还是恶性</li>
+<li><p>照片：猫还是狗</p>
+<p>类似这些的分类任务，我们称之为二分类（Binary Classification）。事实上这种二分类问题都可以抽象成对0和1的分类。整个模型简图如下，输入数据，通过一个函数，输出一个类别（0或者1）。</p>
+</li>
+</ul>
+<p><img src="/2021/06/16/lgR1/lgstR1.jpg" alt></p>
+<h1 id="思路和方法"><a href="#思路和方法" class="headerlink" title="思路和方法"></a>思路和方法</h1><p>我们的思考方式一般都是从低维慢慢拓展至高维，所以我们这里就假设一个物体的特征可以用一个数来表示。比如我们假设根据肿瘤的大小就可以判断肿瘤是良性还是恶性，并且假设大的肿瘤更可能是恶性肿瘤。用0表示良性肿瘤，用1表示恶性肿瘤。</p>
+<p><img src="/2021/06/16/lgR1/LgstR2.png" alt></p>
+<p>如上图所示，显然根据我们的设定，Size在1-4的 肿瘤都算是良性的肿瘤，Size大于等于5的肿瘤都是恶性的肿瘤。那么，根据这些数据，我们要怎么样才可以得到一个通用模型，使得输入一个肿瘤的大小，就可以判断它是良性的还是恶性的呢？</p>
+<h2 id="用线性回归？"><a href="#用线性回归？" class="headerlink" title="用线性回归？"></a>用线性回归？</h2><p>按照这个思路，很容易联想到其实这也很像一个预测的过程，那么用我们之前介绍过的线性回归（<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42393947/article/details/114049215">线性回归：机器学习的”Hello, World”</a>）可不可以做到呢？</p>
+<p>不妨试他一试，上图中的线性拟合结果大致可以表示成下图：</p>
+<p><img src="/2021/06/16/lgR1/LgstR3pp.jpg" alt></p>
+<p>那么随便输入一个肿瘤的大小，我们就会得到一个输出$h_{\theta}(x)$，但是这个值的范围并不只有0和1，这种情况要怎么办呢？我们可以取0和1的中点0.5作为一个阈值，根据以下规则调整输出：</p>
+<ul>
+<li>如果$h_{\theta}(x)\geq0.5$，认为$”y=1”$</li>
+<li>如果$h_{\theta}(x)&lt;0.5$，认为$”y=0”$</li>
+</ul>
+<p>这样看起来貌似挺合理的，但是如果我们再加一个比较偏远的数据点呢？这个时候我们的误差就会非常大了，所以显然这并不是一个特别好的选择。 </p>
+<p><img src="/2021/06/16/lgR1/LgstR4.jpg" alt></p>
+<h2 id="逻辑回归（Logistic-Regression）"><a href="#逻辑回归（Logistic-Regression）" class="headerlink" title="逻辑回归（Logistic Regression）"></a>逻辑回归（Logistic Regression）</h2><p>根据上面的分析可以看出，如果使用线性回归，输出的值是可以小于0或者大于1的。事实上对于一个分类程序来说，输出远小于0和远大于1都是非常奇怪的。逻辑回归的好处之一就是得到的输出是一个0到1的数。即：</p>
+<script type="math/tex; mode=display">
+0\leq h_{\theta}(x)\leq1</script><p>当我们在用线性回归的时候，我们提出的假设是：</p>
+<script type="math/tex; mode=display">
+h_{\theta}(x) = \theta^TX</script><p>这个式子的意义就是，每一个输入的特征都对结果有一定的贡献，这个贡献的大小就是对应的权重$\theta_i$。为了让输出结果为在0到1之间，同时又要体现各个特征的贡献，那么聪明的人们就想到用以下形式来作为输出函数：</p>
+<script type="math/tex; mode=display">
+h_{\theta}(x) = g(\theta^TX)\\
+g(z) = \frac{1}{1+e^{-z}}</script><p>函数$g(z)$被称为$Sigmoid$函数，图像如下图所示：</p>
+<p><img src="/2021/06/16/lgR1/LgstR3.png" alt></p>
+<p>显然，这个函数的值最终都是在区间$(0,1)$上的。也就是说这个函数实现了所有实数到区间$(0,1)$上的映射。我们再联想一下，这个一定在区间$(0,1)$上的输出值，会有什么意义呢？当然可以解释成靠近0或1的程度，而这种程度，很直觉地，非常类似于<strong>概率</strong>。也就是说，我们得到的$h_{\theta}(x)$，可以认为是<strong>分类结果为1的概率</strong>。用数学形式表示如下：</p>
+<script type="math/tex; mode=display">
+h_{\theta}(x) = P\{y=1|x; \theta\}</script><p>好的，那么我们已经知道了使用的函数的形式及其意义，接下来我们介绍一下<strong>决策边界（Decision Boundary）</strong>。</p>
+<h2 id="决策边界（Decision-Boundary）"><a href="#决策边界（Decision-Boundary）" class="headerlink" title="决策边界（Decision Boundary）"></a>决策边界（Decision Boundary）</h2><p>再把$Sigmoid$函数搬出来，仍记得它长成这样：</p>
+<script type="math/tex; mode=display">
+g(z) = \frac{1}{1+e^{-z}}</script><p><img src="/2021/06/16/lgR1/LgstR3.png" alt></p>
+<p>显然，如果我们把$z = 0$代入函数式中，得到的函数值为0.5，也就是说</p>
+<ul>
+<li>$z\geq0:\ g(z)\geq0.5$</li>
+<li>$z&lt;0:\ g(z)&lt;0.5$</li>
+</ul>
+<p>显然，要分类0和1，只要将$g(z)$的大小与0.5作比较即可，也就是比较$z$与0的大小关系。 前面提到，$z = \theta^TX$，那么整个过程就简化为：</p>
+<ul>
+<li>$\theta^TX\geq0$: 类别1</li>
+<li>$\theta^TX&lt;0$: 类别0</li>
+</ul>
+<p>有没有联想到什么？或许还不够明显，如果写成如下形式呢？</p>
+<ul>
+<li>$\theta_1x_1 + \theta_2x_2+\dots+\theta_nx_n\geq0$: 类别1</li>
+<li>$\theta_1x_1 + \theta_2x_2+\dots+\theta_nx_n&lt;0$: 类别0</li>
+</ul>
+<p>或许高维还是有些不够直观，降到二维看一看？</p>
+<ul>
+<li>$\theta_1x + \theta_2y\geq0$: 类别1</li>
+<li><p>$\theta_1x + \theta_2y&lt;0$: 类别0</p>
+<p>这个形式，是不是非常像我们高中学到过的线性规划呢？回想一下线性规划的思路，先令整个表达式等于0，在坐标系中画出一条线，将整个坐标空间划分成两个部分，一部分满足表达式&gt;0，另一部分则满足表达式&lt;0。事实上，这一条线就可以叫做<strong>决策边界（Decision Boundary）</strong>。拓展至三维还是可以想象的，那时候决策边界就是一个平面，但是当维度拓展至四维时，我们就难以将其具象化了，但是这种思想依旧是正确的。我们把满足$\theta_1x_1 + \theta_2x_2+\dots+\theta_nx_n=0$的所有点组成的集合叫作<strong>超平面（Hyperplane）</strong>，它也就是决策边界了。</p>
+</li>
+</ul>
+<p>那么，一切的一切，又落在确定决策边界这个问题上了。</p>
+<p>要确定决策边界，也就是要确定最合适的参数$\theta$。还是那句话，何为==合适==，使得训练集对应的Loss函数最小，就是合适。</p>
+<h2 id="损失函数（Loss-Function）"><a href="#损失函数（Loss-Function）" class="headerlink" title="损失函数（Loss Function）"></a>损失函数（Loss Function）</h2><h3 id="试试线性回归的Loss-Function？"><a href="#试试线性回归的Loss-Function？" class="headerlink" title="试试线性回归的Loss Function？"></a>试试线性回归的Loss Function？</h3><p>学习了线性回归的相关知识，我们很容易想到继续用MSE来表示，即：</p>
+<script type="math/tex; mode=display">
+L(\theta) = \frac{1}{m}\sum_{i=1}^m\frac{1}{2}(h_\theta(x^{(i)})-y)^2</script><p>（注： 此处的系数$1/2$，只是为了让求导后的形式更简洁而已，对理解Loss函数没有实质影响）<br>然而，经过各种学者的探索与验证，我们发现，这种形式的函数是一个非凸函数（non-convex function）。我们把求和号后面的式子视为函数$Cost(h_\theta(x^{(i)}),y)$，则Loss Function可以精简成如下格式：</p>
+<script type="math/tex; mode=display">
+L(\theta) = \frac{1}{m}\sum_{i=1}^mCost(h_\theta(x^{(i)}),y)\\
+Cost(h_\theta(x),y)=\frac{1}{2}(h_\theta(x)-y)^2</script><p>这里借用一下吴恩达机器学习课程里的图，函数的图像轮廓大概如下：</p>
+<p><img src="/2021/06/16/lgR1/LgstR4.png" alt></p>
+<p>显然，这种函数有非常多的<strong>局部最优（Local Minimum）</strong>，较难收敛到全局最优。那么我们真正用到的Cost函数是：</p>
+<script type="math/tex; mode=display">
+Cost(h_\theta(x),y) = \left\{
+\begin{aligned}
+-log(h_\theta(x))& \ \ \ \ if\ \ y =1 \\
+-log(1-h_\theta(x))& \ \ \ \ if\ \ y=0
+\end{aligned}
+\right.</script><p>历史已经向我们证明了这个Cost函数是可行的。或许很多教程都会直接把这个结果给出来，但是，为什么呢？</p>
+<h3 id="Maximum-Likelihood"><a href="#Maximum-Likelihood" class="headerlink" title="Maximum Likelihood"></a>Maximum Likelihood</h3><p>我们已经知道，输出的$h_\theta(x)$表示的是输入为$x$，输出为1的概率。那么，改变$\theta$的时候，一个类别为1的样本，预测结果为1的概率越高，则这个训练的模型越准确。那么如果有两个类别为1的样本，则是两个预测结果都为1的概率越高，那么这个训练的模型越准确。以此类推，假设有m个类别为1的样本，全部的预测结果都是1的概率越高，这个训练的模型越准确。对类别为0的样本也是同理。<strong>换句话说，所有样本的预测结果都与事实匹配的概率越高，那么模型越准确。</strong> 那么我们的目的就是找出合适的参数$\theta$，使得下式最大：</p>
+<script type="math/tex; mode=display">
+P\{h_\theta(x^{(1)})=y^{(1)}\}\cdot P\{h_\theta(x^{(2)})=y^{(2)}\}\dots P\{h_\theta(x^{(m)})=y^{(m)}\}</script><p>上式就被称为Likelihood。我们可以把获得的所有训练集数据当作一次<strong>试验</strong>，$m$为一次试验中样本的数量。<strong>整个过程也就可以理解成，我们不停地寻找参数$\theta$，使得在这个条件下，做一次试验能得到和训练集一模一样的数据的概率最大。</strong></p>
+<p>我们知道，$h_\theta(x)$可以理解为判断$x$为类别1时的概率，那么显然地，$1-h_\theta(x)$为判断$x$为类别0的概率。为了更好地理解，举一个例子吧，假设训练集有四组数据，对应的类别如下表：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>$x^{(1)}$</th>
+<th>$x^{(2)}$</th>
+<th>$x^{(3)}$</th>
+<th>$x^{(4)}$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Class 1</td>
+<td>Class 0</td>
+<td>Class 0</td>
+<td>Class 1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>那么对于这个训练集，Likelihood就可以写成如下形式：</p>
+<script type="math/tex; mode=display">
+h_\theta(x^{(1)})\cdot (1-h_\theta (x^{(2)}))\cdot h_\theta(x^{(3)})\cdot (1-h_\theta (x^{(4)}))</script><p>那么问题来了，要求极值就肯定涉及求导，这么多函数相乘，要求导实在是太过复杂，那么这里我们就可以运用到高中学过的用对数进行<strong>降级运算</strong>。上面的思路就转化为要使下式达到最大值：</p>
+<script type="math/tex; mode=display">
+ln(h_\theta(x^{(1)}))+ ln(1-h_\theta (x^{(2)}))+ ln(h_\theta(x^{(3)}))+ ln(1-h_\theta (x^{(4)}))</script><p>OK，那现在求导应该方便一点了。但是还是有点怪怪的，我们已经知道了梯度下降算法，但是那是用来求最小值的，现在我们要求最大值，怎么办呢？每一项加一个负号就可以了。</p>
+<script type="math/tex; mode=display">
+-log(h_\theta(x^{(1)}))- log(1-h_\theta (x^{(2)}))- log(h_\theta(x^{(3)}))- log(1-h_\theta (x^{(4)}))</script><p><em>P.S. 笔者百度了一下，发现逻辑回归里确实也有梯度上升法，这里就不详细展开了，读者有兴趣可以了解一下。</em></p>
+<p>好了，那么现在再回到我们的Cost函数，是不是就一目了然了呢。</p>
+<script type="math/tex; mode=display">
+Cost(h_\theta(x),y) = \left\{
+\begin{aligned}
+-log(h_\theta(x))& \ \ \ \ if\ \ y =1 \\
+-log(1-h_\theta(x))& \ \ \ \ if\ \ y=0
+\end{aligned}
+\right.</script><h3 id="Loss函数的一般形式"><a href="#Loss函数的一般形式" class="headerlink" title="Loss函数的一般形式"></a>Loss函数的一般形式</h3><p>注意到，我们的Cost函数是一个分段函数，而分段函数的求导是非常复杂的。再考虑到$y$的取值只有0和1，我们可以把Cost函数写成一个比较容易求导的形式：</p>
+<script type="math/tex; mode=display">
+Cost(h_\theta(x),y) = 
+-ylog(h_\theta(x))
+-(1-y)log(1-h_\theta(x))</script><p>那么Loss函数就是如下形式：</p>
+<script type="math/tex; mode=display">
+L(\theta) = \frac{1}{m}\sum_{i=1}^mCost(h_\theta(x^{(i)}),y^{(i)})
+=\frac{1}{m}\sum_{i=1}^m[-y^{(i)}log(h_\theta(x^{(i)}))-(1-y^{(i)})log(1-h_\theta(x^{(i)}))]</script><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>具体的计算部分就留到下篇文章再详细阐述吧。也确实还有很多东西没讲，比如多分类问题、以及逻辑回归与线性回归的巧合之类的。这篇文章提到的的很多知识都很有意思，包括决策边界的提出，对数降级运算的思想以及最后Cost函数的一般形式，这不是小聪明，这是大智慧啊！</p>
+<h1 id="勘误历史"><a href="#勘误历史" class="headerlink" title="勘误历史"></a>勘误历史</h1><p>2021.03.11 感谢用户ah_atishoo对$Sigmoid$函数表达式的勘误！</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div></div>
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="Xiaolong Chen WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/06/16/linear-regression/" rel="prev" title="线性回归：机器学习的“Hello, World“">
+                  <i class="fa fa-chevron-left"></i> 线性回归：机器学习的“Hello, World“
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaolong Chen</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div><script color="255,255,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{&quot;enable&quot;:true,&quot;tags&quot;:&quot;none&quot;,&quot;js&quot;:{&quot;url&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;mathjax@3.1.4&#x2F;es5&#x2F;tex-mml-chtml.js&quot;,&quot;integrity&quot;:&quot;sha256-ncNI9OXOS5Ek4tzVYiOMmN&#x2F;KKCPZ6V0Cpv2P&#x2F;zHntiA&#x3D;&quot;}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+  
+</body>
+</html>
