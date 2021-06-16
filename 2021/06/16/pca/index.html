@@ -20,27 +20,40 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;chenxlong3.github.io&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;}}</script><script src="/js/config.js"></script>
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "2397f328"
+    });
+  daovoice('update');
+  </script>
+<meta name="description" content="引言">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="https://chenxlong3.github.io/2021/06/13/hello-world/index.html">
+<meta property="og:title" content="纯粹直觉地理解主成分分析 (PCA)">
+<meta property="og:url" content="https://chenxlong3.github.io/2021/06/16/pca/index.html">
 <meta property="og:site_name" content="Xiaolong Chen">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta property="og:description" content="引言">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-06-13T08:04:45.538Z">
-<meta property="article:modified_time" content="2021-06-13T08:04:45.538Z">
+<meta property="og:image" content="https://chenxlong3.github.io/.io//pca1.jpg">
+<meta property="og:image" content="https://chenxlong3.github.io/.io//pca2.jpg">
+<meta property="article:published_time" content="2021-06-16T01:50:54.000Z">
+<meta property="article:modified_time" content="2021-06-16T02:20:09.894Z">
 <meta property="article:author" content="Xiaolong Chen">
+<meta property="article:tag" content="Machine Learning">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chenxlong3.github.io/.io//pca1.jpg">
 
 
-<link rel="canonical" href="https://chenxlong3.github.io/2021/06/13/hello-world/">
+<link rel="canonical" href="https://chenxlong3.github.io/2021/06/16/pca/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;chenxlong3.github.io&#x2F;2021&#x2F;06&#x2F;13&#x2F;hello-world&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;06&#x2F;13&#x2F;hello-world&#x2F;&quot;,&quot;title&quot;:&quot;Hello World&quot;}</script>
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;chenxlong3.github.io&#x2F;2021&#x2F;06&#x2F;16&#x2F;pca&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;06&#x2F;16&#x2F;pca&#x2F;&quot;,&quot;title&quot;:&quot;纯粹直觉地理解主成分分析 (PCA)&quot;}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
-<title>Hello World | Xiaolong Chen</title>
+<title>纯粹直觉地理解主成分分析 (PCA) | Xiaolong Chen</title>
   
 
 
@@ -117,7 +130,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%99%8D%E7%BB%B4%E7%9A%84%E6%80%9D%E6%83%B3"><span class="nav-number">2.</span> <span class="nav-text">降维的思想</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90"><span class="nav-number">3.</span> <span class="nav-text">主成分分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%A6%E4%B8%80%E7%A7%8D%E7%9C%8B%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">另一种看法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A2%8E%E7%A2%8E%E5%BF%B5"><span class="nav-number">5.</span> <span class="nav-text">碎碎念</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -137,11 +150,18 @@
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
   </nav>
 </div>
   <div class="links-of-author site-overview-item animated">
       <span class="links-of-author-item">
         <a href="mailto:chenxlong3@outlook.com" title="E-Mail → mailto:chenxlong3@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/weixin_42393947?spm=1000.2115.3001.5343" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;weixin_42393947?spm&#x3D;1000.2115.3001.5343" rel="noopener" target="_blank"><i class="fa fa-blog fa-fw"></i>CSDN</a>
       </span>
   </div>
 
@@ -188,7 +208,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chenxlong3.github.io/2021/06/13/hello-world/">
+    <link itemprop="mainEntityOfPage" href="https://chenxlong3.github.io/2021/06/16/pca/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/sijia.jpg">
@@ -201,7 +221,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hello World
+          纯粹直觉地理解主成分分析 (PCA)
         </h1>
 
         <div class="post-meta-container">
@@ -211,8 +231,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
+      
 
-      <time title="Created: 2021-06-13 16:04:45" itemprop="dateCreated datePublished" datetime="2021-06-13T16:04:45+08:00">2021-06-13</time>
+      <time title="Created: 2021-06-16 09:50:54 / Modified: 10:20:09" itemprop="dateCreated datePublished" datetime="2021-06-16T09:50:54+08:00">2021-06-16</time>
     </span>
 
   
@@ -223,7 +244,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>367</span>
+      <span>1.5k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
@@ -241,19 +262,20 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>写这篇blog只是分享一下个人对于PCA的直观理解，并不涉及严谨的数学推导，懒是一个原因，而且自己对线性代数的SVD那些知识掌握得还不够熟练，这里就不班门弄斧了。</p>
+<h1 id="降维的思想"><a href="#降维的思想" class="headerlink" title="降维的思想"></a>降维的思想</h1><p>要了解某个物体，我们往往会关注它的多个特性（或者叫多个维度）。假设这里有n个特性，那么对于每一个样本，我们可以用n维空间的某一个点来表示：<br> $$(x_1, x_2 , \dots, x_n)$$<br> 然而，这些特性中，会存在某一些高度相关的特性，比如在评价一个人时，他/她的总财产和月收入一般是正相关的，那么我们是否可以只用一个数来描述这个人的富有程度呢？显然是可以的。事实上，这样的想法就基本上是降维的思路了。如果按照上述例子的思路，我们就可以把一个n维空间的点，变成一个n-1维空间的点了。</p>
+<h1 id="主成分分析"><a href="#主成分分析" class="headerlink" title="主成分分析"></a>主成分分析</h1><p>事实上，主成分分析的实质就是<strong>坐标轴的变换</strong>，然后舍弃掉贡献较小的变量。</p>
+<p>在这里提一下，很多教程喜欢把中心化(centralizing)放在前面讲，但事实上这个操作只是把坐标原点进行平移而已，并不涉及PCA的实质，暂且不提。</p>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p><img src="/.io//pca1.jpg" alt="axis_rotation"></p>
+<p>如上图所示，我们用了新的一组变量$(PC_1 , PC_2)$来代替原来的变量$(x_1, x_2)$。显然，在新的坐标下，数据点在$PC_2$方向上的分散较小，若在误差范围内，可以忽略。这样，我们就可以只用$PC_1$一个变量来描述这些数据点了。</p>
+<p>根据线性代数的知识，我们可以知道这里其实就涉及到基变换的知识了。同样地，这也是个非常“数学”的过程，等以后有时间再写。简单来说，新的变量组是旧变量组的线性组合。</p>
+<h1 id="另一种看法"><a href="#另一种看法" class="headerlink" title="另一种看法"></a>另一种看法</h1><p>不难发现，上述对于PCA的理解其实有点类似Linear Regression。现在我们用另外一种角度来考虑PCA。前面提到，新的变量组是旧变量组的线性组合，那就可以写成如下格式：<br>$\begin{cases}  PC_1 = c_{11}x_1 + c_{12}x_2 + \dots +c_{1n}x_n \<br>PC_2 = c_{21}x_1 + c_{22}x_2 + \dots +c_{2n}x_n \ \vdots \<br>PC_n = c_{n1}x_1 + c_{n2}x_2 + \dots +c_{nn}x_n<br>\end{cases}$<br>问题是系数$c_{ii}$的选取，以什么作为原则呢？因为我们最终目的是降维，也就是说要把尽量多的<strong>特征</strong>保留在前几个主成分中。这意味着什么呢？如果两个点投影到一个轴上之后重合成一个点，那么这两个点的区分度就变小了，也就是说，在降维之后，用于描述这两个点的特征变少了。那么直观上怎么样才算是保留了较多的<strong>特征</strong>呢？事实上， 这就是要求样本点在新的轴上的分布尽量分散。很容易联想到，描述样本分散程度的数学量就是方差。所以我们要做的事情也就是使$Var(PC_1)$最大化。</p>
+<p>这两种看法实际上是一样的，设样本点到新坐标轴的距离为$h$，点 $\overline{x}$ 的坐标为$(\overline{x_1}, \overline{x_2}, \dots, \overline{x<br>_n})$，样本点在新坐标轴上的投影到点 $\overline{x}$ 的距离为$d$。因为样本点到点 $\overline{x}$ 点的距离是一定的，那么根据勾股定理，如果我们要求$h$尽量小，实际上等价于要求$d$尽量大。</p>
+<p><img src="/.io//pca2.jpg" alt="another"></p>
+<p>上述的证明默认了新的坐标轴是经过点 $\overline{x}$ 的，其实这也就是中心化。</p>
+<h1 id="碎碎念"><a href="#碎碎念" class="headerlink" title="碎碎念"></a>碎碎念</h1><p>PCA的数学公式推导暂且先留个坑，希望以后会有时间搞一搞。不得不说孔子讲得还真对，温故而知新。线性代数这门学科越是反复看就越是觉得有意思，当然也确实有点难度，等到一切尘埃落定之后会好好整理一下这些知识。</p>
 
     </div>
 
@@ -276,16 +298,19 @@
   </div>
 </div>
 
+          <div class="post-tags">
+              <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
+          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
+                <a href="/2021/06/15/dream/" rel="prev" title="人间滚烫，我的理想">
+                  <i class="fa fa-chevron-left"></i> 人间滚烫，我的理想
+                </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2021/06/15/dream/" rel="next" title="人间滚烫，我的理想">
-                  人间滚烫，我的理想 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
@@ -317,13 +342,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="Symbols count total">0k</span>
+    <span title="Symbols count total">2k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">1 mins.</span>
+    <span title="Reading time total">2 mins.</span>
   </span>
 </div><script color="255,0,120" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
 
