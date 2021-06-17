@@ -29,28 +29,33 @@
 });
 daovoice('update');
 </script>
-<meta name="description" content="“唯有不平等的现实，平等地存在着”">
+<meta name="description" content="回顾">
 <meta property="og:type" content="article">
-<meta property="og:title" content="人间滚烫，我的理想">
-<meta property="og:url" content="https://chenxlong3.github.io/2021/06/15/dream/index.html">
+<meta property="og:title" content="逻辑回归（二）：Loss易导">
+<meta property="og:url" content="https://chenxlong3.github.io/2021/06/17/lgR2/index.html">
 <meta property="og:site_name" content="Xiaolong Chen">
-<meta property="og:description" content="“唯有不平等的现实，平等地存在着”">
+<meta property="og:description" content="回顾">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-06-15T06:28:19.000Z">
-<meta property="article:modified_time" content="2021-06-16T14:22:13.075Z">
+<meta property="og:image" content="https://chenxlong3.github.io/2021/06/17/lgR2/multi.png">
+<meta property="og:image" content="https://chenxlong3.github.io/2021/06/17/lgR2/circle.jpg">
+<meta property="og:image" content="https://chenxlong3.github.io/2021/06/17/lgR2/triangle.png">
+<meta property="og:image" content="https://chenxlong3.github.io/2021/06/17/lgR2/rectangle.png">
+<meta property="article:published_time" content="2021-06-17T02:05:24.000Z">
+<meta property="article:modified_time" content="2021-06-17T02:53:54.070Z">
 <meta property="article:author" content="Xiaolong Chen">
-<meta property="article:tag" content="thoughts">
+<meta property="article:tag" content="Machine Learning">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chenxlong3.github.io/2021/06/17/lgR2/multi.png">
 
 
-<link rel="canonical" href="https://chenxlong3.github.io/2021/06/15/dream/">
+<link rel="canonical" href="https://chenxlong3.github.io/2021/06/17/lgR2/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;chenxlong3.github.io&#x2F;2021&#x2F;06&#x2F;15&#x2F;dream&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;06&#x2F;15&#x2F;dream&#x2F;&quot;,&quot;title&quot;:&quot;人间滚烫，我的理想&quot;}</script>
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;chenxlong3.github.io&#x2F;2021&#x2F;06&#x2F;17&#x2F;lgR2&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;06&#x2F;17&#x2F;lgR2&#x2F;&quot;,&quot;title&quot;:&quot;逻辑回归（二）：Loss易导&quot;}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
-<title>人间滚烫，我的理想 | Xiaolong Chen</title>
+<title>逻辑回归（二）：Loss易导 | Xiaolong Chen</title>
   
 
 
@@ -116,7 +121,7 @@ daovoice('update');
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -129,6 +134,7 @@ daovoice('update');
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9E%E9%A1%BE"><span class="nav-number">1.</span> <span class="nav-text">回顾</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D"><span class="nav-number">2.</span> <span class="nav-text">梯度下降</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E5%85%AC%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text">更新公式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%9A%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">多分类问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -208,7 +214,7 @@ daovoice('update');
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chenxlong3.github.io/2021/06/15/dream/">
+    <link itemprop="mainEntityOfPage" href="https://chenxlong3.github.io/2021/06/17/lgR2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/sijia.jpg">
@@ -221,7 +227,7 @@ daovoice('update');
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          人间滚烫，我的理想
+          逻辑回归（二）：Loss易导
         </h1>
 
         <div class="post-meta-container">
@@ -231,16 +237,10 @@ daovoice('update');
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
+      
 
-      <time title="Created: 2021-06-15 14:28:19" itemprop="dateCreated datePublished" datetime="2021-06-15T14:28:19+08:00">2021-06-15</time>
+      <time title="Created: 2021-06-17 10:05:24 / Modified: 10:53:54" itemprop="dateCreated datePublished" datetime="2021-06-17T10:05:24+08:00">2021-06-17</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-06-16 22:22:13" itemprop="dateModified" datetime="2021-06-16T22:22:13+08:00">2021-06-16</time>
-      </span>
 
   
     <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
@@ -259,16 +259,78 @@ daovoice('update');
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>“唯有不平等的现实，平等地存在着”</p>
-<p>那个戴着奥特曼面具卖樱桃的少年以及北大附中、清华附中的privilege，都是给我心灵带来极大触动的事情。我当然知道每一代人都会为了下一代人过得更好而付出努力，这些努力不能被抹除，也知道要实现绝对公平是不可能的，但我仍然想做我能做到的事，帮我能帮到的人。</p>
-<p>从初中到高中，我一路走得都还算顺利，以至于我根本就没意识到其实自己其实才是运气好的那一批人。后来辅导了一些小孩，有些在平行班，学习氛围几乎没有；有些遇到了不太好的老师，一直受批评导致自我怀疑；有些在之前的学习阶段就没有取得好成绩，把及格当作成功……那个时候我才意识到，我这一路的“顺利”并不完全是靠我自己的努力争取来的，而是很多“幸运”共同作用的结果，而事实上很多人并不具备我当初拥有的教育条件。所以，我希望降低这些其他因素的影响，让学生自身拥有足够强的自我驱动力，让学习这件事变得轻松且快乐。</p>
-<p>上了大学，因为对所学专业没有什么热情，学习的过程比较痛苦，最后也没有取得什么好的结果。所幸最后这段时间，也就是做毕设的时候，因为一直相信着自己做的事情是有意义的、能帮助到他人的，待在实验室敲键盘的时光也就变得比较快乐了。吧啦吧啦扯了一堆，其实就是应了那句老话：兴趣是最好的老师。</p>
-<p>那么现在问题就是，怎么样让学生感兴趣呢？</p>
-<p>据我浅薄的观察，小孩们似乎都更倾向于做自己“会”做的东西，而且在现实生活中，“喜欢”和“擅长”也往往是同时存在的。为什么喜欢？因为擅长。为什么擅长？因为喜欢。那么问题又变成了，怎么样让学生能学懂。我的想法就是利用可视化，让抽象的知识更加易于理解，让学生们可以体会到知识的奇妙之处。事实上已经有人在做这样的事情了，包括3Blue1Brown以及github上面的算法可视化项目。</p>
-<p>当然，随着学习的深入，所有知识都不可避免地走向抽象，那这些“高阶”知识的可视化，也就成为了一个值得深挖的研究方向了。想一想就兴奋不已。</p>
-<p>这个想法目前也只是一个想法，我还没有实际上手，也不知道前方会遇到怎样的阻碍，希望自己不会放弃。或许自己的想法很天真，或许根本没有学生会在意这些事情，他们只是单纯不想学习……但是只要能帮助到哪怕一个人，我做的事便是有意义的。</p>
-<p>理想主义者的结局悲壮而绝不可怜。正是因为理想主义者想办法改变现状，现状才能得以改变。</p>
-<p>“我要不平等地拯救他人”</p>
+        <h1 id="回顾">回顾</h1>
+<p>书接上回，讲到了逻辑回归的Loss函数的一般形式，大体如下：</p>
+<p><span class="math display">\[
+L(\theta) = \frac{1}{m}\sum_{i=1}^mCost(h_\theta(x^{(i)}),y^{(i)})
+\\=\frac{1}{m}\sum_{i=1}^m[-y^{(i)}log(h_\theta(x^{(i)}))-(1-y^{(i)})log(1-h_\theta(x^{(i)}))]
+\\h_{\theta}(x) = g(\theta^TX)\\
+g(z) = \frac{1}{1+e^{-z}}
+\]</span></p>
+<h1 id="梯度下降">梯度下降</h1>
+<p>已经有了Loss函数，那么我们要做的事情就是通过梯度下降的方法来确定最佳参数<span class="math inline">\(\theta\)</span>，使得对于训练集的所有数据，Loss函数值最小。那么我们就来对这看似复杂的函数进行一下求导吧。 ## 对Loss函数求偏导 我们知道函数有以下形式： <span class="math display">\[
+L(\theta) = \frac{1}{m}\sum_{i=1}^m[-y^{(i)}log(h_\theta(x^{(i)}))-(1-y^{(i)})log(1-h_\theta(x^{(i)}))]
+\]</span> <span class="math inline">\(\frac{1}{m}\)</span>是常数，我们可以先放至一边。括号里面的<span class="math inline">\(y^{(i)}\)</span>和<span class="math inline">\((1-y^{(i)})\)</span>都是常数，对导数的形式并无影响。Loss函数对<span class="math inline">\(\theta\)</span>求偏导有以下形式： <span class="math display">\[
+\frac{\partial L(\theta)}{\partial \theta_j}=\frac{1}{m}\sum_{i=1}^m[-y^{(i)}\frac{\partial log(h_\theta(x^{(i)}))}{\partial \theta_j}-(1-y^{(i)})\frac{\partial log(1-h_\theta(x^{(i)}))}{\partial \theta_j}]
+\]</span> 显然，要计算<span class="math inline">\(\frac{\partial L(\theta)}{\partial \theta_j}\)</span>，我们就只需要计算<span class="math inline">\(\frac{\partial log(h_\theta(x^{(i)}))}{\partial \theta_j}\)</span>以及<span class="math inline">\(\frac{\partial log(1-h_\theta(x^{(i)}))}{\partial \theta_j}\)</span>。</p>
+<p>这看起来还是非常吓人呢，不过没关系，笔者高中数学老师曾告诉过我们，一切反动派都是纸老虎。先让我们回到<span class="math inline">\(h_\theta(x^{(i)})\)</span>的表达式，令<span class="math inline">\(z=\theta^TX\)</span></p>
+<p><span class="math display">\[h_{\theta}(x) = g(z) =\frac{1}{1+e^{-z}}\]</span></p>
+<p>根据复合函数的求导，我们可以知道： <span class="math display">\[
+\begin{aligned}
+\frac{\partial log(h_\theta(x^{(i)}))}{\partial \theta_j}&amp;=
+\frac{\partial log(g(z))}{\partial \theta_j}\\
+&amp;= \frac{1}{g(z)} \frac{\partial g(z)}{\partial \theta_j}\\
+&amp;= \frac{1}{g(z)} \frac{\partial g(z)}{\partial z} \frac{\partial z}{\partial \theta_j}
+\end{aligned}
+\]</span> 一项一项拆解： <span class="math display">\[
+\frac{1}{g(z)} = 1+e^{-z}
+\]</span></p>
+<p><span class="math display">\[
+\frac{\partial g(z)}{\partial z} = -\frac{-e^{-z}}{(1+e^{-z})^2}=\frac{e^{-z}}{(1+e^{-z})^2}
+\]</span></p>
+<p><span class="math display">\[
+\frac{\partial z}{\partial \theta_j}=x_j
+\]</span></p>
+<p>那么我们就可以得到<span class="math inline">\(log(h_\theta(x^{(i)}))\)</span>对<span class="math inline">\(\theta_j\)</span>的偏导： <span class="math display">\[
+\frac{\partial log(h_\theta(x^{(i)}))}{\partial \theta_j}=\frac{e^{-z}}{1+e^{-z}}\cdot x_j = (1-g(z))x_j
+\]</span> 接着我们继续看<span class="math inline">\(log(1-h_\theta(x^{(i)}))\)</span>对<span class="math inline">\(\theta_j\)</span>的偏导，事实上，依旧是根据复合函数的求导： <span class="math display">\[
+\begin{aligned}
+\frac{\partial log(1-h_\theta(x^{(i)}))}{\partial \theta_j} &amp;=
+\frac{-1}{1-h_\theta(x^{(i)})} \frac{\partial h_\theta(x^{(i)})}{\partial \theta_j}\\
+&amp;= -\frac{1}{1-g(z)}\frac{\partial g(z)}{\partial \theta_j}\\
+&amp;= -\frac{1+e^{-z}}{e^{-z}}\cdot \frac{e^{-z}}{(1+e^{-z})^2} \cdot x_j\\
+&amp;= -g(z)\cdot x_j
+\end{aligned}
+\]</span> OK，那么我们把得到的这两个式子代回Loss函数的偏导形式中，得到： <span class="math display">\[
+\begin{aligned}
+\frac{\partial L(\theta)}{\partial \theta_j}&amp;=\frac{1}{m}\sum_{i=1}^m[-y^{(i)}\frac{\partial log(h_\theta(x^{(i)}))}{\partial \theta_j}-(1-y^{(i)})\frac{\partial log(1-h_\theta(x^{(i)}))}{\partial \theta_j}]\\
+&amp;= \frac{1}{m}\sum_{i=1}^m[-y^{(i)}(1-g(z))x_j+(1-y^{(i)})g(z)x_j]\\
+&amp;= \frac{1}{m}\sum_{i=1}^m[g(z)-y^{(i)}]x_j\\
+&amp;= \frac{1}{m}\sum_{i=1}^m[h_{\theta}(x^{(i)})-y^{(i)}]x^{(i)}_j
+\end{aligned}
+\]</span></p>
+<p>还是那句话，常数只是起到一个缩放的作用，重要的是求和号后面的形式。那么看到这个式子，你有想到什么吗？事实上，逻辑回归和线性回归的的Loss函数的偏导形式是相同的，多么美丽的巧合！值得一提的是，这也仅仅是巧合而已，线性回归和逻辑回归是两个不同的算法，因为我们使用的model，也就是假设函数<span class="math inline">\(h_\theta(x)\)</span>是不同的。</p>
+<h2 id="更新公式">更新公式</h2>
+<p>与线性回归同理，我们依旧是按照如下式子进行参数的更新： <span class="math display">\[
+\theta_j := \theta_j - \eta \frac{\partial}{\partial \theta_j}L(\theta)
+\]</span> 将前面求得的表达式代入得： <span class="math display">\[
+\theta_j := \theta_j - \eta \frac{1}{m}\sum_{i=1}^m[h_{\theta}(x^{(i)})-y^{(i)}]x^{(i)}_j
+\]</span></p>
+<h1 id="多分类问题">多分类问题</h1>
+<p>目前为止我们也只是提出了一种解决二分类问题的方法，但是日常生活中，我们常常需要进行更多种的分类，比如除了猫和狗，我们还希望计算机能识别出老鼠等更多动物；除了分辨诈骗和非诈骗邮件，我们还希望计算机能自动分出哪些邮件是家人发的，哪些是朋友发的等等。那么，我们讨论过的逻辑回归算法，能不能应用在多分类上呢？答案是肯定的。以三分类为例子，我们用圆形、正方形和三角形来表示。如下图：</p>
+<p><img src="/2021/06/17/lgR2/multi.png"></p>
+<p>我们可以把这个问题转换成三个二分类问题。先把所有圆形的看作第一类，其余的都看作第二类，如下图：</p>
+<p><img src="/2021/06/17/lgR2/circle.jpg"></p>
+<p>利用这些数据，我们可以训练得到一个函数<span class="math inline">\(h_\theta^{(1)}(x)\)</span>，这个函数的输出的意义是<span class="math inline">\(x\)</span>为圆形的概率。</p>
+<p>然后把三角形看作一类，其他的看作另一类：</p>
+<p><img src="/2021/06/17/lgR2/triangle.png"></p>
+<p>可以训练得到一个函数<span class="math inline">\(h_\theta^{(2)}(x)\)</span>，这个函数的输出的意义是<span class="math inline">\(x\)</span>为三角形的概率。</p>
+<p>同理，把正方形当作一类，其他当作另一类：</p>
+<p><img src="/2021/06/17/lgR2/rectangle.png"></p>
+<p>可以训练得到一个函数<span class="math inline">\(h_\theta^{(3)}(x)\)</span>，这个函数的输出的意义是<span class="math inline">\(x\)</span>为三角形的概率。</p>
+<p>那么，对于一个输入<span class="math inline">\(X\)</span>，我们可以把<span class="math inline">\(X\)</span>输入到三个函数中，则得到这个<span class="math inline">\(X\)</span>为三种类型的概率，概率最大的那个函数对应的类别即为结果。</p>
+<h1 id="总结">总结</h1>
+<p>逻辑回归讲到这里就差不多了，当然还有正则项之类的知识，我自己也没太想好应该怎么理解，等到以后有机会再写。有意思的是，清楚了逻辑回归的基础知识，我们就快要揭开神经网络的神秘面纱了。</p>
 
     </div>
 
@@ -292,18 +354,18 @@ daovoice('update');
 </div>
 
           <div class="post-tags">
-              <a href="/tags/thoughts/" rel="tag"># thoughts</a>
+              <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
+                <a href="/2021/06/16/lgR1/" rel="prev" title="逻辑回归（一）：0还是1？">
+                  <i class="fa fa-chevron-left"></i> 逻辑回归（一）：0还是1？
+                </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2021/06/16/pca/" rel="next" title="纯粹直觉地理解主成分分析 (PCA)">
-                  纯粹直觉地理解主成分分析 (PCA) <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
@@ -370,7 +432,7 @@ daovoice('update');
 
   
 
-  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{&quot;enable&quot;:true,&quot;tags&quot;:&quot;none&quot;,&quot;js&quot;:{&quot;url&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;mathjax@3.1.4&#x2F;es5&#x2F;tex-mml-chtml.js&quot;,&quot;integrity&quot;:&quot;sha256-ncNI9OXOS5Ek4tzVYiOMmN&#x2F;KKCPZ6V0Cpv2P&#x2F;zHntiA&#x3D;&quot;}}</script>
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{&quot;enable&quot;:true,&quot;tags&quot;:&quot;none&quot;,&quot;js&quot;:{&quot;url&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;mathjax@3.1.4&#x2F;es5&#x2F;tex-mml-chtml.js&quot;,&quot;integrity&quot;:&quot;sha256-ncNI9OXOS5Ek4tzVYiOMmN&#x2F;KKCPZ6V0Cpv2P&#x2F;zHntiA&#x3D;&quot;}}</script>
 <script src="/js/third-party/math/mathjax.js"></script>
 
 
