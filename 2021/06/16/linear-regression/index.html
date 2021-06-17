@@ -38,7 +38,7 @@ daovoice('update');
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://chenxlong3.github.io/2021/06/16/linear-regression/linear-regression/LR1.jpg">
 <meta property="article:published_time" content="2021-06-16T12:41:18.000Z">
-<meta property="article:modified_time" content="2021-06-16T12:57:52.202Z">
+<meta property="article:modified_time" content="2021-06-17T03:13:45.894Z">
 <meta property="article:author" content="Xiaolong Chen">
 <meta property="article:tag" content="Machine Learning">
 <meta name="twitter:card" content="summary">
@@ -131,7 +131,7 @@ daovoice('update');
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%83%B3%E8%A6%81%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">想要解决的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E6%A8%A1%E5%9E%8Bmodel"><span class="nav-number">1.1.</span> <span class="nav-text">选择模型（Model）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0loss-function"><span class="nav-number">1.2.</span> <span class="nav-text">损失函数（Loss function）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95gradient-descent"><span class="nav-number">1.3.</span> <span class="nav-text">梯度下降法（Gradient Descent）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B1%82%E5%AF%BC%E5%85%AC%E5%BC%8F"><span class="nav-number">1.4.</span> <span class="nav-text">求导公式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%93%E5%B1%95%E5%B9%82%E6%AC%A1"><span class="nav-number">1.4.1.</span> <span class="nav-text">拓展（幂次）</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%83%B3%E8%A6%81%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">想要解决的问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92linear-regression"><span class="nav-number">2.</span> <span class="nav-text">线性回归（Linear Regression）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E6%A8%A1%E5%9E%8Bmodel"><span class="nav-number">2.1.</span> <span class="nav-text">选择模型（Model）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0loss-function"><span class="nav-number">2.2.</span> <span class="nav-text">损失函数（Loss function）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95gradient-descent"><span class="nav-number">2.3.</span> <span class="nav-text">梯度下降法（Gradient Descent）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B1%82%E5%AF%BC%E5%85%AC%E5%BC%8F"><span class="nav-number">2.4.</span> <span class="nav-text">求导公式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%93%E5%B1%95%E5%B9%82%E6%AC%A1"><span class="nav-number">2.4.1.</span> <span class="nav-text">拓展（幂次）</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -234,10 +234,16 @@ daovoice('update');
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2021-06-16 20:41:18 / Modified: 20:57:52" itemprop="dateCreated datePublished" datetime="2021-06-16T20:41:18+08:00">2021-06-16</time>
+      <time title="Created: 2021-06-16 20:41:18" itemprop="dateCreated datePublished" datetime="2021-06-16T20:41:18+08:00">2021-06-16</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-06-17 11:13:45" itemprop="dateModified" datetime="2021-06-17T11:13:45+08:00">2021-06-17</time>
+      </span>
 
   
     <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
@@ -257,7 +263,9 @@ daovoice('update');
     
     <div class="post-body" itemprop="articleBody">
         <h1 id="想要解决的问题">想要解决的问题</h1>
-<p>假设我们知道若干房子的面积以及对应的房价，那么如果随便告诉我们一套房子的面积，怎么才能知道这套房子最可能买多少钱呢？再假设我们知道了一些零件的使用时间和对应的维修费用，那么如果告诉我们一个零件的使用时间，我们要怎样推测出来对应的维修费用呢？没错，线性回归就是用来解决这些问题的，也就是通过拟合曲线来进行预测。 # 线性回归（Linear Regression） 线性回归大体分为三个部分，选择合适的模型（model），确定损失函数，梯度下降求解最优参数。</p>
+<p>假设我们知道若干房子的面积以及对应的房价，那么如果随便告诉我们一套房子的面积，怎么才能知道这套房子最可能买多少钱呢？再假设我们知道了一些零件的使用时间和对应的维修费用，那么如果告诉我们一个零件的使用时间，我们要怎样推测出来对应的维修费用呢？没错，线性回归就是用来解决这些问题的，也就是通过拟合曲线来进行预测。</p>
+<h1 id="线性回归linear-regression">线性回归（Linear Regression）</h1>
+<p>线性回归大体分为三个部分，选择合适的模型（model），确定损失函数，梯度下降求解最优参数。</p>
 <h2 id="选择模型model">选择模型（Model）</h2>
 <p>首先我们要知道模型（model）是什么，在这个问题中，我们所说的model是指一个函数族。我们最终想要的结果，就是输入一个<span class="math inline">\(x\)</span>，得到一个十分可信的输出<span class="math inline">\(\hat{y}\)</span>，其实也就是找一个比较好的<strong>函数</strong>而已。问题是，这种函数可能有非常多，以单变量线性回归为例子，我们可以提出以下函数来进行拟合： <span class="math display">\[
 \begin{aligned}
