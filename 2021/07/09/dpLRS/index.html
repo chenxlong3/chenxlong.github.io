@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;chenxlong3.github.io&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;}}</script><script src="/js/config.js"></script>
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/2397f328.js","daovoice")
+  daovoice('init', {
+  app_id: "2397f328"
+});
+daovoice('update');
+</script>
+<meta name="description" content="最长重复子串问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="动态规划与最长重复子串">
+<meta property="og:url" content="https://chenxlong3.github.io/2021/07/09/dpLRS/index.html">
+<meta property="og:site_name" content="Xiaolong Chen">
+<meta property="og:description" content="最长重复子串问题">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-07-09T12:58:47.000Z">
+<meta property="article:modified_time" content="2021-07-09T13:51:58.177Z">
+<meta property="article:author" content="Xiaolong Chen">
+<meta property="article:tag" content="Algorithm">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://chenxlong3.github.io/2021/07/09/dpLRS/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;chenxlong3.github.io&#x2F;2021&#x2F;07&#x2F;09&#x2F;dpLRS&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;07&#x2F;09&#x2F;dpLRS&#x2F;&quot;,&quot;title&quot;:&quot;动态规划与最长重复子串&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>动态规划与最长重复子串 | Xiaolong Chen</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Xiaolong Chen</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About Me</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E9%95%BF%E9%87%8D%E5%A4%8D%E5%AD%90%E4%B8%B2%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">最长重复子串问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9A%B4%E5%8A%9B%E9%81%8D%E5%8E%86"><span class="nav-number">2.</span> <span class="nav-text">暴力遍历</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92"><span class="nav-number">3.</span> <span class="nav-text">动态规划</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#lrs%E9%97%AE%E9%A2%98%E4%B8%ADdp%E6%95%B0%E7%BB%84%E7%9A%84%E6%84%8F%E4%B9%89"><span class="nav-number">3.1.</span> <span class="nav-text">LRS问题中dp数组的意义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E8%BD%AC%E7%A7%BB%E6%96%B9%E7%A8%8B"><span class="nav-number">3.2.</span> <span class="nav-text">状态转移方程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%87%8D%E5%8F%A0%E9%97%AE%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">重叠问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9A%B4%E5%8A%9B%E9%81%8D%E5%8E%86-1"><span class="nav-number">4.1.</span> <span class="nav-text">暴力遍历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dp%E8%A7%A3%E6%B3%95"><span class="nav-number">4.2.</span> <span class="nav-text">dp解法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95"><span class="nav-number">5.</span> <span class="nav-text">一些想法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%92%8C%E5%93%88%E5%B8%8C%E8%A1%A8"><span class="nav-number">5.1.</span> <span class="nav-text">动态规划和哈希表？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#s.substr%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">5.2.</span> <span class="nav-text">s.substr()的时间复杂度？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A2%8E%E7%A2%8E%E5%BF%B5"><span class="nav-number">5.3.</span> <span class="nav-text">碎碎念</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Xiaolong Chen"
+      src="/images/sijia.jpg">
+  <p class="site-author-name" itemprop="name">Xiaolong Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="mailto:chenxlong3@outlook.com" title="E-Mail → mailto:chenxlong3@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/weixin_42393947?spm=1000.2115.3001.5343" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;weixin_42393947?spm&#x3D;1000.2115.3001.5343" rel="noopener" target="_blank"><i class="fa fa-blog fa-fw"></i>CSDN</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      More info
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="/file/cv_XiaolongChen.pdf" title="&#x2F;file&#x2F;cv_XiaolongChen.pdf">CV-Eng</a>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenxlong3.github.io/2021/07/09/dpLRS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/sijia.jpg">
+      <meta itemprop="name" content="Xiaolong Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xiaolong Chen">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          动态规划与最长重复子串
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-07-09 20:58:47 / Modified: 21:51:58" itemprop="dateCreated datePublished" datetime="2021-07-09T20:58:47+08:00">2021-07-09</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="最长重复子串问题">最长重复子串问题</h1>
+<p>假设我们有一个字符串，要如何求出在这个字符串里最长的重复子串呢？比如给出字符串<strong><em>abcdeefabcd</em></strong>，显然这个字符串的重复子串有很多，比如<strong><em>a</em></strong>、<strong><em>b</em></strong>、<strong><em>ab</em></strong>、<strong><em>abc</em></strong> 等等，那么通过观察，我们可以知道这个字符串的最长重复子串(Longest Repeated Substring)为<strong><em>abcd</em></strong>。</p>
+<p>如果要用编程的方法来找出这个最长重复子串，应该怎么做呢？</p>
+<h1 id="暴力遍历">暴力遍历</h1>
+<p>非常正常的想法是遍历，利用三重循环，每一次比较两个相等长度的子字符串是否相等，将记录下的最大长度与该子字符串进行比较，如果更长，则更新答案。简单的代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function">string <span class="title">naiveLRS</span><span class="params">(string s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> maxm=<span class="number">0</span>; <span class="comment">//重复子字符串的最大长度</span></span><br><span class="line">    string ans = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;s.<span class="built_in">length</span>();i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=i;j&lt;s.<span class="built_in">length</span>();j++)</span><br><span class="line">        &#123;</span><br><span class="line">            string x=s.<span class="built_in">substr</span>(i,j-i+<span class="number">1</span>);  <span class="comment">//一个子字符串</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k=i+<span class="number">1</span>;k&lt;s.<span class="built_in">length</span>();k++) <span class="comment">//从i+1开始，因为如果从i开始，两字符串的起点相同，得到的答案必定为原字符串s</span></span><br><span class="line">            &#123;</span><br><span class="line">                string y=s.<span class="built_in">substr</span>(k,j-i+<span class="number">1</span>); <span class="comment">//另一个与x不相等的子字符串</span></span><br><span class="line">                <span class="keyword">if</span>(x == y &amp;&amp; x.<span class="built_in">length</span>() &gt; maxm) <span class="comment">//如果这两个字符串相等，并且长度比之前记录的maxm更大，则更新答案</span></span><br><span class="line">                &#123;</span><br><span class="line">                    maxm = x.<span class="built_in">length</span>();</span><br><span class="line">                    ans = x;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    string s,ans;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;Enter the input string:-\n&quot;</span>;</span><br><span class="line">    cin &gt;&gt; s;   <span class="comment">//输入字符串</span></span><br><span class="line">    ans = <span class="built_in">naiveLRS</span>(s);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;The longest repeating substring is:- &quot;</span> &lt;&lt; ans &lt;&lt; <span class="string">&#x27;\n&#x27;</span>; <span class="comment">//输出答案</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>显然，这种方法的时间复杂度是<span class="math inline">\(O(n^3)\)</span>，空间复杂度为<span class="math inline">\(O(1)\)</span>。值得一提的是，在第三层循环中，是不需要考虑如果长度<span class="math inline">\(j-i+1\)</span>超出字符串长度的情况，因为在substr()函数中，如果给出的长度超出了字符串原本的长度，会自动截取到字符串的结尾。</p>
+<h1 id="动态规划">动态规划</h1>
+<p>显然，前面提到的暴力解法涉及到了非常多的重复计算。而动态规划的思想，实际上就是利用“记忆”下来的数据，避免这些重复计算。这些“记忆”下来的数据，大概可以理解成“历史记录”。我们一般会用一个数组dp来存放这些“历史记录”。问题是，这个数组的意义是什么，里面的值应该怎样更新呢？</p>
+<h2 id="lrs问题中dp数组的意义">LRS问题中dp数组的意义</h2>
+<p>首先呢，我们需要明确这个dp数组的意义。在我们提到的最长重复子串问题中，<span class="math inline">\(dp[i][j]\)</span>存储的是以第i和第j个字符结尾的重复子字符串的长度。这样表述还是有点抽象，以一个具体的字符串为例子，如<strong><em>banana</em></strong>。我们会将dp数组初始化如下：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;">b</th>
+<th style="text-align: center;">a</th>
+<th style="text-align: center;">n</th>
+<th style="text-align: center;">a</th>
+<th style="text-align: center;">n</th>
+<th style="text-align: center;">a</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>i \ j</strong></td>
+<td style="text-align: center;"><strong>0</strong></td>
+<td style="text-align: center;"><strong>1</strong></td>
+<td style="text-align: center;"><strong>2</strong></td>
+<td style="text-align: center;"><strong>3</strong></td>
+<td style="text-align: center;"><strong>4</strong></td>
+<td style="text-align: center;"><strong>5</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>b</strong></td>
+<td style="text-align: center;"><strong>0</strong></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>a</strong></td>
+<td style="text-align: center;"><strong>1</strong></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>n</strong></td>
+<td style="text-align: center;"><strong>2</strong></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>a</strong></td>
+<td style="text-align: center;"><strong>3</strong></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>n</strong></td>
+<td style="text-align: center;"><strong>4</strong></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>a</strong></td>
+<td style="text-align: center;"><strong>5</strong></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+</tbody>
+</table>
+<h2 id="状态转移方程">状态转移方程</h2>
+<p>事实上就是一个<span class="math inline">\(n*n\)</span>的矩阵（<span class="math inline">\(n\)</span>为字符串的长度），初始化为0。那么我们从i开始遍历。起初<span class="math inline">\(i=0\)</span>，那么开始遍历<span class="math inline">\(j\)</span>，为了避免得到两个完全重合的子字符串，<span class="math inline">\(j\)</span>的初始值为<span class="math inline">\(i+1\)</span>，也就是1，随后我们比较<span class="math inline">\(s[i]\)</span>和<span class="math inline">\(s[j]\)</span>，如果<span class="math inline">\(s[i] == s[j]\)</span>，那么我们就把<span class="math inline">\(dp[i][j]\)</span>在<strong>原来的基础上</strong>加1。这个<strong>原来的基础</strong>又分为两种情况：</p>
+<ol type="1">
+<li>在<span class="math inline">\(i==0\)</span>时，更新数据的过程只是单纯把0变为1，在这个例子中，就是拿出第一个字符<strong><em>b</em></strong>与后面的<strong><em>anana</em></strong>中的每一个字符进行比较，显然后者是没有与前者相匹配的字符，所以第一行的数据依然保持全部为0。</li>
+<li>而当<span class="math inline">\(i&gt;0\)</span>时，更新数据的过程就应该是<span class="math inline">\(dp[i][j] == dp[i-1][j-1]+1\)</span>，事实上，<span class="math inline">\(dp[i-1][j-1]\)</span>就是对前一轮遍历的“记忆”，因为每次遇到字符相等，我们就会想，那这两个字符的前一个字符又是否相同呢？按照这个思路，<span class="math inline">\(dp\)</span>矩阵在新一轮的更新如下：</li>
+</ol>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;">b</th>
+<th style="text-align: center;">a</th>
+<th style="text-align: center;">n</th>
+<th style="text-align: center;">a</th>
+<th style="text-align: center;">n</th>
+<th style="text-align: center;">a</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>i \ j</strong></td>
+<td style="text-align: center;"><strong>0</strong></td>
+<td style="text-align: center;"><strong>1</strong></td>
+<td style="text-align: center;"><strong>2</strong></td>
+<td style="text-align: center;"><strong>3</strong></td>
+<td style="text-align: center;"><strong>4</strong></td>
+<td style="text-align: center;"><strong>5</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>b</strong></td>
+<td style="text-align: center;"><strong>0</strong></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>a</strong></td>
+<td style="text-align: center;"><strong>1</strong></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;"><font color="#FF0000">1</font></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;"><font color="#FF0000">1</font></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>n</strong></td>
+<td style="text-align: center;"><strong>2</strong></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>a</strong></td>
+<td style="text-align: center;"><strong>3</strong></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>n</strong></td>
+<td style="text-align: center;"><strong>4</strong></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>a</strong></td>
+<td style="text-align: center;"><strong>5</strong></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+</tbody>
+</table>
+<p>通过以上分析，我们可以得到状态转移方程：</p>
+<p><span class="math display">\[
+dp[i][j] = 
+\left\{
+\begin{aligned}
+&amp;1, \ \ \ \ i =0 \\
+&amp;dp[i-1][j-1] + 1, \ \ \ \ i&gt;0
+\end{aligned}
+\right.
+\]</span> 其中<span class="math inline">\(j&gt;i\)</span>。 根据这个思路我们把<span class="math inline">\(dp\)</span>矩阵剩余的数据全部进行更新：</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;">b</th>
+<th style="text-align: center;">a</th>
+<th style="text-align: center;">n</th>
+<th style="text-align: center;">a</th>
+<th style="text-align: center;">n</th>
+<th style="text-align: center;">a</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><strong>i \ j</strong></td>
+<td style="text-align: center;"><strong>0</strong></td>
+<td style="text-align: center;"><strong>1</strong></td>
+<td style="text-align: center;"><strong>2</strong></td>
+<td style="text-align: center;"><strong>3</strong></td>
+<td style="text-align: center;"><strong>4</strong></td>
+<td style="text-align: center;"><strong>5</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>b</strong></td>
+<td style="text-align: center;"><strong>0</strong></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>a</strong></td>
+<td style="text-align: center;"><strong>1</strong></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>n</strong></td>
+<td style="text-align: center;"><strong>2</strong></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;"><font color="#FF0000">2</font></td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>a</strong></td>
+<td style="text-align: center;"><strong>3</strong></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;"><font color="#FF0000">3</font></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>n</strong></td>
+<td style="text-align: center;"><strong>4</strong></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>a</strong></td>
+<td style="text-align: center;"><strong>5</strong></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+</tbody>
+</table>
+<p>由此，我们就可以得到最长重复子串——<strong><em>ana</em></strong>，及其长度3。C++代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function">string <span class="title">dpLRS</span><span class="params">(string s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    string ans = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">int</span> maxm = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> sze = s.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">int</span> dp[sze][sze];   <span class="comment">//新建dp数组</span></span><br><span class="line">    <span class="built_in">memset</span>(dp, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(dp));  <span class="comment">//初始化dp数组</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;sze; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>; j&lt;sze; j++)  <span class="comment">//从i+1开始遍历</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(s[i] == s[j])    <span class="comment">//若两字符相等</span></span><br><span class="line">            &#123;</span><br><span class="line">                dp[i][j] = i == <span class="number">0</span> ? <span class="number">1</span> : dp[i<span class="number">-1</span>][j<span class="number">-1</span>] + <span class="number">1</span>;   <span class="comment">//状态转移方程</span></span><br><span class="line">                <span class="keyword">if</span>(dp[i][j] &gt; maxm) <span class="comment">//更新答案</span></span><br><span class="line">                &#123;</span><br><span class="line">                    maxm = dp[i][j];</span><br><span class="line">                    ans = s.<span class="built_in">substr</span>(i-maxm+<span class="number">1</span>, maxm);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    string s,ans;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;Enter the input string:-\n&quot;</span>;</span><br><span class="line">    cin &gt;&gt; s;   <span class="comment">//输入字符串</span></span><br><span class="line">    ans = <span class="built_in">dpLRS</span>(s);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;The longest repeating substring is:- &quot;</span> &lt;&lt; ans &lt;&lt; <span class="string">&#x27;\n&#x27;</span>; <span class="comment">//输出答案</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="重叠问题">重叠问题</h1>
+<p>读到这里，聪明的你或许已经发现，前面提供的解法貌似有一些问题，比如提到的字符串<strong><em>banana</em></strong>，按道理来讲，我们应该是可以看出最长重复子串应该是<strong><em>an</em></strong>或者<strong><em>na</em></strong>，然而用上面的程序求出来的却是<strong><em>ana</em></strong>，这实际上就是<strong>重叠</strong>的问题，这个<strong><em>ana</em></strong>来自b<strong><em>ana</em></strong>na以及ban<strong><em>ana</em></strong>。那么我们要怎么解决这个问题，使得求出来的答案更加符合我们的直觉呢？就这一点，我们在接下来的内容中会对之前的代码进行修改。</p>
+<h2 id="暴力遍历-1">暴力遍历</h2>
+<p>直接遍历的方法其实很容易改进，注意到我们的<span class="math inline">\(k\)</span>是从<span class="math inline">\(i+1\)</span>开始递增的，其实这就是会导致重叠的原因。只要我们把第三层循环的起点设置成<span class="math inline">\(j+1\)</span>即可，因为第一个字符串<span class="math inline">\(x\)</span>是以<span class="math inline">\(s[i]\)</span>开头，<span class="math inline">\(s[j]\)</span>结尾，只要我们在枚举第二个字符串的时候，把起点设置在<span class="math inline">\(s[j+1]\)</span>，就不会有重叠的部分了。代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function">string <span class="title">naiveLRS</span><span class="params">(string s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> maxm=<span class="number">0</span>; <span class="comment">//重复子字符串的最大长度</span></span><br><span class="line">    string ans = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;s.<span class="built_in">length</span>();i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=i;j&lt;s.<span class="built_in">length</span>();j++)</span><br><span class="line">        &#123;</span><br><span class="line">            string x=s.<span class="built_in">substr</span>(i,j-i+<span class="number">1</span>);  <span class="comment">//一个子字符串</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k=j+<span class="number">1</span>;k&lt;s.<span class="built_in">length</span>();k++) <span class="comment">//从j+1开始，避免重叠</span></span><br><span class="line">            &#123;</span><br><span class="line">                string y=s.<span class="built_in">substr</span>(k,j-i+<span class="number">1</span>); <span class="comment">//另一个与x不相等的子字符串</span></span><br><span class="line">                <span class="keyword">if</span>(x == y &amp;&amp; x.<span class="built_in">length</span>() &gt; maxm) <span class="comment">//如果这两个字符串相等，并且长度比之前记录的maxm更大，则更新答案</span></span><br><span class="line">                &#123;</span><br><span class="line">                    maxm = x.<span class="built_in">length</span>();</span><br><span class="line">                    ans = x;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    string s,ans;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;Enter the input string:-\n&quot;</span>;</span><br><span class="line">    cin &gt;&gt; s;   <span class="comment">//输入字符串</span></span><br><span class="line">    ans = <span class="built_in">naiveLRS</span>(s);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;The longest repeating substring is:- &quot;</span> &lt;&lt; ans &lt;&lt; <span class="string">&#x27;\n&#x27;</span>; <span class="comment">//输出答案</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此时再输入<strong><em>banana</em></strong>，得到的结果就是<strong><em>an</em></strong>了。</p>
+<h2 id="dp解法">dp解法</h2>
+<p>对于dp解法的改进可能需要稍微绕一点弯子，在更新的过程中，对于同一个子字符串对应的<span class="math inline">\(dp\)</span>数组的更新，<span class="math inline">\(i\)</span>和<span class="math inline">\(j\)</span>是同步进行的，并且我们可以知道这个重复的子字符串的长度即为<span class="math inline">\(dp[i][j]\)</span>，那么我们就可以知道，第一个字符串的终点即为<span class="math inline">\(s[i]\)</span>，而第二个字符串的起点，则为<span class="math inline">\(s[j - dp[i][j]+1]\)</span>，根据<span class="math inline">\(j-dp[i][j]+1 &gt; i\)</span>，得到<span class="math inline">\(dp[i][j] &lt; j-i+1\)</span>，那么把这个条件加入到代码中即可。代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function">string <span class="title">dpLRS</span><span class="params">(string s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    string ans = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">int</span> maxm = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> sze = s.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">int</span> dp[sze][sze];   <span class="comment">//新建dp数组</span></span><br><span class="line">    <span class="built_in">memset</span>(dp, <span class="number">0</span>, <span class="built_in"><span class="keyword">sizeof</span></span>(dp));  <span class="comment">//初始化dp数组</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;sze; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>; j&lt;sze; j++)  <span class="comment">//从i+1开始遍历</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(s[i] == s[j])    <span class="comment">//若两字符相等</span></span><br><span class="line">            &#123;</span><br><span class="line">                dp[i][j] = i == <span class="number">0</span> ? <span class="number">1</span> : dp[i<span class="number">-1</span>][j<span class="number">-1</span>] + <span class="number">1</span>;   <span class="comment">//状态转移方程</span></span><br><span class="line">                <span class="keyword">if</span>(dp[i][j] &gt; j-i)  dp[i][j] = <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">if</span>(dp[i][j] &gt; maxm) <span class="comment">//更新答案</span></span><br><span class="line">                &#123;</span><br><span class="line">                    maxm = dp[i][j];</span><br><span class="line">                    ans = s.<span class="built_in">substr</span>(i-maxm+<span class="number">1</span>, maxm);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    string s,ans;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;Enter the input string:-\n&quot;</span>;</span><br><span class="line">    cin &gt;&gt; s;   <span class="comment">//输入字符串</span></span><br><span class="line"><span class="comment">//    ans = naiveLRS(s);</span></span><br><span class="line">    ans = <span class="built_in">dpLRS</span>(s);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;The longest repeating substring is:- &quot;</span> &lt;&lt; ans &lt;&lt; <span class="string">&#x27;\n&#x27;</span>; <span class="comment">//输出答案</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="一些想法">一些想法</h1>
+<h2 id="动态规划和哈希表">动态规划和哈希表？</h2>
+<p>其实要求这个最长重复子串，未必要用到那么难想的动态规划的方法，用哈希的方法同样可以把这个问题解决了。我们可以建立一个<span class="math inline">\(map&lt;string, int&gt;\)</span>来统计每个子字符串出现的次数，这样的话，我们也是只需要把每个子字符串遍历一遍，进行统计，实时更新即可。时间复杂度和空间复杂度均与动态规划的相同。或许动态规划也是一种以空间换时间的算法吗？</p>
+<h2 id="s.substr的时间复杂度">s.substr()的时间复杂度？</h2>
+<p>查阅了一些网上的回答，说是这个函数只是简单的拷贝，时间复杂度记为<span class="math inline">\(O(1)\)</span>即可。笔者水平还没有到达阅读stl源码的地步，所以没有在这方面花太多时间，如果您恰巧对此很了解，欢迎您教一教我。</p>
+<h2 id="碎碎念">碎碎念</h2>
+<p>动态规划的算法也算是一个深坑，思想基本都不会变，但是很多题目的具体做法都千变万化，笔者对这方面了解得还是有很多不足之处，待以后学有所成再行分享。写这篇文章只是为了记录一下利用动态规划的思想解决最长重复子串问题的方法，并没有什么关于动态规划的独特见解。算法知识浩如烟海，不过还是如那句老话所说，怕什么真理无穷，进一寸有进一寸的欢喜。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div></div>
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="Xiaolong Chen WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/06/17/lgR2/" rel="prev" title="逻辑回归（二）：Loss易导">
+                  <i class="fa fa-chevron-left"></i> 逻辑回归（二）：Loss易导
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaolong Chen</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div><script color="255,255,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{&quot;enable&quot;:true,&quot;tags&quot;:&quot;none&quot;,&quot;js&quot;:{&quot;url&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;mathjax@3.1.4&#x2F;es5&#x2F;tex-mml-chtml.js&quot;,&quot;integrity&quot;:&quot;sha256-ncNI9OXOS5Ek4tzVYiOMmN&#x2F;KKCPZ6V0Cpv2P&#x2F;zHntiA&#x3D;&quot;}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+  
+</body>
+</html>
