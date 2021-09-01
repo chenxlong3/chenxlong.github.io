@@ -36,13 +36,13 @@ daovoice('update');
 <meta property="og:site_name" content="Xiaolong Chen">
 <meta property="og:description" content="想要解决的问题">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://chenxlong3.github.io/2021/06/16/linear-regression/linear-regression/LR1.jpg">
+<meta property="og:image" content="https://chenxlong3.github.io/2021/06/16/linear-regression/LR1.jpg">
 <meta property="article:published_time" content="2021-06-16T12:41:18.000Z">
-<meta property="article:modified_time" content="2021-09-01T15:21:02.564Z">
+<meta property="article:modified_time" content="2021-09-01T15:25:21.993Z">
 <meta property="article:author" content="Xiaolong Chen">
 <meta property="article:tag" content="Machine Learning">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://chenxlong3.github.io/2021/06/16/linear-regression/linear-regression/LR1.jpg">
+<meta name="twitter:image" content="https://chenxlong3.github.io/2021/06/16/linear-regression/LR1.jpg">
 
 
 <link rel="canonical" href="https://chenxlong3.github.io/2021/06/16/linear-regression/">
@@ -242,7 +242,7 @@ daovoice('update');
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-09-01 23:21:02" itemprop="dateModified" datetime="2021-09-01T23:21:02+08:00">2021-09-01</time>
+        <time title="Modified: 2021-09-01 23:25:21" itemprop="dateModified" datetime="2021-09-01T23:25:21+08:00">2021-09-01</time>
       </span>
 
   
@@ -292,7 +292,7 @@ L(\theta_0, \theta_1) = \frac{1}{m}\sum_{i=1}^m(\hat{y}^{(i)} - y)^2
 <p>那么接下来，我们会介绍一种求解<span class="math inline">\(\theta_0\)</span>和<span class="math inline">\(\theta_1\)</span>的最常用的方法，梯度下降法（Gradient Descent）。</p>
 <h2 id="梯度下降法gradient-descent">梯度下降法（Gradient Descent）</h2>
 <p>经过高中数学的学习，想必大家都知道了导数的几何意义，在某一点的导数就等于过这一点切线的斜率，如下图所示：</p>
-<p><img src="/2021/06/16/linear-regression/linear-regression\LR1.jpg"></p>
+<p><img src="/2021/06/16/linear-regression/LR1.jpg"></p>
 <p>显然，在<span class="math inline">\(x_1\)</span>处的导数小于0，意味着在这个点的右边还有会使<span class="math inline">\(y\)</span>更小的<span class="math inline">\(x\)</span>值，暗示我们向右取值；相反地，在<span class="math inline">\(x_2\)</span>处的导数大于0，意味着在这个点的左边有能使<span class="math inline">\(y\)</span>更小的<span class="math inline">\(x\)</span>值，暗示我们向左取值。所以就有如下的迭代策略： <span class="math display">\[
 \theta_j := \theta_j - \eta \frac{\partial}{\partial \theta_j}L(\theta_0, \theta_1) \ \ \ \ \ \ \ \ (j = 0, 1)
 \]</span> 公式逐渐复杂了起来，不过问题不大，我们来分析一下各个参数的意义。</p>
