@@ -37,7 +37,7 @@ daovoice('update');
 <meta property="og:description" content="正好课上讲到开根号的迭代公式，写篇blog推导一下。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-09-03T14:41:06.000Z">
-<meta property="article:modified_time" content="2021-09-03T16:22:32.715Z">
+<meta property="article:modified_time" content="2021-09-03T16:37:25.613Z">
 <meta property="article:author" content="Xiaolong Chen">
 <meta property="article:tag" content="Math">
 <meta name="twitter:card" content="summary">
@@ -240,7 +240,7 @@ daovoice('update');
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-09-04 00:22:32" itemprop="dateModified" datetime="2021-09-04T00:22:32+08:00">2021-09-04</time>
+        <time title="Modified: 2021-09-04 00:37:25" itemprop="dateModified" datetime="2021-09-04T00:37:25+08:00">2021-09-04</time>
       </span>
 
   
@@ -263,9 +263,13 @@ daovoice('update');
         <p>正好课上讲到开根号的迭代公式，写篇blog推导一下。</p>
 <h1 id="需要解决的问题">需要解决的问题</h1>
 <p>怎么求对某一个数开根号的数值解？比如<span class="math inline">\(\sqrt{17}\)</span>，它的近似值是多少呢？这个问题抽象一下，其实就是求以下非线性方程的数值解。 <span class="math display">\[
+\begin{align*}
 x^2 = a
+\end{align*}
 \]</span> 写作以下形式更方便之后的推导： <span class="math display">\[
+\begin{align*}
 f(x) = x^2 - a = 0
+\end{align*}
 \]</span> 在介绍牛顿迭代法之前，先来复习一下泰勒展开的内容。</p>
 <h1 id="泰勒展开">泰勒展开</h1>
 <p>对于函数<span class="math inline">\(f(x)\)</span>，在<span class="math inline">\((x_0, f(x_0))\)</span>这个点进行泰勒展开，可以作如下近似： <span class="math display">\[
@@ -273,9 +277,13 @@ f(x) = f(x_0) + f^\prime(x_0)(x-x_0) + \frac{1}{2}f^{\prime\prime}(x_0)(x-x_0)^2
 \]</span> 中国农业大学的陈研教授开的数值计算方法的课程中，对泰勒展开的理解我个人感觉非常巧妙，以后再写。</p>
 <h1 id="牛顿迭代法">牛顿迭代法</h1>
 <p>牛顿迭代法其实非常简单，我们只取一阶近似： <span class="math display">\[
+\begin{align*}
 f(x)\approx f(x_0) + f^\prime(x_0)(x-x_0)
+\end{align*}
 \]</span> 我们在一开始也提到，非线性方程可以写作<span class="math inline">\(f(x) = 0\)</span>。那么就有如下公式： <span class="math display">\[
+\begin{align*}
 f(x_0) + f^\prime(x_0)(x-x_0) = 0
+\end{align*}
 \]</span> 要时刻想清楚我们想求的东西是什么。这个问题我们要求的东西是解，是<span class="math inline">\(x\)</span>。所以利用初中知识做一些数学上的变换： <span class="math display">\[
 \begin{align*}
 f^\prime(x_0)(x-x_0) &amp;= -f(x_0)\\
