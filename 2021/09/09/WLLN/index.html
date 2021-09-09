@@ -31,14 +31,15 @@ daovoice('update');
 </script>
 <meta name="description" content="样本数目足够多的情况下，样本均值会趋于期望。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Xiaolong Chen">
+<meta property="og:title" content="弱大数定律的证明及意义">
 <meta property="og:url" content="https://chenxlong3.github.io/2021/09/09/WLLN/index.html">
 <meta property="og:site_name" content="Xiaolong Chen">
 <meta property="og:description" content="样本数目足够多的情况下，样本均值会趋于期望。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-09-09T15:23:13.324Z">
-<meta property="article:modified_time" content="2021-09-09T15:23:42.895Z">
+<meta property="article:published_time" content="2021-09-09T15:25:47.000Z">
+<meta property="article:modified_time" content="2021-09-09T15:31:12.000Z">
 <meta property="article:author" content="Xiaolong Chen">
+<meta property="article:tag" content="Math">
 <meta name="twitter:card" content="summary">
 
 
@@ -46,10 +47,10 @@ daovoice('update');
 
 
 
-<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;chenxlong3.github.io&#x2F;2021&#x2F;09&#x2F;09&#x2F;WLLN&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;09&#x2F;09&#x2F;WLLN&#x2F;&quot;,&quot;title&quot;:&quot;&quot;}</script>
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;chenxlong3.github.io&#x2F;2021&#x2F;09&#x2F;09&#x2F;WLLN&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;09&#x2F;09&#x2F;WLLN&#x2F;&quot;,&quot;title&quot;:&quot;弱大数定律的证明及意义&quot;}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
-<title> | Xiaolong Chen</title>
+<title>弱大数定律的证明及意义 | Xiaolong Chen</title>
   
 
 
@@ -221,7 +222,7 @@ daovoice('update');
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
+          弱大数定律的证明及意义
         </h1>
 
         <div class="post-meta-container">
@@ -233,7 +234,7 @@ daovoice('update');
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2021-09-09 23:23:13 / Modified: 23:23:42" itemprop="dateCreated datePublished" datetime="2021-09-09T23:23:13+08:00">2021-09-09</time>
+      <time title="Created: 2021-09-09 23:25:47 / Modified: 23:31:12" itemprop="dateCreated datePublished" datetime="2021-09-09T23:25:47+08:00">2021-09-09</time>
     </span>
 
   
@@ -327,7 +328,9 @@ M_n = \frac{X_1 + X_2+\cdots + X_n}{n}
 <p><span class="math inline">\(X_1\cdots X_n\)</span>: 独立同分布的随机变量</p>
 <p>接下来我们给出弱大数定律的证明：</p>
 <p>$Proof: $</p>
-<p>根据均值及方差的线性性 (Linearity): $$ <span class="math display">\[\begin{align*}
+<p>根据均值及方差的线性性 (Linearity):</p>
+<p><span class="math display">\[
+\begin{align*}
 E[M_n] &amp;= E[\frac{X_1+\cdots+X_n}{n}]\\
 \\
 &amp;= \frac{E[X_1]+\cdots+E[X_n]}{n}\\
@@ -344,22 +347,25 @@ Var(M_n) &amp;= Var(\frac{X_1+\cdots+X_n}{n})\\
 &amp;= \frac{n\sigma^2}{n^2}\\
 \\
 &amp;= \frac{\sigma^2}{n}
-
-\end{align*}\]</span> <span class="math display">\[
-根据前面提到的Chebyshev Inequality，
-\]</span> <span class="math display">\[\begin{align*}
+\end{align*}
+\]</span></p>
+<p>根据前面提到的Chebyshev Inequality，</p>
+<p><span class="math display">\[
+\begin{align*}
 P(|M_n - \mu| \geq \epsilon) &amp;\leq \frac{Var(M_n)}{\epsilon^2}
 = \frac{\sigma^2}{n\epsilon^2}\\
 \\
 0\leq \lim_{n \to \infty} P(|M_n - \mu| &amp;\geq \epsilon)\leq \lim_{n \to \infty} \frac{\sigma^2}{n\epsilon^2} = 0
-\end{align*}\]</span> <span class="math display">\[
-根据夹逼定理，
-\]</span> <span class="math display">\[\begin{align*}
+\end{align*}
+\]</span> 根据夹逼定理， <span class="math display">\[
+\begin{align*}
 \lim_{n \to \infty} P(|M_n - \mu| &amp;\geq \epsilon) = 0
-\end{align*}\]</span> $$ 证毕。</p>
+\end{align*}
+\]</span> 证毕。</p>
 <p>WLLN描述的实际上就是我们在开头讲的，样本数目足够多的情况下，样本均值会趋于期望。那这个描述样本均值的定律，是怎么和频率扯上关系的呢？</p>
 <h2 id="大数定律与事件概率估计">大数定律与事件概率估计</h2>
-<p>我们在讨论<span class="math inline">\(X_1\cdots X_n\)</span>时，实际上讨论的是某一试验的多次重复。不妨用<span class="math inline">\(X_i\)</span>来表示某事件<span class="math inline">\(A\)</span>是否发生，即： <span class="math display">\[
+<p>我们在讨论<span class="math inline">\(X_1\cdots X_n\)</span>时，实际上讨论的是某一试验的多次重复。不妨用<span class="math inline">\(X_i\)</span>来表示某事件<span class="math inline">\(A\)</span>是否发生，即：</p>
+<p><span class="math display">\[
 \begin{equation}
 X_i = \left\{
 \begin{aligned}
@@ -368,7 +374,9 @@ X_i = \left\{
 \end{aligned}
 \right.
 \end{equation}
-\]</span> 那么，经过多次重复实验，得到的样本均值实际上就是事情发生的频率。 $$ <span class="math display">\[\begin{align*}
+\]</span> 那么，经过多次重复实验，得到的样本均值实际上就是事情发生的频率。</p>
+<p><span class="math display">\[
+\begin{align*}
 M_n &amp;= \frac{\sum^{n}_{i=1} X_i}{n} \\
 &amp;= \frac{\text{the number of times that event A happens}}{n}\\
 &amp;= frequency\\
@@ -376,12 +384,13 @@ M_n &amp;= \frac{\sum^{n}_{i=1} X_i}{n} \\
 \mu &amp;= 1\cdot P(A)+0\cdot (1-P(A))\\
 \\
 &amp;=P(A)
-
-\end{align*}\]</span> <span class="math display">\[
-所以，根据大数定律：
-\]</span> <span class="math display">\[\begin{align*}
+\end{align*}
+\]</span> 所以，根据大数定律：</p>
+<p><span class="math display">\[
+\begin{align*}
 \lim_{n \to \infty} P(|M_n - \mu| &amp;\geq \epsilon) = \lim_{n \to \infty}P(frequency-P(A)) = 0
-\end{align*}\]</span> $$ 也就是说，频率趋于概率。</p>
+\end{align*}
+\]</span> 也就是说，频率趋于概率。</p>
 <h1 id="强大数定律">强大数定律</h1>
 <p>强大数定律的数学形式如下， <span class="math display">\[
 \begin{align*}
@@ -414,6 +423,9 @@ P(\lim_{n \to \infty} |M_n - \mu| \geq \epsilon) &amp;= 0
   </div>
 </div>
 
+          <div class="post-tags">
+              <a href="/tags/Math/" rel="tag"># Math</a>
+          </div>
 
         
 
@@ -490,7 +502,7 @@ P(\lim_{n \to \infty} |M_n - \mu| \geq \epsilon) &amp;= 0
 
   
 
-  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{&quot;enable&quot;:true,&quot;tags&quot;:&quot;none&quot;,&quot;js&quot;:{&quot;url&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;mathjax@3.1.4&#x2F;es5&#x2F;tex-mml-chtml.js&quot;,&quot;integrity&quot;:&quot;sha256-ncNI9OXOS5Ek4tzVYiOMmN&#x2F;KKCPZ6V0Cpv2P&#x2F;zHntiA&#x3D;&quot;}}</script>
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{&quot;enable&quot;:true,&quot;tags&quot;:&quot;none&quot;,&quot;js&quot;:{&quot;url&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;mathjax@3.1.4&#x2F;es5&#x2F;tex-mml-chtml.js&quot;,&quot;integrity&quot;:&quot;sha256-ncNI9OXOS5Ek4tzVYiOMmN&#x2F;KKCPZ6V0Cpv2P&#x2F;zHntiA&#x3D;&quot;}}</script>
 <script src="/js/third-party/math/mathjax.js"></script>
 
 
