@@ -29,28 +29,28 @@
 });
 daovoice('update');
 </script>
-<meta name="description" content="正好课上讲到开根号的迭代公式，写篇blog推导一下。">
+<meta name="description" content="样本数目足够多的情况下，样本均值会趋于期望。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="利用牛顿迭代法开根号">
-<meta property="og:url" content="https://chenxlong3.github.io/2021/09/03/numerical-sqrt/index.html">
+<meta property="og:title" content="弱大数定律的推导及意义">
+<meta property="og:url" content="https://chenxlong3.github.io/2021/09/09/WLLN/index.html">
 <meta property="og:site_name" content="Xiaolong Chen">
-<meta property="og:description" content="正好课上讲到开根号的迭代公式，写篇blog推导一下。">
+<meta property="og:description" content="样本数目足够多的情况下，样本均值会趋于期望。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-09-03T14:41:06.000Z">
-<meta property="article:modified_time" content="2021-09-03T16:37:25.613Z">
+<meta property="article:published_time" content="2021-09-09T15:25:47.000Z">
+<meta property="article:modified_time" content="2021-09-09T17:02:59.453Z">
 <meta property="article:author" content="Xiaolong Chen">
 <meta property="article:tag" content="Math">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://chenxlong3.github.io/2021/09/03/numerical-sqrt/">
+<link rel="canonical" href="https://chenxlong3.github.io/2021/09/09/WLLN/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;chenxlong3.github.io&#x2F;2021&#x2F;09&#x2F;03&#x2F;numerical-sqrt&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;09&#x2F;03&#x2F;numerical-sqrt&#x2F;&quot;,&quot;title&quot;:&quot;利用牛顿迭代法开根号&quot;}</script>
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;chenxlong3.github.io&#x2F;2021&#x2F;09&#x2F;09&#x2F;WLLN&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;09&#x2F;09&#x2F;WLLN&#x2F;&quot;,&quot;title&quot;:&quot;弱大数定律的推导及意义&quot;}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
-<title>利用牛顿迭代法开根号 | Xiaolong Chen</title>
+<title>弱大数定律的推导及意义 | Xiaolong Chen</title>
   
 
 
@@ -130,7 +130,7 @@ daovoice('update');
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9C%80%E8%A6%81%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">需要解决的问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%B0%E5%8B%92%E5%B1%95%E5%BC%80"><span class="nav-number">2.</span> <span class="nav-text">泰勒展开</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%89%9B%E9%A1%BF%E8%BF%AD%E4%BB%A3%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">牛顿迭代法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%A0%E4%BD%95%E6%84%8F%E4%B9%89"><span class="nav-number">4.</span> <span class="nav-text">几何意义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B2%97%E7%B3%99%E7%9A%84%E4%BB%A3%E7%A0%81python"><span class="nav-number">5.</span> <span class="nav-text">粗糙的代码（python）</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E4%B8%8D%E7%AD%89%E5%BC%8F-the-markov-inequality"><span class="nav-number">1.</span> <span class="nav-text">马尔可夫不等式 (The Markov Inequality)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%87%E6%AF%94%E9%9B%AA%E5%A4%AB%E4%B8%8D%E7%AD%89%E5%BC%8F-the-chebyshev-inequality"><span class="nav-number">2.</span> <span class="nav-text">切比雪夫不等式 (The Chebyshev Inequality)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%B1%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B-weak-law-of-large-numbers-wlln"><span class="nav-number">3.</span> <span class="nav-text">弱大数定律 (Weak Law of Large Numbers, WLLN)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%81%E6%98%8E"><span class="nav-number">3.1.</span> <span class="nav-text">证明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B%E4%B8%8E%E4%BA%8B%E4%BB%B6%E6%A6%82%E7%8E%87%E4%BC%B0%E8%AE%A1"><span class="nav-number">3.2.</span> <span class="nav-text">大数定律与事件概率估计</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%BA%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B"><span class="nav-number">4.</span> <span class="nav-text">强大数定律</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -210,7 +210,7 @@ daovoice('update');
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chenxlong3.github.io/2021/09/03/numerical-sqrt/">
+    <link itemprop="mainEntityOfPage" href="https://chenxlong3.github.io/2021/09/09/WLLN/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/sijia.jpg">
@@ -223,7 +223,7 @@ daovoice('update');
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          利用牛顿迭代法开根号
+          弱大数定律的推导及意义
         </h1>
 
         <div class="post-meta-container">
@@ -234,14 +234,14 @@ daovoice('update');
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2021-09-03 22:41:06" itemprop="dateCreated datePublished" datetime="2021-09-03T22:41:06+08:00">2021-09-03</time>
+      <time title="Created: 2021-09-09 23:25:47" itemprop="dateCreated datePublished" datetime="2021-09-09T23:25:47+08:00">2021-09-09</time>
     </span>
       <span class="post-meta-item">
         <span class="post-meta-item-icon">
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-09-04 00:37:25" itemprop="dateModified" datetime="2021-09-04T00:37:25+08:00">2021-09-04</time>
+        <time title="Modified: 2021-09-10 01:02:59" itemprop="dateModified" datetime="2021-09-10T01:02:59+08:00">2021-09-10</time>
       </span>
 
   
@@ -261,70 +261,153 @@ daovoice('update');
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>正好课上讲到开根号的迭代公式，写篇blog推导一下。</p>
-<h1 id="需要解决的问题">需要解决的问题</h1>
-<p>怎么求对某一个数开根号的数值解？比如<span class="math inline">\(\sqrt{17}\)</span>，它的近似值是多少呢？这个问题抽象一下，其实就是求以下非线性方程的数值解。 <span class="math display">\[
+        <p>样本数目足够多的情况下，样本均值会趋于期望。</p>
+<p>样本数目足够多的情况下，事件发生的频率趋于概率。</p>
+<p>为何两种说法都称为大数定律，样本均值与频率又到底是什么关系呢？</p>
+<h1 id="马尔可夫不等式-the-markov-inequality">马尔可夫不等式 (The Markov Inequality)</h1>
+<p>Markov Inequality描述了一个非常简单的想法：如果随机变量恒大于零，且该随机变量的期望较小，那么我们随机做一次实验，所得到的<span class="math inline">\(X\)</span>也不太可能会很大。举个例子，如果全国十四亿人口的平均身高为1.67米，那么我们随机抽一个人，他/她的身高不会偏离这个数字太远，他/她的身高为2米的概率是比较低的。</p>
+<p><span class="math inline">\(P(X\geq a)\)</span>: 随机变量<span class="math inline">\(X\)</span>不小于<span class="math inline">\(a\)</span> 的概率</p>
+<p><span class="math inline">\(E[X]\)</span>: 随机变量<span class="math inline">\(X\)</span>的期望</p>
+<p><span class="math inline">\(a\)</span>: 任一正数 <span class="math display">\[
+P(X\geq a) \leq \frac{E[X]}{a}
+\]</span> <span class="math inline">\(Proof\ 1\)</span>: <span class="math display">\[
 \begin{align*}
-x^2 = a
-\end{align*}
-\]</span> 写作以下形式更方便之后的推导： <span class="math display">\[
-\begin{align*}
-f(x) = x^2 - a = 0
-\end{align*}
-\]</span> 在介绍牛顿迭代法之前，先来复习一下泰勒展开的内容。</p>
-<h1 id="泰勒展开">泰勒展开</h1>
-<p>对于函数<span class="math inline">\(f(x)\)</span>，在<span class="math inline">\((x_0, f(x_0))\)</span>这个点进行泰勒展开，可以作如下近似： <span class="math display">\[
-f(x) = f(x_0) + f^\prime(x_0)(x-x_0) + \frac{1}{2}f^{\prime\prime}(x_0)(x-x_0)^2 + \cdots + \frac{f^{(n)}}{n!}(x-x_0)^n
-\]</span> 中国农业大学的陈研教授开的数值计算方法的课程中，对泰勒展开的理解我个人感觉非常巧妙，以后再写。</p>
-<h1 id="牛顿迭代法">牛顿迭代法</h1>
-<p>牛顿迭代法其实非常简单，我们只取一阶近似： <span class="math display">\[
-\begin{align*}
-f(x)\approx f(x_0) + f^\prime(x_0)(x-x_0)
-\end{align*}
-\]</span> 我们在一开始也提到，非线性方程可以写作<span class="math inline">\(f(x) = 0\)</span>。那么就有如下公式： <span class="math display">\[
-\begin{align*}
-f(x_0) + f^\prime(x_0)(x-x_0) = 0
-\end{align*}
-\]</span> 要时刻想清楚我们想求的东西是什么。这个问题我们要求的东西是解，是<span class="math inline">\(x\)</span>。所以利用初中知识做一些数学上的变换： <span class="math display">\[
-\begin{align*}
-f^\prime(x_0)(x-x_0) &amp;= -f(x_0)\\
-x - x_0 &amp;= -\frac{f(x_0)}{f^\prime(x_0)}\\
-x &amp;= x_0 - \frac{f(x_0)}{f^\prime(x_0)}
-\end{align*}
-\]</span> （看到分母我们就应该想到它是不能等于0的，所以接下来的推导也都基于<span class="math inline">\(f^\prime(x_0) \neq 0\)</span>这个假设）</p>
-<p>然而，我们只是随便取的一个点，想要一步就求出解那也有点过于异想天开了。我们接下来还需要做一件事情，就是迭代。 <span class="math display">\[
-\begin{align*}
-x_1 &amp;= x_0 - \frac{f(x_0)}{f^\prime(x_0)}\\
-x_2 &amp;= x_1 - \frac{f(x_1)}{f^\prime(x_1)}\\
-\vdots
+E[X] &amp;= \int^{\infty}_{-\infty} xf(x)dx\\
+&amp;\geq \int^{\infty}_{a} xf(x)dx \\
+&amp;\geq \int^{\infty}_{a} af(x)dx \\
+&amp;= aP(X\geq a)
 \\
-x_k &amp;= x_{k-1} - \frac{f(x_{k-1})}{f^\prime(x_{k-1})}
+\\
+P(X\geq a) &amp;\leq \frac{E[x]}{a}
+\end{align*}
+\]</span> 除此之外，还有一种证明方法，但两者的内在思想是一样的，也在此简述一下。</p>
+<p><span class="math inline">\(Proof\ 2\)</span>:</p>
+<p>假设我们有另外一个随机变量<span class="math inline">\(Y\)</span>，如下： <span class="math display">\[
+\begin{equation*}
+Y=\left\{
+\begin{aligned}
+a, &amp;\quad X\geq a\\
+0, &amp;\quad X&lt;a
+\end{aligned}
+\right.
+\end{equation*}
+\]</span> 显然这是一个离散型随机变量，那么我们可以用以下公式计算出它的期望： <span class="math display">\[
+\begin{align*}
+E[Y] &amp;= aP(X\geq a) + 0\cdot P(X&lt;a)\\
+&amp;= aP(X\geq a)
+\end{align*}
+\]</span> 因为当<span class="math inline">\(X\geq a\)</span>时，<span class="math inline">\(Y=a\)</span>，而当<span class="math inline">\(X&lt;a\)</span>时，<span class="math inline">\(Y = 0\)</span>。所以很显然可以得到：<span class="math inline">\(Y\leq X\)</span>。那么也就有<span class="math inline">\(E[Y] \leq E[X]\)</span>。则： <span class="math display">\[
+\begin{align*}
+E[Y] = aP(&amp;X\geq a) \leq E[X] \\
+\\P(X\geq a) &amp; \leq \frac{E[X]}{a}
+\end{align*}
+\]</span> 可是稍微往深处想一想，就会觉得这个不等式非常鸡肋。从不等式上来看，随机变量大于或等于<span class="math inline">\(k\)</span>倍期望的概率不超过<span class="math inline">\(\frac{1}{k}\)</span>。这样说或许还不直观，我们再举回那个身高的例子，全国十四亿人口的平均身高为1.67米。这个不等式告诉我们，如果随机抽一个人，他/她的身高不小于3.34米的概率不超过<span class="math inline">\(1/2\)</span>……</p>
+<p>根据我们的常识，这个概率何止是不超过<span class="math inline">\(1/2\)</span>，说是远小于1%也不为过。这其实就是这个Markov Inequality的一个缺点——它的上界定得太大了。</p>
+<h1 id="切比雪夫不等式-the-chebyshev-inequality">切比雪夫不等式 (The Chebyshev Inequality)</h1>
+<p>Chebyshev Inequality把方差也考虑了进来。这个不等式阐述的想法就是：如果一个随机变量的方差不大，那么这个随机变量不会离它的均值太远。不等式的形式如下： <span class="math display">\[
+\begin{align*}
+P(|X-\mu|\geq c)\leq \frac{\sigma^2}{c^2}
+\end{align*}
+\]</span> 同样地，我们来证明一下这个不等式。</p>
+<p>首先，绝对值这个东西有点碍眼，它的存在往往意味着分类讨论，我们可以先把它去掉，两边同时进行平方运算。 <span class="math display">\[
+\begin{align*}
+P(|X-\mu|\geq c) = P((X-\mu)^2\geq c^2)
+\end{align*}
+\]</span> 然后，把<span class="math inline">\((X-\mu)^2\)</span>看作一个新的随机变量，利用Markov Inequality得到， <span class="math display">\[
+\begin{align*}
+P(|X-\mu|\geq c) = P((X-\mu)^2 \geq c^2) &amp;\leq \frac{E[(X-\mu)^2]}{c^2} = \frac{\sigma^2}{c^2}
+\end{align*}
+\]</span> 证毕。</p>
+<p>假设平均身高为167<span class="math inline">\(cm\)</span>，方差为100<span class="math inline">\(cm^2\)</span>，那么抽到一个人身高大于或等于3.34米的概率会小于或等于0.0035。这样看倒也科学不少。</p>
+<h1 id="弱大数定律-weak-law-of-large-numbers-wlln">弱大数定律 (Weak Law of Large Numbers, WLLN)</h1>
+<h2 id="证明">证明</h2>
+<p>接着我们来看一下这篇文章真正的主角——大数定律。更准确地说，是弱大数定律，也称为辛钦大数定律。至于强大数定律，会在这篇blog的结尾提一嘴，它的证明有点超出我的知识范畴了，我也就偷个懒吧。</p>
+<p>先给出来大数定律的形式：</p>
+<p>对于任意<span class="math inline">\(\epsilon &gt; 0\)</span>: <span class="math display">\[
+\begin{align*}
+P(|M_n-\mu|\geq \epsilon) \rightarrow 0, \ as\ n \rightarrow \infty
+\end{align*}
+\]</span> 其中：</p>
+<p><span class="math inline">\(M_n\)</span>: 样本均值，计算公式为 <span class="math display">\[
+M_n = \frac{X_1 + X_2+\cdots + X_n}{n}
+\]</span> <span class="math inline">\(\mu\)</span>: 随机变量的期望</p>
+<p><span class="math inline">\(n\)</span>: 样本数量</p>
+<p><span class="math inline">\(X_1\cdots X_n\)</span>: 独立同分布的随机变量</p>
+<p>接下来我们给出弱大数定律的证明：</p>
+<p>$Proof: $</p>
+<p>根据均值及方差的线性性 (Linearity):</p>
+<p><span class="math display">\[
+\begin{align*}
+E[M_n] &amp;= E[\frac{X_1+\cdots+X_n}{n}]\\
+\\
+&amp;= \frac{E[X_1]+\cdots+E[X_n]}{n}\\
+\\
+&amp;=\frac{n\mu}{n}\\
+\\
+&amp;= \mu\\
+\\
+\\
+Var(M_n) &amp;= Var(\frac{X_1+\cdots+X_n}{n})\\
+\\
+&amp;= \frac{Var(X_1) + \cdots + Var(X_n)}{n^2}\\
+\\
+&amp;= \frac{n\sigma^2}{n^2}\\
+\\
+&amp;= \frac{\sigma^2}{n}
 \end{align*}
 \]</span></p>
-<p>OK，回到我们要解决的问题上来。 <span class="math display">\[
+<p>根据前面提到的Chebyshev Inequality，</p>
+<p><span class="math display">\[
 \begin{align*}
-f(x) &amp;= x^2 - a\\
-f^{\prime}(x) &amp;= 2x
+P(|M_n - \mu| \geq \epsilon) &amp;\leq \frac{Var(M_n)}{\epsilon^2}
+= \frac{\sigma^2}{n\epsilon^2}\\
+\\
+0\leq \lim_{n \to \infty} P(|M_n - \mu| &amp;\geq \epsilon)\leq \lim_{n \to \infty} \frac{\sigma^2}{n\epsilon^2} = 0
 \end{align*}
-\]</span> 那么，迭代的公式就可以写作（这里的等号是赋值的意思，利用程序化的语言来写了）： <span class="math display">\[
+\]</span> 根据夹逼定理， <span class="math display">\[
 \begin{align*}
-x &amp;= x - \frac{x^2-a}{2x}\\
-&amp;= \frac{2x^2-x^2+a}{2x} \\
-&amp;= \frac{x^2+a}{2x}\\
-&amp;= \frac{x + \frac{a}{x}}{2}
+\lim_{n \to \infty} P(|M_n - \mu| &amp;\geq \epsilon) = 0
 \end{align*}
-\]</span></p>
-<h1 id="几何意义">几何意义</h1>
-<p>来，看一下这个东西到底是什么。 <span class="math display">\[
-f(x_0) + f^\prime(x_0)(x-x_0) = 0
-\]</span> 是不是和<span class="math inline">\(f(x)\)</span>在<span class="math inline">\(x_0\)</span>处的切线方程非常类似？没错。那么我们这里求出来的<span class="math inline">\(x\)</span>是什么呢？其实是这条切线与<span class="math inline">\(x\)</span>轴的交点。我们在做的事情，其实就是一直找这个交点，直到它和函数<span class="math inline">\(f(x)\)</span>的根足够近。其实根据可视化，这个过程一目了然，但本人能力有限，暂时做不出来，在此贴上一个我觉得不错的链接，感兴趣的可以阅读一下。</p>
+\]</span> 证毕。</p>
+<p>WLLN描述的实际上就是我们在开头讲的，样本数目足够多的情况下，样本均值会趋于期望。那这个描述样本均值的定律，是怎么和频率扯上关系的呢？</p>
+<h2 id="大数定律与事件概率估计">大数定律与事件概率估计</h2>
+<p>我们在讨论<span class="math inline">\(X_1\cdots X_n\)</span>时，实际上讨论的是某一试验的多次重复。不妨用<span class="math inline">\(X_i\)</span>来表示某事件<span class="math inline">\(A\)</span>是否发生，即：</p>
+<p><span class="math display">\[
+\begin{equation}
+X_i = \left\{
+\begin{aligned}
+1, \quad &amp;\text{if event A happens}\\
+0, \quad &amp;\text{if event A doesn&#39;t happen}
+\end{aligned}
+\right.
+\end{equation}
+\]</span> 那么，经过多次重复实验，得到的样本均值实际上就是事情发生的频率。</p>
+<p><span class="math display">\[
+\begin{align*}
+M_n &amp;= \frac{\sum^{n}_{i=1} X_i}{n} \\
+&amp;= \frac{\text{the number of times that event A happens}}{n}\\
+&amp;= frequency\\
+\\
+\mu &amp;= 1\cdot P(A)+0\cdot (1-P(A))\\
+\\
+&amp;=P(A)
+\end{align*}
+\]</span> 所以，根据大数定律：</p>
+<p><span class="math display">\[
+\begin{align*}
+\lim_{n \to \infty} P(|M_n - \mu| &amp;\geq \epsilon) = \lim_{n \to \infty}P(frequency-P(A)) = 0
+\end{align*}
+\]</span> 也就是说，频率趋于概率。</p>
+<h1 id="强大数定律">强大数定律</h1>
+<p>强大数定律的数学形式如下， <span class="math display">\[
+\begin{align*}
+P(\lim_{n \to \infty} |M_n - \mu| \geq \epsilon) &amp;= 0
+\end{align*}
+\]</span> 实际上就是把极限符号给放进去了，虽然只有一点变化，但是表示的意思就更强烈了一点。</p>
 <blockquote>
-<p>https://www.zhihu.com/question/20690553/answer/925196172</p>
+<p>弱大数定律指的是样本均值依概率收敛于期望，而强大数定律则指出样本均值几乎处处收敛于期望。</p>
 </blockquote>
-<h1 id="粗糙的代码python">粗糙的代码（python）</h1>
-<p>求<span class="math inline">\(\sqrt{17}\)</span>的代码，十分粗糙...</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">1</span></span><br><span class="line">a = <span class="number">17</span></span><br><span class="line">acc = <span class="number">1e-5</span></span><br><span class="line"><span class="keyword">while</span> <span class="built_in">abs</span>(x*x-<span class="number">17</span>) &gt;= acc:</span><br><span class="line">    x = (x+a/x)/<span class="number">2</span></span><br><span class="line"><span class="built_in">print</span>(x)</span><br></pre></td></tr></table></figure>
-<p>有意思的是，我们知道开平方是有两个根的，我们只要把初始值取为负数，得到的就会是负根。</p>
+<p>至于再深一点的理解，笔者也并不太了解，还需深入学习。</p>
 
     </div>
 
@@ -355,14 +438,11 @@ f(x_0) + f^\prime(x_0)(x-x_0) = 0
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2021/09/02/primeTable/" rel="prev" title="质数表的建立">
-                  <i class="fa fa-chevron-left"></i> 质数表的建立
+                <a href="/2021/09/03/numerical-sqrt/" rel="prev" title="利用牛顿迭代法开根号">
+                  <i class="fa fa-chevron-left"></i> 利用牛顿迭代法开根号
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2021/09/09/WLLN/" rel="next" title="弱大数定律的推导及意义">
-                  弱大数定律的推导及意义 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
