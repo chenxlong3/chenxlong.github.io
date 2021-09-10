@@ -29,33 +29,28 @@
 });
 daovoice('update');
 </script>
-<meta name="description" content="回顾">
+<meta name="description" content="样本数目足够多的情况下，样本均值会趋于期望。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="逻辑回归（二）：Loss易导">
-<meta property="og:url" content="https://chenxlong3.github.io/2021/06/17/lgR2/index.html">
+<meta property="og:title" content="弱大数定律的推导及意义">
+<meta property="og:url" content="https://chenxlong3.github.io/2021/09/10/wlln-0/index.html">
 <meta property="og:site_name" content="Xiaolong Chen">
-<meta property="og:description" content="回顾">
+<meta property="og:description" content="样本数目足够多的情况下，样本均值会趋于期望。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://chenxlong3.github.io/2021/06/17/lgR2/multi.png">
-<meta property="og:image" content="https://chenxlong3.github.io/2021/06/17/lgR2/circle.jpg">
-<meta property="og:image" content="https://chenxlong3.github.io/2021/06/17/lgR2/triangle.png">
-<meta property="og:image" content="https://chenxlong3.github.io/2021/06/17/lgR2/rectangle.png">
-<meta property="article:published_time" content="2021-06-17T02:05:24.000Z">
-<meta property="article:modified_time" content="2021-06-17T02:53:54.070Z">
+<meta property="article:published_time" content="2021-09-10T04:47:46.000Z">
+<meta property="article:modified_time" content="2021-09-10T04:48:34.722Z">
 <meta property="article:author" content="Xiaolong Chen">
-<meta property="article:tag" content="Machine Learning">
+<meta property="article:tag" content="Math">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://chenxlong3.github.io/2021/06/17/lgR2/multi.png">
 
 
-<link rel="canonical" href="https://chenxlong3.github.io/2021/06/17/lgR2/">
+<link rel="canonical" href="https://chenxlong3.github.io/2021/09/10/wlln-0/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;chenxlong3.github.io&#x2F;2021&#x2F;06&#x2F;17&#x2F;lgR2&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;06&#x2F;17&#x2F;lgR2&#x2F;&quot;,&quot;title&quot;:&quot;逻辑回归（二）：Loss易导&quot;}</script>
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;chenxlong3.github.io&#x2F;2021&#x2F;09&#x2F;10&#x2F;wlln-0&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;09&#x2F;10&#x2F;wlln-0&#x2F;&quot;,&quot;title&quot;:&quot;弱大数定律的推导及意义&quot;}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
-<title>逻辑回归（二）：Loss易导 | Xiaolong Chen</title>
+<title>弱大数定律的推导及意义 | Xiaolong Chen</title>
   
 
 
@@ -134,7 +129,7 @@ daovoice('update');
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9E%E9%A1%BE"><span class="nav-number">1.</span> <span class="nav-text">回顾</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D"><span class="nav-number">2.</span> <span class="nav-text">梯度下降</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E5%85%AC%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text">更新公式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%9A%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">多分类问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E4%B8%8D%E7%AD%89%E5%BC%8F-the-markov-inequality"><span class="nav-number">1.</span> <span class="nav-text">马尔可夫不等式 (The Markov Inequality)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%87%E6%AF%94%E9%9B%AA%E5%A4%AB%E4%B8%8D%E7%AD%89%E5%BC%8F-the-chebyshev-inequality"><span class="nav-number">2.</span> <span class="nav-text">切比雪夫不等式 (The Chebyshev Inequality)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%B1%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B-weak-law-of-large-numbers-wlln"><span class="nav-number">3.</span> <span class="nav-text">弱大数定律 (Weak Law of Large Numbers, WLLN)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%81%E6%98%8E"><span class="nav-number">3.1.</span> <span class="nav-text">证明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B%E4%B8%8E%E4%BA%8B%E4%BB%B6%E6%A6%82%E7%8E%87%E4%BC%B0%E8%AE%A1"><span class="nav-number">3.2.</span> <span class="nav-text">大数定律与事件概率估计</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%BA%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B"><span class="nav-number">4.</span> <span class="nav-text">强大数定律</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -214,7 +209,7 @@ daovoice('update');
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://chenxlong3.github.io/2021/06/17/lgR2/">
+    <link itemprop="mainEntityOfPage" href="https://chenxlong3.github.io/2021/09/10/wlln-0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/sijia.jpg">
@@ -227,7 +222,7 @@ daovoice('update');
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          逻辑回归（二）：Loss易导
+          弱大数定律的推导及意义
         </h1>
 
         <div class="post-meta-container">
@@ -239,7 +234,7 @@ daovoice('update');
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2021-06-17 10:05:24 / Modified: 10:53:54" itemprop="dateCreated datePublished" datetime="2021-06-17T10:05:24+08:00">2021-06-17</time>
+      <time title="Created: 2021-09-10 12:47:46 / Modified: 12:48:34" itemprop="dateCreated datePublished" datetime="2021-09-10T12:47:46+08:00">2021-09-10</time>
     </span>
 
   
@@ -259,78 +254,153 @@ daovoice('update');
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="回顾">回顾</h1>
-<p>书接上回，讲到了逻辑回归的Loss函数的一般形式，大体如下：</p>
-<p><span class="math display">\[
-L(\theta) = \frac{1}{m}\sum_{i=1}^mCost(h_\theta(x^{(i)}),y^{(i)})
-\\=\frac{1}{m}\sum_{i=1}^m[-y^{(i)}log(h_\theta(x^{(i)}))-(1-y^{(i)})log(1-h_\theta(x^{(i)}))]
-\\h_{\theta}(x) = g(\theta^TX)\\
-g(z) = \frac{1}{1+e^{-z}}
-\]</span></p>
-<h1 id="梯度下降">梯度下降</h1>
-<p>已经有了Loss函数，那么我们要做的事情就是通过梯度下降的方法来确定最佳参数<span class="math inline">\(\theta\)</span>，使得对于训练集的所有数据，Loss函数值最小。那么我们就来对这看似复杂的函数进行一下求导吧。 ## 对Loss函数求偏导 我们知道函数有以下形式： <span class="math display">\[
-L(\theta) = \frac{1}{m}\sum_{i=1}^m[-y^{(i)}log(h_\theta(x^{(i)}))-(1-y^{(i)})log(1-h_\theta(x^{(i)}))]
-\]</span> <span class="math inline">\(\frac{1}{m}\)</span>是常数，我们可以先放至一边。括号里面的<span class="math inline">\(y^{(i)}\)</span>和<span class="math inline">\((1-y^{(i)})\)</span>都是常数，对导数的形式并无影响。Loss函数对<span class="math inline">\(\theta\)</span>求偏导有以下形式： <span class="math display">\[
-\frac{\partial L(\theta)}{\partial \theta_j}=\frac{1}{m}\sum_{i=1}^m[-y^{(i)}\frac{\partial log(h_\theta(x^{(i)}))}{\partial \theta_j}-(1-y^{(i)})\frac{\partial log(1-h_\theta(x^{(i)}))}{\partial \theta_j}]
-\]</span> 显然，要计算<span class="math inline">\(\frac{\partial L(\theta)}{\partial \theta_j}\)</span>，我们就只需要计算<span class="math inline">\(\frac{\partial log(h_\theta(x^{(i)}))}{\partial \theta_j}\)</span>以及<span class="math inline">\(\frac{\partial log(1-h_\theta(x^{(i)}))}{\partial \theta_j}\)</span>。</p>
-<p>这看起来还是非常吓人呢，不过没关系，笔者高中数学老师曾告诉过我们，一切反动派都是纸老虎。先让我们回到<span class="math inline">\(h_\theta(x^{(i)})\)</span>的表达式，令<span class="math inline">\(z=\theta^TX\)</span></p>
-<p><span class="math display">\[h_{\theta}(x) = g(z) =\frac{1}{1+e^{-z}}\]</span></p>
-<p>根据复合函数的求导，我们可以知道： <span class="math display">\[
+        <p>样本数目足够多的情况下，样本均值会趋于期望。</p>
+<p>样本数目足够多的情况下，事件发生的频率趋于概率。</p>
+<p>为何两种说法都称为大数定律，样本均值与频率又到底是什么关系呢？</p>
+<h1 id="马尔可夫不等式-the-markov-inequality">马尔可夫不等式 (The Markov Inequality)</h1>
+<p>Markov Inequality描述了一个非常简单的想法：如果随机变量恒大于零，且该随机变量的期望较小，那么我们随机做一次实验，所得到的<span class="math inline">\(X\)</span>也不太可能会很大。举个例子，如果全国十四亿人口的平均身高为1.67米，那么我们随机抽一个人，他/她的身高不会偏离这个数字太远，他/她的身高为2米的概率是比较低的。</p>
+<p><span class="math inline">\(P(X\geq a)\)</span>: 随机变量<span class="math inline">\(X\)</span>不小于<span class="math inline">\(a\)</span> 的概率</p>
+<p><span class="math inline">\(E[X]\)</span>: 随机变量<span class="math inline">\(X\)</span>的期望</p>
+<p><span class="math inline">\(a\)</span>: 任一正数 <span class="math display">\[
+P(X\geq a) \leq \frac{E[X]}{a}
+\]</span> <span class="math inline">\(Proof\ 1\)</span>: <span class="math display">\[
+\begin{align*}
+E[X] &amp;= \int^{\infty}_{-\infty} xf(x)dx\\
+&amp;\geq \int^{\infty}_{a} xf(x)dx \\
+&amp;\geq \int^{\infty}_{a} af(x)dx \\
+&amp;= aP(X\geq a)
+\\
+\\
+P(X\geq a) &amp;\leq \frac{E[x]}{a}
+\end{align*}
+\]</span> 除此之外，还有一种证明方法，但两者的内在思想是一样的，也在此简述一下。</p>
+<p><span class="math inline">\(Proof\ 2\)</span>:</p>
+<p>假设我们有另外一个随机变量<span class="math inline">\(Y\)</span>，如下： <span class="math display">\[
+\begin{equation*}
+Y=\left\{
 \begin{aligned}
-\frac{\partial log(h_\theta(x^{(i)}))}{\partial \theta_j}&amp;=
-\frac{\partial log(g(z))}{\partial \theta_j}\\
-&amp;= \frac{1}{g(z)} \frac{\partial g(z)}{\partial \theta_j}\\
-&amp;= \frac{1}{g(z)} \frac{\partial g(z)}{\partial z} \frac{\partial z}{\partial \theta_j}
+a, &amp;\quad X\geq a\\
+0, &amp;\quad X&lt;a
 \end{aligned}
-\]</span> 一项一项拆解： <span class="math display">\[
-\frac{1}{g(z)} = 1+e^{-z}
-\]</span></p>
+\right.
+\end{equation*}
+\]</span> 显然这是一个离散型随机变量，那么我们可以用以下公式计算出它的期望： <span class="math display">\[
+\begin{align*}
+E[Y] &amp;= aP(X\geq a) + 0\cdot P(X&lt;a)\\
+&amp;= aP(X\geq a)
+\end{align*}
+\]</span> 因为当<span class="math inline">\(X\geq a\)</span>时，<span class="math inline">\(Y=a\)</span>，而当<span class="math inline">\(X&lt;a\)</span>时，<span class="math inline">\(Y = 0\)</span>。所以很显然可以得到：<span class="math inline">\(Y\leq X\)</span>。那么也就有<span class="math inline">\(E[Y] \leq E[X]\)</span>。则： <span class="math display">\[
+\begin{align*}
+E[Y] = aP(&amp;X\geq a) \leq E[X] \\
+\\P(X\geq a) &amp; \leq \frac{E[X]}{a}
+\end{align*}
+\]</span> 可是稍微往深处想一想，就会觉得这个不等式非常鸡肋。从不等式上来看，随机变量大于或等于<span class="math inline">\(k\)</span>倍期望的概率不超过<span class="math inline">\(\frac{1}{k}\)</span>。这样说或许还不直观，我们再举回那个身高的例子，全国十四亿人口的平均身高为1.67米。这个不等式告诉我们，如果随机抽一个人，他/她的身高不小于3.34米的概率不超过<span class="math inline">\(1/2\)</span>……</p>
+<p>根据我们的常识，这个概率何止是不超过<span class="math inline">\(1/2\)</span>，说是远小于1%也不为过。这其实就是这个Markov Inequality的一个缺点——它的上界定得太大了。</p>
+<h1 id="切比雪夫不等式-the-chebyshev-inequality">切比雪夫不等式 (The Chebyshev Inequality)</h1>
+<p>Chebyshev Inequality把方差也考虑了进来。这个不等式阐述的想法就是：如果一个随机变量的方差不大，那么这个随机变量不会离它的均值太远。不等式的形式如下： <span class="math display">\[
+\begin{align*}
+P(|X-\mu|\geq c)\leq \frac{\sigma^2}{c^2}
+\end{align*}
+\]</span> 同样地，我们来证明一下这个不等式。</p>
+<p>首先，绝对值这个东西有点碍眼，它的存在往往意味着分类讨论，我们可以先把它去掉，两边同时进行平方运算。 <span class="math display">\[
+\begin{align*}
+P(|X-\mu|\geq c) = P((X-\mu)^2\geq c^2)
+\end{align*}
+\]</span> 然后，把<span class="math inline">\((X-\mu)^2\)</span>看作一个新的随机变量，利用Markov Inequality得到， <span class="math display">\[
+\begin{align*}
+P(|X-\mu|\geq c) = P((X-\mu)^2 \geq c^2) &amp;\leq \frac{E[(X-\mu)^2]}{c^2} = \frac{\sigma^2}{c^2}
+\end{align*}
+\]</span> 证毕。</p>
+<p>假设平均身高为167<span class="math inline">\(cm\)</span>，方差为100<span class="math inline">\(cm^2\)</span>，那么抽到一个人身高大于或等于3.34米的概率会小于或等于0.0035。这样看倒也科学不少。</p>
+<h1 id="弱大数定律-weak-law-of-large-numbers-wlln">弱大数定律 (Weak Law of Large Numbers, WLLN)</h1>
+<h2 id="证明">证明</h2>
+<p>接着我们来看一下这篇文章真正的主角——大数定律。更准确地说，是弱大数定律，也称为辛钦大数定律。至于强大数定律，会在这篇blog的结尾提一嘴，它的证明有点超出我的知识范畴了，我也就偷个懒吧。</p>
+<p>先给出来大数定律的形式：</p>
+<p>对于任意<span class="math inline">\(\epsilon &gt; 0\)</span>: <span class="math display">\[
+\begin{align*}
+P(|M_n-\mu|\geq \epsilon) \rightarrow 0, \ as\ n \rightarrow \infty
+\end{align*}
+\]</span> 其中：</p>
+<p><span class="math inline">\(M_n\)</span>: 样本均值，计算公式为 <span class="math display">\[
+M_n = \frac{X_1 + X_2+\cdots + X_n}{n}
+\]</span> <span class="math inline">\(\mu\)</span>: 随机变量的期望</p>
+<p><span class="math inline">\(n\)</span>: 样本数量</p>
+<p><span class="math inline">\(X_1\cdots X_n\)</span>: 独立同分布的随机变量</p>
+<p>接下来我们给出弱大数定律的证明：</p>
+<p>$Proof: $</p>
+<p>根据均值及方差的线性性 (Linearity):</p>
 <p><span class="math display">\[
-\frac{\partial g(z)}{\partial z} = -\frac{-e^{-z}}{(1+e^{-z})^2}=\frac{e^{-z}}{(1+e^{-z})^2}
+\begin{align*}
+E[M_n] &amp;= E[\frac{X_1+\cdots+X_n}{n}]\\
+\\
+&amp;= \frac{E[X_1]+\cdots+E[X_n]}{n}\\
+\\
+&amp;=\frac{n\mu}{n}\\
+\\
+&amp;= \mu\\
+\\
+\\
+Var(M_n) &amp;= Var(\frac{X_1+\cdots+X_n}{n})\\
+\\
+&amp;= \frac{Var(X_1) + \cdots + Var(X_n)}{n^2}\\
+\\
+&amp;= \frac{n\sigma^2}{n^2}\\
+\\
+&amp;= \frac{\sigma^2}{n}
+\end{align*}
 \]</span></p>
+<p>根据前面提到的Chebyshev Inequality，</p>
 <p><span class="math display">\[
-\frac{\partial z}{\partial \theta_j}=x_j
-\]</span></p>
-<p>那么我们就可以得到<span class="math inline">\(log(h_\theta(x^{(i)}))\)</span>对<span class="math inline">\(\theta_j\)</span>的偏导： <span class="math display">\[
-\frac{\partial log(h_\theta(x^{(i)}))}{\partial \theta_j}=\frac{e^{-z}}{1+e^{-z}}\cdot x_j = (1-g(z))x_j
-\]</span> 接着我们继续看<span class="math inline">\(log(1-h_\theta(x^{(i)}))\)</span>对<span class="math inline">\(\theta_j\)</span>的偏导，事实上，依旧是根据复合函数的求导： <span class="math display">\[
+\begin{align*}
+P(|M_n - \mu| \geq \epsilon) &amp;\leq \frac{Var(M_n)}{\epsilon^2}
+= \frac{\sigma^2}{n\epsilon^2}\\
+\\
+0\leq \lim_{n \to \infty} P(|M_n - \mu| &amp;\geq \epsilon)\leq \lim_{n \to \infty} \frac{\sigma^2}{n\epsilon^2} = 0
+\end{align*}
+\]</span> 根据夹逼定理， <span class="math display">\[
+\begin{align*}
+\lim_{n \to \infty} P(|M_n - \mu| &amp;\geq \epsilon) = 0
+\end{align*}
+\]</span> 证毕。</p>
+<p>WLLN描述的实际上就是我们在开头讲的，样本数目足够多的情况下，样本均值会趋于期望。那这个描述样本均值的定律，是怎么和频率扯上关系的呢？</p>
+<h2 id="大数定律与事件概率估计">大数定律与事件概率估计</h2>
+<p>我们在讨论<span class="math inline">\(X_1\cdots X_n\)</span>时，实际上讨论的是某一试验的多次重复。不妨用<span class="math inline">\(X_i\)</span>来表示某事件<span class="math inline">\(A\)</span>是否发生，即：</p>
+<p><span class="math display">\[
+\begin{equation}
+X_i = \left\{
 \begin{aligned}
-\frac{\partial log(1-h_\theta(x^{(i)}))}{\partial \theta_j} &amp;=
-\frac{-1}{1-h_\theta(x^{(i)})} \frac{\partial h_\theta(x^{(i)})}{\partial \theta_j}\\
-&amp;= -\frac{1}{1-g(z)}\frac{\partial g(z)}{\partial \theta_j}\\
-&amp;= -\frac{1+e^{-z}}{e^{-z}}\cdot \frac{e^{-z}}{(1+e^{-z})^2} \cdot x_j\\
-&amp;= -g(z)\cdot x_j
+1, \quad &amp;\text{if event A happens}\\
+0, \quad &amp;\text{if event A doesn&#39;t happen}
 \end{aligned}
-\]</span> OK，那么我们把得到的这两个式子代回Loss函数的偏导形式中，得到： <span class="math display">\[
-\begin{aligned}
-\frac{\partial L(\theta)}{\partial \theta_j}&amp;=\frac{1}{m}\sum_{i=1}^m[-y^{(i)}\frac{\partial log(h_\theta(x^{(i)}))}{\partial \theta_j}-(1-y^{(i)})\frac{\partial log(1-h_\theta(x^{(i)}))}{\partial \theta_j}]\\
-&amp;= \frac{1}{m}\sum_{i=1}^m[-y^{(i)}(1-g(z))x_j+(1-y^{(i)})g(z)x_j]\\
-&amp;= \frac{1}{m}\sum_{i=1}^m[g(z)-y^{(i)}]x_j\\
-&amp;= \frac{1}{m}\sum_{i=1}^m[h_{\theta}(x^{(i)})-y^{(i)}]x^{(i)}_j
-\end{aligned}
-\]</span></p>
-<p>还是那句话，常数只是起到一个缩放的作用，重要的是求和号后面的形式。那么看到这个式子，你有想到什么吗？事实上，逻辑回归和线性回归的的Loss函数的偏导形式是相同的，多么美丽的巧合！值得一提的是，这也仅仅是巧合而已，线性回归和逻辑回归是两个不同的算法，因为我们使用的model，也就是假设函数<span class="math inline">\(h_\theta(x)\)</span>是不同的。</p>
-<h2 id="更新公式">更新公式</h2>
-<p>与线性回归同理，我们依旧是按照如下式子进行参数的更新： <span class="math display">\[
-\theta_j := \theta_j - \eta \frac{\partial}{\partial \theta_j}L(\theta)
-\]</span> 将前面求得的表达式代入得： <span class="math display">\[
-\theta_j := \theta_j - \eta \frac{1}{m}\sum_{i=1}^m[h_{\theta}(x^{(i)})-y^{(i)}]x^{(i)}_j
-\]</span></p>
-<h1 id="多分类问题">多分类问题</h1>
-<p>目前为止我们也只是提出了一种解决二分类问题的方法，但是日常生活中，我们常常需要进行更多种的分类，比如除了猫和狗，我们还希望计算机能识别出老鼠等更多动物；除了分辨诈骗和非诈骗邮件，我们还希望计算机能自动分出哪些邮件是家人发的，哪些是朋友发的等等。那么，我们讨论过的逻辑回归算法，能不能应用在多分类上呢？答案是肯定的。以三分类为例子，我们用圆形、正方形和三角形来表示。如下图：</p>
-<p><img src="/2021/06/17/lgR2/multi.png"></p>
-<p>我们可以把这个问题转换成三个二分类问题。先把所有圆形的看作第一类，其余的都看作第二类，如下图：</p>
-<p><img src="/2021/06/17/lgR2/circle.jpg"></p>
-<p>利用这些数据，我们可以训练得到一个函数<span class="math inline">\(h_\theta^{(1)}(x)\)</span>，这个函数的输出的意义是<span class="math inline">\(x\)</span>为圆形的概率。</p>
-<p>然后把三角形看作一类，其他的看作另一类：</p>
-<p><img src="/2021/06/17/lgR2/triangle.png"></p>
-<p>可以训练得到一个函数<span class="math inline">\(h_\theta^{(2)}(x)\)</span>，这个函数的输出的意义是<span class="math inline">\(x\)</span>为三角形的概率。</p>
-<p>同理，把正方形当作一类，其他当作另一类：</p>
-<p><img src="/2021/06/17/lgR2/rectangle.png"></p>
-<p>可以训练得到一个函数<span class="math inline">\(h_\theta^{(3)}(x)\)</span>，这个函数的输出的意义是<span class="math inline">\(x\)</span>为三角形的概率。</p>
-<p>那么，对于一个输入<span class="math inline">\(X\)</span>，我们可以把<span class="math inline">\(X\)</span>输入到三个函数中，则得到这个<span class="math inline">\(X\)</span>为三种类型的概率，概率最大的那个函数对应的类别即为结果。</p>
-<h1 id="总结">总结</h1>
-<p>逻辑回归讲到这里就差不多了，当然还有正则项之类的知识，我自己也没太想好应该怎么理解，等到以后有机会再写。有意思的是，清楚了逻辑回归的基础知识，我们就快要揭开神经网络的神秘面纱了。</p>
+\right.
+\end{equation}
+\]</span> 那么，经过多次重复实验，得到的样本均值实际上就是事情发生的频率。</p>
+<p><span class="math display">\[
+\begin{align*}
+M_n &amp;= \frac{\sum^{n}_{i=1} X_i}{n} \\
+&amp;= \frac{\text{the number of times that event A happens}}{n}\\
+&amp;= frequency\\
+\\
+\mu &amp;= 1\cdot P(A)+0\cdot (1-P(A))\\
+\\
+&amp;=P(A)
+\end{align*}
+\]</span> 所以，根据大数定律：</p>
+<p><span class="math display">\[
+\begin{align*}
+\lim_{n \to \infty} P(|M_n - \mu| &amp;\geq \epsilon) = \lim_{n \to \infty}P(frequency-P(A)) = 0
+\end{align*}
+\]</span> 也就是说，频率趋于概率。</p>
+<h1 id="强大数定律">强大数定律</h1>
+<p>强大数定律的数学形式如下， <span class="math display">\[
+\begin{align*}
+P(\lim_{n \to \infty} |M_n - \mu| \geq \epsilon) &amp;= 0
+\end{align*}
+\]</span> 实际上就是把极限符号给放进去了，虽然只有一点变化，但是表示的意思就更强烈了一点。</p>
+<blockquote>
+<p>弱大数定律指的是样本均值依概率收敛于期望，而强大数定律则指出样本均值几乎处处收敛于期望。</p>
+</blockquote>
+<p>至于再深一点的理解，笔者也并不太了解，还需深入学习。</p>
 
     </div>
 
@@ -354,21 +424,18 @@ L(\theta) = \frac{1}{m}\sum_{i=1}^m[-y^{(i)}log(h_\theta(x^{(i)}))-(1-y^{(i)})lo
 </div>
 
           <div class="post-tags">
-              <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
+              <a href="/tags/Math/" rel="tag"># Math</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2021/06/16/lgR1/" rel="prev" title="逻辑回归（一）：0还是1？">
-                  <i class="fa fa-chevron-left"></i> 逻辑回归（一）：0还是1？
+                <a href="/2021/09/09/WLLN/" rel="prev" title="弱大数定律的推导及意义">
+                  <i class="fa fa-chevron-left"></i> 弱大数定律的推导及意义
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2021/07/09/dpLRS/" rel="next" title="动态规划与最长重复子串">
-                  动态规划与最长重复子串 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
