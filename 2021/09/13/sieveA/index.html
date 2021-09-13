@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/dragon64.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon.png">
+  <link rel="mask-icon" href="/images/dragon.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;chenxlong3.github.io&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;}}</script><script src="/js/config.js"></script>
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/2397f328.js","daovoice")
+  daovoice('init', {
+  app_id: "2397f328"
+});
+daovoice('update');
+</script>
+<meta name="description" content="之前介绍了Eratosthenes筛法，时间复杂度是\(O(nloglogn)\)。比起最朴素的遍历法，这个时间复杂度已经不错了。然而，在建立质数表的时候，仍然会有重复计算。比如，我们遍历到\(2\)的时候，会筛掉指定范围中\(2\)的所有倍数，当然也就会筛掉\(12\)这个数，然后遍历到\(3\)，同样也会筛掉\(12\)这个数，类似这种的重复计算还是挺多的。那么要怎样才能避免掉这些重复计算，优">
+<meta property="og:type" content="article">
+<meta property="og:title" content="质数表的建立2——欧拉筛法">
+<meta property="og:url" content="https://chenxlong3.github.io/2021/09/13/sieveA/index.html">
+<meta property="og:site_name" content="Xiaolong Chen">
+<meta property="og:description" content="之前介绍了Eratosthenes筛法，时间复杂度是\(O(nloglogn)\)。比起最朴素的遍历法，这个时间复杂度已经不错了。然而，在建立质数表的时候，仍然会有重复计算。比如，我们遍历到\(2\)的时候，会筛掉指定范围中\(2\)的所有倍数，当然也就会筛掉\(12\)这个数，然后遍历到\(3\)，同样也会筛掉\(12\)这个数，类似这种的重复计算还是挺多的。那么要怎样才能避免掉这些重复计算，优">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://chenxlong3.github.io/2021/09/13/sieveA/pic1.PNG">
+<meta property="og:image" content="https://chenxlong3.github.io/2021/09/13/sieveA/pic2.PNG">
+<meta property="og:image" content="https://chenxlong3.github.io/2021/09/13/sieveA/pic3.PNG">
+<meta property="og:image" content="https://chenxlong3.github.io/2021/09/13/sieveA/pic4.PNG">
+<meta property="og:image" content="https://chenxlong3.github.io/2021/09/13/sieveA/pic5.PNG">
+<meta property="og:image" content="https://chenxlong3.github.io/2021/09/13/sieveA/pic6.PNG">
+<meta property="og:image" content="https://chenxlong3.github.io/2021/09/13/sieveA/pic7.PNG">
+<meta property="og:image" content="https://chenxlong3.github.io/2021/09/13/sieveA/pic8.PNG">
+<meta property="article:published_time" content="2021-09-13T01:08:10.000Z">
+<meta property="article:modified_time" content="2021-09-13T01:08:10.170Z">
+<meta property="article:author" content="Xiaolong Chen">
+<meta property="article:tag" content="Algorithm">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chenxlong3.github.io/2021/09/13/sieveA/pic1.PNG">
+
+
+<link rel="canonical" href="https://chenxlong3.github.io/2021/09/13/sieveA/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;chenxlong3.github.io&#x2F;2021&#x2F;09&#x2F;13&#x2F;sieveA&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;09&#x2F;13&#x2F;sieveA&#x2F;&quot;,&quot;title&quot;:&quot;质数表的建立2——欧拉筛法&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>质数表的建立2——欧拉筛法 | Xiaolong Chen</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Xiaolong Chen</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About Me</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AC%A7%E6%8B%89%E7%AD%9B%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">欧拉筛法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0-c-python"><span class="nav-number">2.</span> <span class="nav-text">代码实现 (C++ &amp; Python)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6%E8%AE%A8%E8%AE%BA"><span class="nav-number">3.</span> <span class="nav-text">复杂度讨论</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Xiaolong Chen"
+      src="/images/sijia.jpg">
+  <p class="site-author-name" itemprop="name">Xiaolong Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="mailto:chenxlong3@outlook.com" title="E-Mail → mailto:chenxlong3@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/weixin_42393947?spm=1000.2115.3001.5343" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;weixin_42393947?spm&#x3D;1000.2115.3001.5343" rel="noopener" target="_blank"><i class="fa fa-blog fa-fw"></i>CSDN</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      More info
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="/file/cv_XiaolongChen.pdf" title="&#x2F;file&#x2F;cv_XiaolongChen.pdf">CV-Eng</a>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenxlong3.github.io/2021/09/13/sieveA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/sijia.jpg">
+      <meta itemprop="name" content="Xiaolong Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xiaolong Chen">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          质数表的建立2——欧拉筛法
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-09-13 09:08:10" itemprop="dateCreated datePublished" datetime="2021-09-13T09:08:10+08:00">2021-09-13</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>之前介绍了Eratosthenes筛法，时间复杂度是<span class="math inline">\(O(nloglogn)\)</span>。比起最朴素的遍历法，这个时间复杂度已经不错了。然而，在建立质数表的时候，仍然会有重复计算。比如，我们遍历到<span class="math inline">\(2\)</span>的时候，会筛掉指定范围中<span class="math inline">\(2\)</span>的所有倍数，当然也就会筛掉<span class="math inline">\(12\)</span>这个数，然后遍历到<span class="math inline">\(3\)</span>，同样也会筛掉<span class="math inline">\(12\)</span>这个数，类似这种的重复计算还是挺多的。那么要怎样才能避免掉这些重复计算，优化时间复杂度呢？</p>
+<h1 id="欧拉筛法">欧拉筛法</h1>
+<p>欧拉筛法，又称为线性筛，从这个名字就可以知道这个方法的时间复杂度是<span class="math inline">\(O(n)\)</span>。欧拉筛法的思想就是，让每个合数只被它的最小质因数筛去。这样讲多少有点抽象了，我们接下来介绍一下整个欧拉筛法的流程。</p>
+<p>首先明确一下目标，我们要得到<span class="math inline">\(2\sim n\)</span>之中的所有素数。筛法的思想仍然是筛掉素数的倍数，不过这次，我们并不会像埃氏筛法那样，把前方的合数赶尽杀绝。欧拉筛法最妙的地方，就是及时收刀。如果我预测到你未来会挂掉，那何必脏了自己的剑呢。</p>
+<p>篇幅所限，我们先以<span class="math inline">\(2\sim 20\)</span>这个范围为例。</p>
+<p><img src="/2021/09/13/sieveA/pic1.PNG"></p>
+<p>在开始遍历之前，我们需要准备好两个数组。<span class="math inline">\(is\_prime\)</span>用来标记对应下标是否为素数，<span class="math inline">\(prime\_list\)</span>用来存放这个范围里所有的素数。</p>
+<p>与埃氏筛法相同，我们要先假设这个范围内所有的数都是素数，就是将<span class="math inline">\(is\_prime\)</span>全部置为<span class="math inline">\(true\)</span>。然后开始遍历。</p>
+<p>对于<span class="math inline">\(2\)</span>，根据查询<span class="math inline">\(is\_prime\)</span>，我们知道它是素数，把它放进<span class="math inline">\(prime\_list\)</span>里。</p>
+<p><img src="/2021/09/13/sieveA/pic2.PNG"></p>
+<p>此时遍历<span class="math inline">\(prime\_list\)</span>，只有一个<span class="math inline">\(2\)</span>，于是我们筛掉<span class="math inline">\(2\times 2\)</span>，即<span class="math inline">\(4\)</span>，把<span class="math inline">\(is\_prime[4]\)</span>设为<span class="math inline">\(false\)</span>。然后我们就开始遍历下一个数了。可能有人会好奇，那后面的<span class="math inline">\(6\)</span>和<span class="math inline">\(8\)</span>之类的这些数，不都是<span class="math inline">\(2\)</span>的倍数吗，为什么不筛掉？这就是我前面提到的妙处了——我们知道这些数在未来会被筛掉。别着急，先往下看。</p>
+<p><img src="/2021/09/13/sieveA/pic3.PNG"></p>
+<p>对于<span class="math inline">\(3\)</span>，根据查询<span class="math inline">\(is\_prime\)</span>，我们知道它是素数，把它放进<span class="math inline">\(prime\_list\)</span>里。</p>
+<p><img src="/2021/09/13/sieveA/pic4.PNG"></p>
+<p>此时遍历<span class="math inline">\(prime\_list\)</span>，有<span class="math inline">\(2\)</span>，于是筛掉<span class="math inline">\(3\times 2\)</span>；有<span class="math inline">\(3\)</span>，于是筛掉<span class="math inline">\(3\times 3\)</span>。把<span class="math inline">\(is\_prime[6]\)</span>和<span class="math inline">\(is\_prime[9]\)</span>设为<span class="math inline">\(false\)</span>。</p>
+<p><img src="/2021/09/13/sieveA/pic5.PNG"></p>
+<p>接着遍历到<span class="math inline">\(4\)</span>，查询<span class="math inline">\(is\_prime\)</span>，我们知道它不是素数，所以不会放进<span class="math inline">\(prime\_list\)</span>中。</p>
+<p>此时遍历<span class="math inline">\(prime\_list\)</span>，先是<span class="math inline">\(2\)</span>，于是筛掉<span class="math inline">\(4\times 2\)</span>，将<span class="math inline">\(is\_prime[8]\)</span>设为<span class="math inline">\(false\)</span>。然而，由于<span class="math inline">\(4\)</span>是<span class="math inline">\(2\)</span>的倍数，所以我们在此停止<span class="math inline">\(prime\_list\)</span>的遍历。</p>
+<p>这个停下来的过程，就是我前面提到的“收刀”。我们假设没有停下来，那我们在这里就会筛掉<span class="math inline">\(4\times 3 = 12\)</span>。然而，当我们在外面的大循环里遍历到<span class="math inline">\(6\)</span>时，我们也会筛掉<span class="math inline">\(6\times 2=12\)</span>。嗯...这就与我们“避免重复计算”的想法相悖了。思考一下，根据质因数分解，我们知道，每个合数<span class="math inline">\(m\)</span>是可以写成若干个质数的乘积的，这些质因数里面，肯定会存在一个最小的<span class="math inline">\(p_{min}\)</span>，使得<span class="math inline">\(m = p_{min}\cdot r\)</span>，其中<span class="math inline">\(r\)</span>为余下质因数的乘积。这种分解方式是唯一的，我们的指导原则就是<strong>只根据这种分解方式</strong>来筛掉合数。以下是几个具体的例子：</p>
+<p><span class="math display">\[
+\begin{align*}
+12 &amp;= 2\times 2 \times 3 = 2\times 6\\
+18 &amp;= 2\times 3 \times 3=2 \times 9 \\
+20 &amp;= 2\times 2 \times 5 = 2\times 10\\
+45 &amp;= 3\times 3 \times 5 = 3\times 15
+\end{align*}
+\]</span></p>
+<p>比如，<span class="math inline">\(4\)</span>是<span class="math inline">\(2\)</span>的倍数，也就意味着，<span class="math inline">\(4\)</span>乘以某个质数<span class="math inline">\(p\)</span>，总能分解为<span class="math inline">\(2\times 2p\)</span>，那么我们自然可以等遍历到<span class="math inline">\(2p\)</span>的时候，再筛掉这个数。</p>
+<p>OK，回到我们例题的解答过程，现在我们筛掉了<span class="math inline">\(8\)</span>。外层循环遍历到<span class="math inline">\(5\)</span>，根据查询<span class="math inline">\(is\_prime\)</span>，我们知道它是素数，把它放进<span class="math inline">\(prime\_list\)</span>里。</p>
+<p><img src="/2021/09/13/sieveA/pic6.PNG"></p>
+<p>此时遍历<span class="math inline">\(prime\_list\)</span>，先是<span class="math inline">\(2\)</span>，于是筛掉<span class="math inline">\(5\times 2\)</span>，将<span class="math inline">\(is\_prime[10]\)</span>设为<span class="math inline">\(false\)</span>；然后是<span class="math inline">\(3\)</span>，筛掉<span class="math inline">\(5\times 3\)</span>，将<span class="math inline">\(is\_prime[15]\)</span>设为<span class="math inline">\(false\)</span>；还有个<span class="math inline">\(5\)</span>，但是<span class="math inline">\(5\times 5\)</span>超出我们要讨论的范围了，所以不用处理。</p>
+<p><img src="/2021/09/13/sieveA/pic7.PNG"></p>
+<p>随后遍历到6，它不是素数，我们筛掉<span class="math inline">\(2\times 6=12\)</span>，<span class="math inline">\(6\)</span>是<span class="math inline">\(2\)</span>的倍数，在此“收刀”，进入下一个数的遍历。</p>
+<p><span class="math inline">\(7\)</span>是素数，筛掉<span class="math inline">\(2\times 7=14\)</span>，随后的素数与<span class="math inline">\(7\)</span>相乘都超出讨论范围，忽略掉。</p>
+<p><span class="math inline">\(8\)</span>不是素数，筛掉<span class="math inline">\(2\times 8=16\)</span>，随后的素数与<span class="math inline">\(7\)</span>相乘都超出讨论范围，忽略掉。</p>
+<p><span class="math inline">\(9\)</span>不是素数，筛掉<span class="math inline">\(2\times 9=18\)</span>。</p>
+<p><span class="math inline">\(10\)</span>不是素数，筛掉<span class="math inline">\(2\times 10 = 20\)</span>。</p>
+<p>随后的数一旦乘<span class="math inline">\(2\)</span>，都超出范围，所以也无法实现“筛”的作用了，于是我们的素数表已建立完毕。</p>
+<p><img src="/2021/09/13/sieveA/pic8.PNG"></p>
+<h1 id="代码实现-c-python">代码实现 (C++ &amp; Python)</h1>
+<p>C++:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n = <span class="number">100</span>;</span><br><span class="line">    vector&lt;<span class="keyword">int</span>&gt; prime_list;</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">bool</span>&gt; <span class="title">prime_hash</span><span class="params">(n+<span class="number">1</span>)</span></span>;</span><br><span class="line">    <span class="built_in">fill</span>(prime_hash.<span class="built_in">begin</span>()+<span class="number">2</span>, prime_hash.<span class="built_in">end</span>(), <span class="literal">true</span>);   <span class="comment">//要首先假设所有数都是质数，需要事先确定0、1不是质数</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>; i&lt;n+<span class="number">1</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(prime_hash[i])</span><br><span class="line">            prime_list.<span class="built_in">push_back</span>(i);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;prime_list.<span class="built_in">size</span>(); j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(prime_list[j]*i &gt; n+<span class="number">1</span>) <span class="keyword">break</span>;</span><br><span class="line">            prime_hash[prime_list[j]*i] = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">if</span>(prime_list[j] % i == <span class="number">0</span>) <span class="keyword">break</span>;   <span class="comment">// 预料到以后定会有人来取后面合数的人头</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;prime_list.<span class="built_in">size</span>(); i++)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; prime_list[i] &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Python:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">prime_hash = [<span class="literal">True</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">101</span>)]</span><br><span class="line">prime_hash[<span class="number">0</span>] = prime_hash[<span class="number">1</span>] = <span class="literal">False</span></span><br><span class="line">prime_list = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">101</span>):</span><br><span class="line">    <span class="keyword">if</span> prime_hash[i]:</span><br><span class="line">        prime_list.append(i)</span><br><span class="line">    <span class="keyword">for</span> p <span class="keyword">in</span> prime_list:</span><br><span class="line">        <span class="keyword">if</span> p*i &gt;= <span class="number">101</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        prime_hash[p*i] = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">if</span> i%p == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"><span class="built_in">print</span>(prime_list)</span><br></pre></td></tr></table></figure>
+<h1 id="复杂度讨论">复杂度讨论</h1>
+<p>外层循环肯定要把<span class="math inline">\(2\sim n\)</span>遍历一遍，时间复杂度为<span class="math inline">\(O(n)\)</span>。现在问题就是我们里层循环到底多做了多少次运算。因为我们整个过程都遵从“所有合数只被筛一次的”原则，那么我们多做的运算其实就是<span class="math inline">\(2\sim n\)</span>中合数的个数。整个遍历次数一定小于<span class="math inline">\(2n\)</span>，所以时间复杂度可以表示为<span class="math inline">\(O(n)\)</span>。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div></div>
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="Xiaolong Chen WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/09/10/wlln/" rel="prev" title="弱大数定律的推导及意义">
+                  <i class="fa fa-chevron-left"></i> 弱大数定律的推导及意义
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaolong Chen</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div><script color="255,255,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{&quot;enable&quot;:true,&quot;tags&quot;:&quot;none&quot;,&quot;js&quot;:{&quot;url&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;mathjax@3.1.4&#x2F;es5&#x2F;tex-mml-chtml.js&quot;,&quot;integrity&quot;:&quot;sha256-ncNI9OXOS5Ek4tzVYiOMmN&#x2F;KKCPZ6V0Cpv2P&#x2F;zHntiA&#x3D;&quot;}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+  
+</body>
+</html>
