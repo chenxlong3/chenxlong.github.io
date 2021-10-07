@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/dragon64.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon.png">
+  <link rel="mask-icon" href="/images/dragon.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;chenxlong3.github.io&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;}}</script><script src="/js/config.js"></script>
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/2397f328.js","daovoice")
+  daovoice('init', {
+  app_id: "2397f328"
+});
+daovoice('update');
+</script>
+<meta name="description" content="问题引入">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sum and Product Puzzle——像程序员一样思考">
+<meta property="og:url" content="https://chenxlong3.github.io/2021/10/07/sppuzzle/index.html">
+<meta property="og:site_name" content="Xiaolong Chen">
+<meta property="og:description" content="问题引入">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://chenxlong3.github.io/2021/10/07/sppuzzle/intro.png">
+<meta property="article:published_time" content="2021-10-06T17:07:12.000Z">
+<meta property="article:modified_time" content="2021-10-07T03:56:01.597Z">
+<meta property="article:author" content="Xiaolong Chen">
+<meta property="article:tag" content="math">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chenxlong3.github.io/2021/10/07/sppuzzle/intro.png">
+
+
+<link rel="canonical" href="https://chenxlong3.github.io/2021/10/07/sppuzzle/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;chenxlong3.github.io&#x2F;2021&#x2F;10&#x2F;07&#x2F;sppuzzle&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;10&#x2F;07&#x2F;sppuzzle&#x2F;&quot;,&quot;title&quot;:&quot;Sum and Product Puzzle——像程序员一样思考&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>Sum and Product Puzzle——像程序员一样思考 | Xiaolong Chen</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Xiaolong Chen</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About Me</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%BC%95%E5%85%A5"><span class="nav-number">1.</span> <span class="nav-text">问题引入</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">问题分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E5%8F%A5%E8%AF%9D"><span class="nav-number">2.1.</span> <span class="nav-text">第一句话</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E5%8F%A5%E8%AF%9D"><span class="nav-number">2.2.</span> <span class="nav-text">第二句话</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E5%8F%A5%E8%AF%9D"><span class="nav-number">2.3.</span> <span class="nav-text">第三句话</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E5%8F%A5%E8%AF%9D"><span class="nav-number">2.4.</span> <span class="nav-text">第四句话</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%93%E5%8D%B0%E7%BB%93%E6%9E%9C"><span class="nav-number">2.5.</span> <span class="nav-text">打印结果</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Xiaolong Chen"
+      src="/images/sijia.jpg">
+  <p class="site-author-name" itemprop="name">Xiaolong Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="mailto:chenxlong3@outlook.com" title="E-Mail → mailto:chenxlong3@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/weixin_42393947?spm=1000.2115.3001.5343" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;weixin_42393947?spm&#x3D;1000.2115.3001.5343" rel="noopener" target="_blank"><i class="fa fa-blog fa-fw"></i>CSDN</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      More info
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="/file/cv_XiaolongChen.pdf" title="&#x2F;file&#x2F;cv_XiaolongChen.pdf">CV-Eng</a>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenxlong3.github.io/2021/10/07/sppuzzle/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/sijia.jpg">
+      <meta itemprop="name" content="Xiaolong Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xiaolong Chen">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Sum and Product Puzzle——像程序员一样思考
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-10-07 01:07:12 / Modified: 11:56:01" itemprop="dateCreated datePublished" datetime="2021-10-07T01:07:12+08:00">2021-10-07</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="问题引入">问题引入</h1>
+<p><img src="/2021/10/07/sppuzzle/intro.png"></p>
+<p>翻译一下。</p>
+<p>我们有两个整数。两整数均大于1，并且它们的和小于100。</p>
+<p>A只知道这两个数的和是多少，B只知道这两个数的乘积是多少。接着两人进行了如下对话：</p>
+<p>B: 我不知道这两个数是多少。</p>
+<p>A: 我知道你不知道这两个数是多少。</p>
+<p>B: 现在我知道这两个数是多少了。</p>
+<p>A: 如果你知道了，那我也知道了。</p>
+<h1 id="问题分析">问题分析</h1>
+<p>假设这两个数是<span class="math inline">\(x\)</span>和<span class="math inline">\(y\)</span>。A知道<span class="math inline">\(x+y\)</span>，我们记作<span class="math inline">\(s\)</span>。B知道<span class="math inline">\(x\cdot y\)</span>，我们记作<span class="math inline">\(p\)</span>。</p>
+<h2 id="第一句话">第一句话</h2>
+<p>B先开口，说自己不知道这两个数。什么意思呢，首先考虑一下，什么时候我们可以从乘积一眼看出两个因数。比如15，我们一看就知道是<span class="math inline">\(3\times 5\)</span>，比如21，我们一看就是<span class="math inline">\(3\times 7\)</span>。显然，如果一个数是两个质数的乘积，那么我们就可以从乘积推出来这两个数。</p>
+<p>根据算数基本定理，每个合数可以分解为若干个质数的乘积。上面我们已经提到只能分为两个质数的情况。除此之外还有没有其他情况呢？假设<span class="math inline">\(p\)</span>有三个质因数，分别是<span class="math inline">\(a, b\)</span>和<span class="math inline">\(c\)</span>。把<span class="math inline">\(p\)</span>分为两个数的乘积，有以下三种方式。</p>
+<p><span class="math display">\[
+\begin{align*}
+p &amp; = a(bc)\\
+p &amp; = b(ac)\\
+p &amp; = c(ab)
+\end{align*}
+\]</span> 然而，当<span class="math inline">\(a = b = c\)</span>时，这三种分解方式相同。即：如果<span class="math inline">\(p\)</span>是质数的三次方，那么我们也能从乘积推出来这两个数。</p>
+<p>别忘了，我们还有一个限制——两个数的和小于100， 这也就意味着两个数也都小于100。对于上面的例子，如果<span class="math inline">\(a, b\)</span>和<span class="math inline">\(c\)</span>中有一个数是大于50的，那么它也只能有一种分解方式。我们用一个具体的例子推一下这个结论。假设<span class="math inline">\(p = abc\)</span>，<span class="math inline">\(a, b\)</span>和<span class="math inline">\(c\)</span>为<span class="math inline">\(p\)</span>的三个质因数，且<span class="math inline">\(a &gt; 50\)</span>，那么<span class="math inline">\(ac\)</span>和<span class="math inline">\(ab\)</span>都会大于100，所以只有<span class="math inline">\(p = a(bc)\)</span>这一种分解方式。</p>
+<p>整理一下第一句话得到的信息：</p>
+<ol type="1">
+<li>两个数不能同时为质数。</li>
+<li>两个数的乘积不能为质数的三次方。</li>
+<li>两个数中不能有大于50的质数。</li>
+</ol>
+<p>显然，提前建好质数表可以稍微降低一点时间复杂度。这里我们利用之前提到过的埃氏筛法来建立质数表，代码如下。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># build prime table</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">buildPrimeTable</span>(<span class="params">n</span>):</span></span><br><span class="line">    is_prime = [<span class="literal">True</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, n+<span class="number">1</span>)]</span><br><span class="line">    <span class="keyword">if</span> n&lt;<span class="number">2</span>:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(is_prime)):</span><br><span class="line">            is_prime[i] = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">return</span> is_prime</span><br><span class="line">    is_prime[<span class="number">0</span>] = is_prime[<span class="number">1</span>] = <span class="literal">False</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, n+<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span> is_prime[i]:</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i+i, n+<span class="number">1</span>, i):</span><br><span class="line">                is_prime[j] = <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> is_prime</span><br><span class="line"></span><br><span class="line">table = buildPrimeTable(<span class="number">100</span>)</span><br></pre></td></tr></table></figure>
+<p>根据第一句话得到的信息，可以写出以下的代码来判断两个数是否满足条件。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">assertion1</span>(<span class="params">x, y</span>):</span></span><br><span class="line">    <span class="keyword">if</span>(x &gt; <span class="number">100</span> <span class="keyword">or</span> y &gt; <span class="number">100</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">if</span>(table[x] <span class="keyword">and</span> table[y]):</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">if</span>((table[y] <span class="keyword">and</span> x == y**<span class="number">2</span>) <span class="keyword">or</span> (table[x] <span class="keyword">and</span> y == x**<span class="number">2</span>)):</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">if</span>((table[x] <span class="keyword">and</span> x &gt;= <span class="number">53</span>) <span class="keyword">or</span> (table[y] <span class="keyword">and</span> y &gt;= <span class="number">53</span>)):</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<h2 id="第二句话">第二句话</h2>
+<p>A说自己知道B不知道这两个数是什么，也就是说，从两个数的和就可以判断出这两个数：</p>
+<ol type="1">
+<li>不都是质数</li>
+<li>乘积不是质数的三次方</li>
+<li>没有大于50的质数</li>
+</ol>
+<p>根据哥德巴赫猜想呢，所有大于2的偶数都可以写成两个质数的和。所以，我们就可以推出，这两个数的和一定不是偶数（即一定是奇数）。可能有人会觉得奇怪，为什么我们可以拿“猜想”来进行逻辑推理呢？事实上，我们讨论的数字范围之内，哥德巴赫猜想是可证的，即100以内的所有大于2的偶数都可以写成两个质数的和。所以，我们知道，这两个数的和一定是奇数。此外，考虑到2也是质数，而2和其他奇质数的和也是奇数，所以我们需要保证<span class="math inline">\(s-2\)</span>不是质数。</p>
+<p>好，现在看条件3，<span class="math inline">\(x\)</span>和<span class="math inline">\(y\)</span>要满足什么条件，才能使得，根据<span class="math inline">\(x+y\)</span>，就能推出<span class="math inline">\(x\)</span>和<span class="math inline">\(y\)</span>其中没有大于50的质数呢？其实非常简单粗暴，只要<span class="math inline">\(x+y\)</span>小于55就可以了。因为如果手上有<span class="math inline">\(s&gt;=55\)</span>，那么总能拆成<span class="math inline">\(53+(s-53)\)</span>，也就导致了B可以直接从乘积得到两个因数，与A说的“我知道B不知道这两个数是什么”相矛盾了。</p>
+<p>综上，我们又有以下条件：</p>
+<ol type="1">
+<li>两数之和是奇数，且<span class="math inline">\(s-2\)</span>不为质数</li>
+<li><span class="math inline">\(s&lt;55\)</span></li>
+</ol>
+<p>可以写出以下代码判断。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">assertion2</span>(<span class="params">x, y</span>):</span></span><br><span class="line">    <span class="keyword">if</span> (x+y)%<span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">if</span> x+y &gt;= <span class="number">55</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">if</span> table[x+y-<span class="number">2</span>]:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">if</span> x+y &gt;= <span class="number">55</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<h2 id="第三句话">第三句话</h2>
+<p>听到A说的话之后，B就知道这两个数是什么了。这句话能带给我们什么信息呢？说明在<span class="math inline">\(p\)</span>的所有分解情况中，满足之前所有条件的，只有一种。还需要往下进行数学上的分析吗？笔者起初确实有进行这种尝试，但是最后仍有几个个例需要进行手动排查，非常不优雅。</p>
+<p>在此，我们可以转换一下思路，利用好我们任劳任怨的计算机。根据<strong>在<span class="math inline">\(p\)</span>的所有分解情况中，满足之前所有条件的，只有一种</strong>这句话，直接写代码就行了。首先我们要获得<span class="math inline">\(p\)</span>的所有分解情况，根据基本的乘除法知识，可以写出以下函数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> sqrt</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">productDecomp</span>(<span class="params">p</span>):</span></span><br><span class="line">    ans = []</span><br><span class="line">    sq = <span class="built_in">int</span>(sqrt(p))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, sq+<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">if</span> p%i == <span class="number">0</span>:</span><br><span class="line">            ans.append((i, <span class="built_in">int</span>(p/i)))</span><br><span class="line">    <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
+<p>接着遍历这些数对，判断满足前两句话的数对是否只有一个。代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">assertion3</span>(<span class="params">x, y</span>):</span></span><br><span class="line">    p_decomp = productDecomp(x*y)</span><br><span class="line">    cnt = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> pair <span class="keyword">in</span> p_decomp:</span><br><span class="line">        <span class="keyword">if</span> assertion1(pair[<span class="number">0</span>], pair[<span class="number">1</span>]) <span class="keyword">and</span> assertion2(pair[<span class="number">0</span>], pair[<span class="number">1</span>]):</span><br><span class="line">            cnt += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> cnt &gt; <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<h2 id="第四句话">第四句话</h2>
+<p>与第三句话非常类似，我们得到的信息也就是<strong>在<span class="math inline">\(s\)</span>的所有分解情况中，满足之前所有条件的，只有一种</strong>。相同地，先写出分解<span class="math inline">\(s\)</span>的程序。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sumDecomp</span>(<span class="params">s</span>):</span></span><br><span class="line">    ans = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, <span class="built_in">int</span>(s/<span class="number">2</span>)):</span><br><span class="line">        ans.append((i, s-i))</span><br><span class="line">    <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
+<p>接着遍历这些数对，判断满足前三句话条件的数对只有一个。代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">assertion4</span>(<span class="params">x, y</span>):</span></span><br><span class="line">    s_decomp = sumDecomp(x+y)</span><br><span class="line">    cnt = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> pair <span class="keyword">in</span> s_decomp:</span><br><span class="line">        <span class="keyword">if</span> assertion1(pair[<span class="number">0</span>], pair[<span class="number">1</span>]) <span class="keyword">and</span> assertion2(pair[<span class="number">0</span>], pair[<span class="number">1</span>]) <span class="keyword">and</span> assertion3(pair[<span class="number">0</span>], pair[<span class="number">1</span>]):</span><br><span class="line">            cnt += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> cnt &gt; <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+<h2 id="打印结果">打印结果</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ans = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, <span class="number">101</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i, <span class="number">101</span>):</span><br><span class="line">        <span class="keyword">if</span> assertion1(i, j) <span class="keyword">and</span> assertion2(i, j) <span class="keyword">and</span> assertion3(i, j) <span class="keyword">and</span> assertion4(i, j):</span><br><span class="line">            ans.append((i, j))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;So the values of these two numbers are %d and %d.&quot;</span> % (ans[<span class="number">0</span>][<span class="number">0</span>], ans[<span class="number">0</span>][<span class="number">1</span>]))</span><br></pre></td></tr></table></figure>
+<p>得到结果：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">So</span> the values of these two numbers are <span class="number">4</span> and <span class="number">13</span>.</span><br></pre></td></tr></table></figure>
+<h1 id="总结">总结</h1>
+<p>需要人工筛除个例的方法不是好方法，在理论上遇到瓶颈的时候，工程上的解决方法也许非常简单。挺有意思的一个puzzle。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div></div>
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="Xiaolong Chen WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/math/" rel="tag"># math</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/09/13/sieveA/" rel="prev" title="质数表的建立2——欧拉筛法">
+                  <i class="fa fa-chevron-left"></i> 质数表的建立2——欧拉筛法
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaolong Chen</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div><script color="255,255,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{&quot;enable&quot;:true,&quot;tags&quot;:&quot;none&quot;,&quot;js&quot;:{&quot;url&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;mathjax@3.1.4&#x2F;es5&#x2F;tex-mml-chtml.js&quot;,&quot;integrity&quot;:&quot;sha256-ncNI9OXOS5Ek4tzVYiOMmN&#x2F;KKCPZ6V0Cpv2P&#x2F;zHntiA&#x3D;&quot;}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+  
+</body>
+</html>
