@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/dragon64.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon.png">
+  <link rel="mask-icon" href="/images/dragon.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;chenxlong3.github.io&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;Searching...&quot;,&quot;empty&quot;:&quot;We didn&#39;t find any results for the search: ${query}&quot;,&quot;hits_time&quot;:&quot;${hits} results found in ${time} ms&quot;,&quot;hits&quot;:&quot;${hits} results found&quot;}}</script><script src="/js/config.js"></script>
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/2397f328.js","daovoice")
+  daovoice('init', {
+  app_id: "2397f328"
+});
+daovoice('update');
+</script>
+<meta name="description" content="为什么要引入红黑树？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="红黑树（一） 性质及插入操作">
+<meta property="og:url" content="https://chenxlong3.github.io/2021/10/25/rbTree/index.html">
+<meta property="og:site_name" content="Xiaolong Chen">
+<meta property="og:description" content="为什么要引入红黑树？">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://chenxlong3.github.io/2021/10/25/rbTree/original.jpg">
+<meta property="og:image" content="https://chenxlong3.github.io/2021/10/25/rbTree/balanceblack.jpg">
+<meta property="og:image" content="https://chenxlong3.github.io/2021/10/25/rbTree/rotate.jpg">
+<meta property="og:image" content="https://chenxlong3.github.io/2021/10/25/rbTree/original.jpg">
+<meta property="og:image" content="https://chenxlong3.github.io/2021/10/25/rbTree/blackone.jpg">
+<meta property="og:image" content="https://chenxlong3.github.io/2021/10/25/rbTree/whyred.jpg">
+<meta property="og:image" content="https://chenxlong3.github.io/2021/10/25/rbTree/insert1.jpg">
+<meta property="og:image" content="https://chenxlong3.github.io/2021/10/25/rbTree/insert2.jpg">
+<meta property="og:image" content="https://chenxlong3.github.io/2021/10/25/rbTree/insert3.jpg">
+<meta property="og:image" content="https://chenxlong3.github.io/2021/10/25/rbTree/insert4.jpg">
+<meta property="og:image" content="https://chenxlong3.github.io/2021/10/25/rbTree/insert5.jpg">
+<meta property="og:image" content="https://chenxlong3.github.io/2021/10/25/rbTree/insert7.jpg">
+<meta property="og:image" content="https://chenxlong3.github.io/2021/10/25/rbTree/final.jpg">
+<meta property="og:image" content="https://chenxlong3.github.io/2021/10/25/rbTree/sameside.jpg">
+<meta property="article:published_time" content="2021-10-25T05:40:31.000Z">
+<meta property="article:modified_time" content="2021-10-25T05:40:31.856Z">
+<meta property="article:author" content="Xiaolong Chen">
+<meta property="article:tag" content="Algorithm">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://chenxlong3.github.io/2021/10/25/rbTree/original.jpg">
+
+
+<link rel="canonical" href="https://chenxlong3.github.io/2021/10/25/rbTree/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;en&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;https:&#x2F;&#x2F;chenxlong3.github.io&#x2F;2021&#x2F;10&#x2F;25&#x2F;rbTree&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;10&#x2F;25&#x2F;rbTree&#x2F;&quot;,&quot;title&quot;:&quot;红黑树（一） 性质及插入操作&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>红黑树（一） 性质及插入操作 | Xiaolong Chen</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Xiaolong Chen</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About Me</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%BC%95%E5%85%A5%E7%BA%A2%E9%BB%91%E6%A0%91"><span class="nav-number">1.</span> <span class="nav-text">为什么要引入红黑树？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%8F%8A%E6%80%A7%E8%B4%A8"><span class="nav-number">2.</span> <span class="nav-text">定义及性质</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E6%93%8D%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">插入操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E8%8A%82%E7%82%B9%E9%A2%9C%E8%89%B2%E7%9A%84%E7%A1%AE%E5%AE%9A"><span class="nav-number">3.1.</span> <span class="nav-text">插入节点颜色的确定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B0%83%E6%95%B4%E7%9A%84%E6%80%9D%E6%83%B3"><span class="nav-number">3.2.</span> <span class="nav-text">调整的思想</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Xiaolong Chen"
+      src="/images/sijia.jpg">
+  <p class="site-author-name" itemprop="name">Xiaolong Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="mailto:chenxlong3@outlook.com" title="E-Mail → mailto:chenxlong3@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/weixin_42393947?spm=1000.2115.3001.5343" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;weixin_42393947?spm&#x3D;1000.2115.3001.5343" rel="noopener" target="_blank"><i class="fa fa-blog fa-fw"></i>CSDN</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      More info
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="/file/cv_XiaolongChen.pdf" title="&#x2F;file&#x2F;cv_XiaolongChen.pdf">CV-Eng</a>
+        </li>
+    </ul>
+  </div>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://chenxlong3.github.io/2021/10/25/rbTree/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/sijia.jpg">
+      <meta itemprop="name" content="Xiaolong Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xiaolong Chen">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          红黑树（一） 性质及插入操作
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-10-25 13:40:31" itemprop="dateCreated datePublished" datetime="2021-10-25T13:40:31+08:00">2021-10-25</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="为什么要引入红黑树">为什么要引入红黑树？</h1>
+<p>因为AVL树的定义太过严格，每次插入或删除都需要维护整体的平衡，产生的额外代价太大。</p>
+<p>于是我们想，能不能适当放宽标准，使得二叉树<strong>既不至于退化成链表，又不会在维持平衡上产生太多额外开销</strong>。</p>
+<p>聪明的人们想到了红黑树。</p>
+<h1 id="定义及性质">定义及性质</h1>
+<p>红黑树是一种<strong>自平衡二叉查找树</strong>。</p>
+<p>首先，它是一种二叉查找树（或二叉搜索树，Binary Search Tree），也就是说，对于每一个节点来说，左子树的所有元素都小于该节点的元素，右子树的所有元素都不小于该节点的元素。其次，它是自平衡的，但并不如AVL树那么严格，我们接下来看一下它的性质是如何来保证这一点的。</p>
+<p>红黑树有以下性质：</p>
+<ol type="1">
+<li>节点是红色或黑色。</li>
+<li>根是黑色。</li>
+<li>所有叶子都是黑色（叶子是NIL节点）。</li>
+<li>每个红色结点的两个子结点一定都是黑色。</li>
+<li>从任一节点到其每个叶子的所有简单路径都包含相同数目的黑色节点。</li>
+</ol>
+<p>那么这些性质，是怎么保证自平衡的呢？性质4保证了没有连续的两个红色节点，性质5保证了该树所有黑色节点构成的树是完美平衡的。以下面这棵树为例。</p>
+<p><img src="/2021/10/25/rbTree/original.jpg"></p>
+<p>它的所有黑色节点构成的树如下（为了方便，NIL节点就用一个圈表示）。</p>
+<p><img src="/2021/10/25/rbTree/balanceblack.jpg"></p>
+<p>显然，黑色节点构成的树是完美平衡的。从根结点到每个NIL节点的路径长度都是3。那么把红色节点考虑进来，这棵树最“歪”的情况是什么？就是左边数值为3的这个节点保持不动，然后在右边加尽可能多的红色节点。然而，考虑到性质4的约束，在某一条路上能添加的红色节点数量是不超过这条路上黑色节点数量的两倍的。对于这棵树来说，从根节点到NIL节点，一共有3个黑色节点，那么在<strong>这条路上</strong>我们能添加的红色节点只有2个（每两个黑色节点之间插入一个红色节点）。事实上，这棵树现在就是它能达到的最不平衡的状态（仅从高度而言）。</p>
+<p>经过上述分析，我们可以知道，因为性质4和性质5的约束，没有一条从根结点到NIL节点的路径会比其他路径长两倍，所以红黑树是相对平衡的。</p>
+<h1 id="插入操作">插入操作</h1>
+<p>在插入某节点时，如果破坏了我们约定的性质，那么就需要对各种节点进行调整。对节点的,操作大体分为两类，旋转和变色，其中旋转又分为左旋和右旋。旋转操作如下图：</p>
+<p><img src="/2021/10/25/rbTree/rotate.jpg"></p>
+<p>同样的，以这棵树为例，我们看一下整个插入节点的流程是怎么样的。</p>
+<p><img src="/2021/10/25/rbTree/original.jpg"></p>
+<h2 id="插入节点颜色的确定">插入节点颜色的确定</h2>
+<p>首先，考虑一下我们插入的这个节点，它应该是红色还是黑色？如果把插入的当前节点当作黑色，那么它就一定会威胁到之前提到的性质5，比如我们在上面那棵树插入数值为2的节点。这个时候，该树所有黑色节点构成的树就变成了：</p>
+<p><img src="/2021/10/25/rbTree/blackone.jpg"></p>
+<p>这样就违反了性质5了。这也就意味着，<strong>如果插入黑色节点，调整是必须的。</strong></p>
+<p>然而如果我们插入的是红色结点的话，在它的父亲是黑色节点的情况下，我们是不需要对树进行调整的。其实就相当于在一个黑色节点和NIL节点之间插入了一个红色节点而已，按照之前的分析，这确实是允许的。即<strong>如果插入红色节点，有可能不需要调整。</strong>比如在这棵树里插入2，</p>
+<p><img src="/2021/10/25/rbTree/whyred.jpg"></p>
+<p>然而，当插入节点的父亲节点是红色的时候，就威胁到了性质4，即红色节点的子节点必须是黑色。这个时候我们要怎么调整呢？</p>
+<h2 id="调整的思想">调整的思想</h2>
+<p>全程记住一个思想：<strong>只利用旋转和变色的操作，将红色的节点移到根节点上，再把根节点变成黑色。</strong>因为根节点是没有父亲节点的，或者说我们默认根节点的父亲节点是黑色。所以对根节点进行变色，是不会威胁到红黑树的性质的。</p>
+<p>接着我们具体来看一下，要怎么样完成这种调整。对于上面提到的树，我们现在尝试插入数值为9的结点。按照之前的讨论，它的颜色是红色，我们用<span class="math inline">\(cur\)</span>来表示当前关注的节点。那么这一步产生的树如下图：</p>
+<p><img src="/2021/10/25/rbTree/insert1.jpg"></p>
+<p>显然，在<span class="math inline">\(cur\)</span>节点处，红黑树的性质被威胁到了，因为<span class="math inline">\(cur\)</span>的父亲的颜色是红色。在这个时候，我们去查叔结点的颜色，用<span class="math inline">\(y\)</span>表示。此时<span class="math inline">\(y\)</span>为节点11，是红色。于是我们把<span class="math inline">\(cur\)</span>的父亲和<span class="math inline">\(y\)</span>都变为黑色，并且把<span class="math inline">\(cur\)</span>的祖父变为红色。这样做的意义其实就是把“黑色”往下移动，“红色”往上移动，同时又保证了从任意节点到NIL节点的路径中黑色节点数目保持不变。这一步产生的树如下：</p>
+<p><img src="/2021/10/25/rbTree/insert2.jpg"></p>
+<p>此时我们需要关注的节点（即<span class="math inline">\(cur\)</span>）就从一开始插入的9，变为现在违反红黑树性质的10了。</p>
+<p><img src="/2021/10/25/rbTree/insert3.jpg"></p>
+<p>这个时候<span class="math inline">\(cur\)</span>的叔节点（节点3）为黑色，如果我们按照上面的方法贸然变色，那就会违反叔节点那边的性质5了，这不是相当于扩大杀伤范围了吗，显然是不可取的。到目前为止，这棵树的性质5依然是得到满足的，即黑色路径相等（为了偷懒就这样写了）。如果只改变<span class="math inline">\(cur\)</span>或者只改变<span class="math inline">\(cur\)</span>父亲的颜色，那这个性质就不满足了。宏观上来讲的话，就是右边已经多了一个节点，不管是什么颜色，都违反了性质。换种说法就是，现在这棵树已经不平衡了。平衡的问题就要用平衡的方法解决。把它看作AVL树，简化成如下形式。</p>
+<p><img src="/2021/10/25/rbTree/insert4.jpg"></p>
+<p>根据AVL树调整高度的知识，我们知道，需要先对节点18进行右旋，并且将<span class="math inline">\(cur\)</span>指向节点18，得到下图。</p>
+<p><img src="/2021/10/25/rbTree/insert5.jpg"></p>
+<p>按照AVL树的思想，我们下一步就应该对节点10进行左旋。但是这里有一点要注意，节点7是黑色节点，如果旋转至左子树，那么左边的黑色路径就会更长一点，违反了性质5，所以我们在这里要更换<span class="math inline">\(cur\)</span>的父亲节点与<span class="math inline">\(cur\)</span>的祖父节点的颜色。得到下图：</p>
+<p><img src="/2021/10/25/rbTree/insert7.jpg"></p>
+<p>之后再继续维持AVL树平衡的步骤，对<span class="math inline">\(cur\)</span>的祖父节点进行左旋。</p>
+<p><img src="/2021/10/25/rbTree/final.jpg"></p>
+<p>至此，<span class="math inline">\(cur\)</span>的父亲节点不是红色，退出循环。最后保证根结点是黑色即可。</p>
+<h1 id="总结">总结</h1>
+<p>在进行调整的过程中，我们总是确保性质5不受到威胁，如果顺利只通过变色完成调整，就说明插入的这个节点并不会影响黑色节点构成的树的平衡性。如果平衡性受到影响，我们就要通过旋转操作来进行调整。</p>
+<p>接下来复盘一下整个调整的过程：</p>
+<ol type="1">
+<li><p>插入的<span class="math inline">\(cur\)</span>节点是红色的，如果它的父亲节点也是红色，就进入调整过程（循环）。</p></li>
+<li><p>看叔节点，如果叔叔是红色，就改变父亲和叔叔的颜色，将祖父节点变为红色。这其实就是把红色节点向上“传递”。</p></li>
+<li><p>如果叔叔是黑色，那么就进行平衡上的调整。其实就是把红色的放到同一侧，然后再换色旋转，如图。</p>
+<p><img src="/2021/10/25/rbTree/sameside.jpg"></p></li>
+<li><p>把根节点染成黑色。</p></li>
+</ol>
+<p>AVL树的基础很重要，代码留坑。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div></div>
+  <button onclick="document.querySelector('.post-reward').classList.toggle('active');">
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="Xiaolong Chen WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/10/07/sppuzzle/" rel="prev" title="Sum and Product Puzzle——像程序员一样思考">
+                  <i class="fa fa-chevron-left"></i> Sum and Product Puzzle——像程序员一样思考
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xiaolong Chen</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div><script color="255,255,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{&quot;enable&quot;:true,&quot;tags&quot;:&quot;none&quot;,&quot;js&quot;:{&quot;url&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;mathjax@3.1.4&#x2F;es5&#x2F;tex-mml-chtml.js&quot;,&quot;integrity&quot;:&quot;sha256-ncNI9OXOS5Ek4tzVYiOMmN&#x2F;KKCPZ6V0Cpv2P&#x2F;zHntiA&#x3D;&quot;}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+  
+</body>
+</html>
