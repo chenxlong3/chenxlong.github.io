@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/dragon64.png">
@@ -272,8 +272,10 @@ daovoice('update');
         <p>之前介绍了Eratosthenes筛法，时间复杂度是<span class="math inline">\(O(nloglogn)\)</span>。比起最朴素的遍历法，这个时间复杂度已经不错了。然而，在建立质数表的时候，仍然会有重复计算。比如，我们遍历到<span class="math inline">\(2\)</span>的时候，会筛掉指定范围中<span class="math inline">\(2\)</span>的所有倍数，当然也就会筛掉<span class="math inline">\(12\)</span>这个数，然后遍历到<span class="math inline">\(3\)</span>，同样也会筛掉<span class="math inline">\(12\)</span>这个数，类似这种的重复计算还是挺多的。那么要怎样才能避免掉这些重复计算，优化时间复杂度呢？</p>
 <h1 id="欧拉筛法">欧拉筛法</h1>
 <p>欧拉筛法，又称为线性筛，从这个名字就可以知道这个方法的时间复杂度是<span class="math inline">\(O(n)\)</span>。欧拉筛法的思想就是，让每个合数只被它的最小质因数筛去。这样讲多少有点抽象了，我们接下来介绍一下整个欧拉筛法的流程。</p>
-<p>首先明确一下目标，我们要得到<span class="math inline">\(2\sim n\)</span>之中的所有素数。筛法的思想仍然是筛掉素数的倍数，不过这次，我们并不会像埃氏筛法那样，把前方的合数赶尽杀绝。欧拉筛法最妙的地方，就是及时收刀。如果我预测到你未来会挂掉，那何必脏了自己的剑呢。</p>
-<p>篇幅所限，我们先以<span class="math inline">\(2\sim 20\)</span>这个范围为例。</p>
+<p>首先明确一下目标，我们要得到<span class="math inline">\(2\sim
+n\)</span>之中的所有素数。筛法的思想仍然是筛掉素数的倍数，不过这次，我们并不会像埃氏筛法那样，把前方的合数赶尽杀绝。欧拉筛法最妙的地方，就是及时收刀。如果我预测到你未来会挂掉，那何必脏了自己的剑呢。</p>
+<p>篇幅所限，我们先以<span class="math inline">\(2\sim
+20\)</span>这个范围为例。</p>
 <p><img src="/2021/09/13/sieveA/pic1.PNG"></p>
 <p>在开始遍历之前，我们需要准备好两个数组。<span class="math inline">\(is\_prime\)</span>用来标记对应下标是否为素数，<span class="math inline">\(prime\_list\)</span>用来存放这个范围里所有的素数。</p>
 <p>与埃氏筛法相同，我们要先假设这个范围内所有的数都是素数，就是将<span class="math inline">\(is\_prime\)</span>全部置为<span class="math inline">\(true\)</span>。然后开始遍历。</p>
@@ -287,7 +289,9 @@ daovoice('update');
 <p><img src="/2021/09/13/sieveA/pic5.PNG"></p>
 <p>接着遍历到<span class="math inline">\(4\)</span>，查询<span class="math inline">\(is\_prime\)</span>，我们知道它不是素数，所以不会放进<span class="math inline">\(prime\_list\)</span>中。</p>
 <p>此时遍历<span class="math inline">\(prime\_list\)</span>，先是<span class="math inline">\(2\)</span>，于是筛掉<span class="math inline">\(4\times 2\)</span>，将<span class="math inline">\(is\_prime[8]\)</span>设为<span class="math inline">\(false\)</span>。然而，由于<span class="math inline">\(4\)</span>是<span class="math inline">\(2\)</span>的倍数，所以我们在此停止<span class="math inline">\(prime\_list\)</span>的遍历。</p>
-<p>这个停下来的过程，就是我前面提到的“收刀”。我们假设没有停下来，那我们在这里就会筛掉<span class="math inline">\(4\times 3 = 12\)</span>。然而，当我们在外面的大循环里遍历到<span class="math inline">\(6\)</span>时，我们也会筛掉<span class="math inline">\(6\times 2=12\)</span>。嗯...这就与我们“避免重复计算”的想法相悖了。思考一下，根据质因数分解，我们知道，每个合数<span class="math inline">\(m\)</span>是可以写成若干个质数的乘积的，这些质因数里面，肯定会存在一个最小的<span class="math inline">\(p_{min}\)</span>，使得<span class="math inline">\(m = p_{min}\cdot r\)</span>，其中<span class="math inline">\(r\)</span>为余下质因数的乘积。这种分解方式是唯一的，我们的指导原则就是<strong>只根据这种分解方式</strong>来筛掉合数。以下是几个具体的例子：</p>
+<p>这个停下来的过程，就是我前面提到的“收刀”。我们假设没有停下来，那我们在这里就会筛掉<span class="math inline">\(4\times 3 =
+12\)</span>。然而，当我们在外面的大循环里遍历到<span class="math inline">\(6\)</span>时，我们也会筛掉<span class="math inline">\(6\times
+2=12\)</span>。嗯...这就与我们“避免重复计算”的想法相悖了。思考一下，根据质因数分解，我们知道，每个合数<span class="math inline">\(m\)</span>是可以写成若干个质数的乘积的，这些质因数里面，肯定会存在一个最小的<span class="math inline">\(p_{min}\)</span>，使得<span class="math inline">\(m = p_{min}\cdot r\)</span>，其中<span class="math inline">\(r\)</span>为余下质因数的乘积。这种分解方式是唯一的，我们的指导原则就是<strong>只根据这种分解方式</strong>来筛掉合数。以下是几个具体的例子：</p>
 <p><span class="math display">\[
 \begin{align*}
 12 &amp;= 2\times 2 \times 3 = 2\times 6\\
@@ -299,9 +303,11 @@ daovoice('update');
 <p>比如，<span class="math inline">\(4\)</span>是<span class="math inline">\(2\)</span>的倍数，也就意味着，<span class="math inline">\(4\)</span>乘以某个质数<span class="math inline">\(p\)</span>，总能分解为<span class="math inline">\(2\times 2p\)</span>，那么我们自然可以等遍历到<span class="math inline">\(2p\)</span>的时候，再筛掉这个数。</p>
 <p>OK，回到我们例题的解答过程，现在我们筛掉了<span class="math inline">\(8\)</span>。外层循环遍历到<span class="math inline">\(5\)</span>，根据查询<span class="math inline">\(is\_prime\)</span>，我们知道它是素数，把它放进<span class="math inline">\(prime\_list\)</span>里。</p>
 <p><img src="/2021/09/13/sieveA/pic6.PNG"></p>
-<p>此时遍历<span class="math inline">\(prime\_list\)</span>，先是<span class="math inline">\(2\)</span>，于是筛掉<span class="math inline">\(5\times 2\)</span>，将<span class="math inline">\(is\_prime[10]\)</span>设为<span class="math inline">\(false\)</span>；然后是<span class="math inline">\(3\)</span>，筛掉<span class="math inline">\(5\times 3\)</span>，将<span class="math inline">\(is\_prime[15]\)</span>设为<span class="math inline">\(false\)</span>；还有个<span class="math inline">\(5\)</span>，但是<span class="math inline">\(5\times 5\)</span>超出我们要讨论的范围了，所以不用处理。</p>
+<p>此时遍历<span class="math inline">\(prime\_list\)</span>，先是<span class="math inline">\(2\)</span>，于是筛掉<span class="math inline">\(5\times 2\)</span>，将<span class="math inline">\(is\_prime[10]\)</span>设为<span class="math inline">\(false\)</span>；然后是<span class="math inline">\(3\)</span>，筛掉<span class="math inline">\(5\times 3\)</span>，将<span class="math inline">\(is\_prime[15]\)</span>设为<span class="math inline">\(false\)</span>；还有个<span class="math inline">\(5\)</span>，但是<span class="math inline">\(5\times
+5\)</span>超出我们要讨论的范围了，所以不用处理。</p>
 <p><img src="/2021/09/13/sieveA/pic7.PNG"></p>
-<p>随后遍历到6，它不是素数，我们筛掉<span class="math inline">\(2\times 6=12\)</span>，<span class="math inline">\(6\)</span>是<span class="math inline">\(2\)</span>的倍数，在此“收刀”，进入下一个数的遍历。</p>
+<p>随后遍历到6，它不是素数，我们筛掉<span class="math inline">\(2\times
+6=12\)</span>，<span class="math inline">\(6\)</span>是<span class="math inline">\(2\)</span>的倍数，在此“收刀”，进入下一个数的遍历。</p>
 <p><span class="math inline">\(7\)</span>是素数，筛掉<span class="math inline">\(2\times 7=14\)</span>，随后的素数与<span class="math inline">\(7\)</span>相乘都超出讨论范围，忽略掉。</p>
 <p><span class="math inline">\(8\)</span>不是素数，筛掉<span class="math inline">\(2\times 8=16\)</span>，随后的素数与<span class="math inline">\(7\)</span>相乘都超出讨论范围，忽略掉。</p>
 <p><span class="math inline">\(9\)</span>不是素数，筛掉<span class="math inline">\(2\times 9=18\)</span>。</p>
@@ -314,7 +320,9 @@ daovoice('update');
 <p>Python:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">prime_hash = [<span class="literal">True</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">101</span>)]</span><br><span class="line">prime_hash[<span class="number">0</span>] = prime_hash[<span class="number">1</span>] = <span class="literal">False</span></span><br><span class="line">prime_list = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">101</span>):</span><br><span class="line">    <span class="keyword">if</span> prime_hash[i]:</span><br><span class="line">        prime_list.append(i)</span><br><span class="line">    <span class="keyword">for</span> p <span class="keyword">in</span> prime_list:</span><br><span class="line">        <span class="keyword">if</span> p*i &gt;= <span class="number">101</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        prime_hash[p*i] = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">if</span> i%p == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"><span class="built_in">print</span>(prime_list)</span><br></pre></td></tr></table></figure>
 <h1 id="复杂度讨论">复杂度讨论</h1>
-<p>外层循环肯定要把<span class="math inline">\(2\sim n\)</span>遍历一遍，时间复杂度为<span class="math inline">\(O(n)\)</span>。现在问题就是我们里层循环到底多做了多少次运算。因为我们整个过程都遵从“所有合数只被筛一次的”原则，那么我们多做的运算其实就是<span class="math inline">\(2\sim n\)</span>中合数的个数。整个遍历次数一定小于<span class="math inline">\(2n\)</span>，所以时间复杂度可以表示为<span class="math inline">\(O(n)\)</span>。</p>
+<p>外层循环肯定要把<span class="math inline">\(2\sim
+n\)</span>遍历一遍，时间复杂度为<span class="math inline">\(O(n)\)</span>。现在问题就是我们里层循环到底多做了多少次运算。因为我们整个过程都遵从“所有合数只被筛一次的”原则，那么我们多做的运算其实就是<span class="math inline">\(2\sim
+n\)</span>中合数的个数。整个遍历次数一定小于<span class="math inline">\(2n\)</span>，所以时间复杂度可以表示为<span class="math inline">\(O(n)\)</span>。</p>
 
     </div>
 

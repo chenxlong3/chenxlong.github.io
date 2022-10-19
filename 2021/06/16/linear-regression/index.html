@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/dragon64.png">
@@ -267,7 +267,8 @@ daovoice('update');
 <h1 id="线性回归linear-regression">线性回归（Linear Regression）</h1>
 <p>线性回归大体分为三个部分，选择合适的模型（model），确定损失函数，梯度下降求解最优参数。</p>
 <h2 id="选择模型model">选择模型（Model）</h2>
-<p>首先我们要知道模型（model）是什么，在这个问题中，我们所说的model是指一个函数族。我们最终想要的结果，就是输入一个<span class="math inline">\(x\)</span>，得到一个十分可信的输出<span class="math inline">\(\hat{y}\)</span>，其实也就是找一个比较好的<strong>函数</strong>而已。问题是，这种函数可能有非常多，以单变量线性回归为例子，我们可以提出以下函数来进行拟合： <span class="math display">\[
+<p>首先我们要知道模型（model）是什么，在这个问题中，我们所说的model是指一个函数族。我们最终想要的结果，就是输入一个<span class="math inline">\(x\)</span>，得到一个十分可信的输出<span class="math inline">\(\hat{y}\)</span>，其实也就是找一个比较好的<strong>函数</strong>而已。问题是，这种函数可能有非常多，以单变量线性回归为例子，我们可以提出以下函数来进行拟合：
+<span class="math display">\[
 \begin{aligned}
 \hat{y} &amp;= \theta_0 + \theta_1 x \\
 \hat{y} &amp;= \theta_0 + \theta_1 x + \theta_2 x^2\\
@@ -279,31 +280,48 @@ daovoice('update');
 \]</span></p>
 <p>很显然，我们的最终目标就是找出<span class="math inline">\(\theta_0\)</span>和<span class="math inline">\(\theta_1\)</span>使得这个函数足够准确。那么问题又来了，我们要怎么样判断这个函数是否<strong>足够准确</strong>呢？</p>
 <h2 id="损失函数loss-function">损失函数（Loss function）</h2>
-<p>我们在说<strong>准确</strong>这个词的时候，实际上是在讨论什么？是<strong>误差</strong>。足够准确，也就是说误差足够小。损失函数（Loss function）就是用来描述这个误差的。如果要衡量误差，直接用预测值减去实际值就可以得出来了，如下： <span class="math display">\[
+<p>我们在说<strong>准确</strong>这个词的时候，实际上是在讨论什么？是<strong>误差</strong>。足够准确，也就是说误差足够小。损失函数（Loss
+function）就是用来描述这个误差的。如果要衡量误差，直接用预测值减去实际值就可以得出来了，如下：
+<span class="math display">\[
 \delta = \hat{y} - y
-\]</span> 对于单个数据点我们当然可以这样做，那对于一堆数据点呢？一个很简单的想法就是直接将多个点的误差相加，问题是如果正的误差和负的误差相加起来抵消掉了怎么办。比如我们现在测量一个5cm的木块，第一次测出来是4.9cm，此时的误差就是-0.1cm，第二次测出来是5.1cm，此时的误差就是0.1cm。两次误差加起来就是0了，那岂不是相当于没有误差？那么现在聪明的你应该会想到，可以用绝对值。没错，这确实是一个可以选择的方式，然而，在实际应用中，带有绝对值的变量往往在求导等操作上会有一点麻烦。所以我们选用另一种方法，就是把这个数平方，即： <span class="math display">\[
+\]</span>
+对于单个数据点我们当然可以这样做，那对于一堆数据点呢？一个很简单的想法就是直接将多个点的误差相加，问题是如果正的误差和负的误差相加起来抵消掉了怎么办。比如我们现在测量一个5cm的木块，第一次测出来是4.9cm，此时的误差就是-0.1cm，第二次测出来是5.1cm，此时的误差就是0.1cm。两次误差加起来就是0了，那岂不是相当于没有误差？那么现在聪明的你应该会想到，可以用绝对值。没错，这确实是一个可以选择的方式，然而，在实际应用中，带有绝对值的变量往往在求导等操作上会有一点麻烦。所以我们选用另一种方法，就是把这个数平方，即：
+<span class="math display">\[
 \delta = (\hat{y} - y)^2
-\]</span> 同样，上式也是对一个数据点的计算，如果有多个数据点，假如一共有<span class="math inline">\(m\)</span>个，直接相加的话，得到的就是所有数据点的误差之和了，但是当数据点非常多时，这个数字就变得很大了，为了方便计算，我们在前面再除以一个数据点的数量，也就得到了我们的损失函数（Loss function）： <span class="math display">\[
+\]</span>
+同样，上式也是对一个数据点的计算，如果有多个数据点，假如一共有<span class="math inline">\(m\)</span>个，直接相加的话，得到的就是所有数据点的误差之和了，但是当数据点非常多时，这个数字就变得很大了，为了方便计算，我们在前面再除以一个数据点的数量，也就得到了我们的损失函数（Loss
+function）： <span class="math display">\[
 L(\theta_0, \theta_1) = \frac{1}{m}\sum_{i=1}^m(\hat{y}^{(i)} - y)^2
-\]</span> （<span class="math inline">\(\hat{y}^{(i)}\)</span>里的上标<span class="math inline">\((i)\)</span>表示第<span class="math inline">\(i\)</span>个数据点） 好的，那么现在我们会发现数学符号逐渐多了起来，但是没有关系，我们把整个过程捋一捋。</p>
+\]</span> （<span class="math inline">\(\hat{y}^{(i)}\)</span>里的上标<span class="math inline">\((i)\)</span>表示第<span class="math inline">\(i\)</span>个数据点）
+好的，那么现在我们会发现数学符号逐渐多了起来，但是没有关系，我们把整个过程捋一捋。</p>
 <p>还记得我们的model吗？就是下面这个： <span class="math display">\[
 \hat{y} = \theta_0 + \theta_1 x
-\]</span> 我们的任务是什么，就是找到最合适的<span class="math inline">\(\theta_0\)</span>和<span class="math inline">\(\theta_1\)</span>，使得上式可以取得较好的预测结果。怎么评估这种<strong>合适</strong>程度呢，我们将会用Loss函数来描述。不断改变<span class="math inline">\(\theta_0\)</span>和<span class="math inline">\(\theta_1\)</span>的值，利用手上已有的数据 <span class="math inline">\(\{ (x^{(1),} y^{(1)}), (x^{(2),} y^{(2)}), (x^{(3),} y^{(3)}), \dots, (x^{(m),} y^{(m)}) \}\)</span>计算出Loss函数的值即可。那么什么时候才算是找到了最合适的<span class="math inline">\(\theta_0\)</span>和<span class="math inline">\(\theta_1\)</span>呢，显然，就是Loss函数最小的时候。误差最小就代表最准确，这是非常明显的。</p>
-<p>那么接下来，我们会介绍一种求解<span class="math inline">\(\theta_0\)</span>和<span class="math inline">\(\theta_1\)</span>的最常用的方法，梯度下降法（Gradient Descent）。</p>
+\]</span> 我们的任务是什么，就是找到最合适的<span class="math inline">\(\theta_0\)</span>和<span class="math inline">\(\theta_1\)</span>，使得上式可以取得较好的预测结果。怎么评估这种<strong>合适</strong>程度呢，我们将会用Loss函数来描述。不断改变<span class="math inline">\(\theta_0\)</span>和<span class="math inline">\(\theta_1\)</span>的值，利用手上已有的数据 <span class="math inline">\(\{ (x^{(1),} y^{(1)}), (x^{(2),} y^{(2)}),
+(x^{(3),} y^{(3)}), \dots, (x^{(m),} y^{(m)})
+\}\)</span>计算出Loss函数的值即可。那么什么时候才算是找到了最合适的<span class="math inline">\(\theta_0\)</span>和<span class="math inline">\(\theta_1\)</span>呢，显然，就是Loss函数最小的时候。误差最小就代表最准确，这是非常明显的。</p>
+<p>那么接下来，我们会介绍一种求解<span class="math inline">\(\theta_0\)</span>和<span class="math inline">\(\theta_1\)</span>的最常用的方法，梯度下降法（Gradient
+Descent）。</p>
 <h2 id="梯度下降法gradient-descent">梯度下降法（Gradient Descent）</h2>
 <p>经过高中数学的学习，想必大家都知道了导数的几何意义，在某一点的导数就等于过这一点切线的斜率，如下图所示：</p>
 <p><img src="/2021/06/16/linear-regression/LR1.jpg"></p>
-<p>显然，在<span class="math inline">\(x_1\)</span>处的导数小于0，意味着在这个点的右边还有会使<span class="math inline">\(y\)</span>更小的<span class="math inline">\(x\)</span>值，暗示我们向右取值；相反地，在<span class="math inline">\(x_2\)</span>处的导数大于0，意味着在这个点的左边有能使<span class="math inline">\(y\)</span>更小的<span class="math inline">\(x\)</span>值，暗示我们向左取值。所以就有如下的迭代策略： <span class="math display">\[
-\theta_j := \theta_j - \eta \frac{\partial}{\partial \theta_j}L(\theta_0, \theta_1) \ \ \ \ \ \ \ \ (j = 0, 1)
-\]</span> 公式逐渐复杂了起来，不过问题不大，我们来分析一下各个参数的意义。</p>
+<p>显然，在<span class="math inline">\(x_1\)</span>处的导数小于0，意味着在这个点的右边还有会使<span class="math inline">\(y\)</span>更小的<span class="math inline">\(x\)</span>值，暗示我们向右取值；相反地，在<span class="math inline">\(x_2\)</span>处的导数大于0，意味着在这个点的左边有能使<span class="math inline">\(y\)</span>更小的<span class="math inline">\(x\)</span>值，暗示我们向左取值。所以就有如下的迭代策略：
+<span class="math display">\[
+\theta_j := \theta_j - \eta \frac{\partial}{\partial
+\theta_j}L(\theta_0, \theta_1) \ \ \ \ \ \ \ \ (j = 0, 1)
+\]</span>
+公式逐渐复杂了起来，不过问题不大，我们来分析一下各个参数的意义。</p>
 <p><span class="math inline">\(\theta_j\)</span>：就是代指<span class="math inline">\(\theta_0\)</span>和<span class="math inline">\(\theta_1\)</span></p>
 <p><span class="math inline">\(:=\)</span>是<strong>赋值</strong>的意思，让左边的数等于右边的数</p>
-<p><span class="math inline">\(\eta\)</span>：学习率（Learning Rate），把降低Loss函数的过程比喻成下山，那么学习率<span class="math inline">\(\eta\)</span>就是下山的步长，<del>步子跨大了容易扯着蛋</del>，步子跨大了就可能一步走到另外一边的上坡路去了，但是步子小了就会走得很慢。</p>
-<p><span class="math inline">\(\frac{\partial}{\partial \theta_j}L(\theta_0, \theta_1)\)</span>：Loss函数对<span class="math inline">\(\theta_j\)</span>的偏导，可以大概理解为其余变量为常数时，对单变量的导数。</p>
-<p>总的来说，整个过程我们就是在变化<span class="math inline">\(\theta_0, \theta_1\)</span>，利用训练集（Training Data）来让我们的“假想函数”与实际的差距越来越小。</p>
+<p><span class="math inline">\(\eta\)</span>：学习率（Learning
+Rate），把降低Loss函数的过程比喻成下山，那么学习率<span class="math inline">\(\eta\)</span>就是下山的步长，<del>步子跨大了容易扯着蛋</del>，步子跨大了就可能一步走到另外一边的上坡路去了，但是步子小了就会走得很慢。</p>
+<p><span class="math inline">\(\frac{\partial}{\partial
+\theta_j}L(\theta_0, \theta_1)\)</span>：Loss函数对<span class="math inline">\(\theta_j\)</span>的偏导，可以大概理解为其余变量为常数时，对单变量的导数。</p>
+<p>总的来说，整个过程我们就是在变化<span class="math inline">\(\theta_0,
+\theta_1\)</span>，利用训练集（Training
+Data）来让我们的“假想函数”与实际的差距越来越小。</p>
 <h2 id="求导公式">求导公式</h2>
 <p>我们这里把Loss函数的形式写完整： <span class="math display">\[
-L(\theta_0, \theta_1) = \sum_{i=1}^m(\hat{y}^{(i)} - y)^2 = 
+L(\theta_0, \theta_1) = \sum_{i=1}^m(\hat{y}^{(i)} - y)^2 =
 \sum_{i=1}^m(\theta_0+\theta_1x^{(i)}-y^{(i)})^2
 \]</span> 那么两个参数的偏导数就如下所示： <span class="math display">\[
 \frac{\partial}{\partial \theta_0}L(\theta_0, \theta_1)=\frac{2}{m}
@@ -314,15 +332,19 @@ L(\theta_0, \theta_1) = \sum_{i=1}^m(\hat{y}^{(i)} - y)^2 =
 \sum_{i=1}^m(\theta_0+\theta_1x^{(i)}-y^{(i)}) \cdot x^{(i)}
 \]</span></p>
 <h3 id="拓展幂次">拓展（幂次）</h3>
-<p>Loss函数构造的思想依然是一样的，只是我们选取的model发生变化了，当然，也就意味着偏导数的形式也发生变化了。假设我们一开始选取的model如下： <span class="math display">\[
+<p>Loss函数构造的思想依然是一样的，只是我们选取的model发生变化了，当然，也就意味着偏导数的形式也发生变化了。假设我们一开始选取的model如下：
+<span class="math display">\[
 \hat{y} = \theta_0 + \theta_1 x + \theta_2 x^2 + \dots + \theta_n x^n
 \]</span> 那么偏导数的形式变为： <span class="math display">\[
-\frac{\partial}{\partial \theta_0}L(\theta_0, \theta_1, \dots, \theta_n)=\frac{2}{m}
+\frac{\partial}{\partial \theta_0}L(\theta_0, \theta_1, \dots,
+\theta_n)=\frac{2}{m}
 \sum_{i=1}^m(\theta_0+\theta_1x^{(i)}+\dots + \theta_n x^{(i)n}-y^{(i)})
 \]</span></p>
 <p><span class="math display">\[
-\frac{\partial}{\partial \theta_j}L(\theta_0, \theta_1, \dots, \theta_n)=\frac{2}{m}
-\sum_{i=1}^m(\theta_0+\theta_1x^{(i)}+\dots + \theta_n x^{(i)n}-y^{(i)})\cdot x^{(i)j}
+\frac{\partial}{\partial \theta_j}L(\theta_0, \theta_1, \dots,
+\theta_n)=\frac{2}{m}
+\sum_{i=1}^m(\theta_0+\theta_1x^{(i)}+\dots + \theta_n
+x^{(i)n}-y^{(i)})\cdot x^{(i)j}
 \]</span></p>
 <p>其中<span class="math inline">\(j\)</span>取<span class="math inline">\(1, 2, \dots, n\)</span>.</p>
 

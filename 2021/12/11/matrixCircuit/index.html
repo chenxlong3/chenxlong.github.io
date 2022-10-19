@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/dragon64.png">
@@ -140,7 +140,8 @@ daovoice('update');
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%87%8F%E5%AD%90%E6%AF%94%E7%89%B9"><span class="nav-number">1.</span> <span class="nav-text">量子比特</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%B5%E8%B7%AF%E5%85%83%E4%BB%B6%E7%9A%84%E7%9F%A9%E9%98%B5%E8%A1%A8%E7%A4%BA"><span class="nav-number">2.</span> <span class="nav-text">电路元件的矩阵表示</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#not-gate"><span class="nav-number">2.1.</span> <span class="nav-text">NOT Gate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#h-gate"><span class="nav-number">2.2.</span> <span class="nav-text">H Gate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#s-gate"><span class="nav-number">2.3.</span> <span class="nav-text">S Gate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#z-gate"><span class="nav-number">2.4.</span> <span class="nav-text">Z Gate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cz-gate"><span class="nav-number">2.5.</span> <span class="nav-text">CZ Gate</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%87%8F%E5%AD%90%E7%94%B5%E8%B7%AF%E9%87%8C%E7%9A%84%E7%9F%A9%E9%98%B5%E8%BF%90%E7%AE%97"><span class="nav-number">3.</span> <span class="nav-text">量子电路里的矩阵运算</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E5%8F%B3%E5%88%B0%E5%B7%A6"><span class="nav-number">3.1.</span> <span class="nav-text">从右到左</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E4%B8%8B%E5%88%B0%E4%B8%8A"><span class="nav-number">3.2.</span> <span class="nav-text">从下到上</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%8B%E7%BD%97%E5%86%85%E5%85%8B%E7%A7%AF-kronecker-product"><span class="nav-number">3.2.1.</span> <span class="nav-text">克罗内克积 (Kronecker product)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#grover-search-algorithm"><span class="nav-number">4.</span> <span class="nav-text">Grover Search Algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%A4%E4%B8%AA%E7%AE%97%E7%AC%A6%E7%9A%84%E7%9F%A9%E9%98%B5%E8%A1%A8%E7%A4%BA"><span class="nav-number">4.1.</span> <span class="nav-text">两个算符的矩阵表示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%A4%E4%B8%AA%E7%AE%97%E7%AC%A6%E7%9A%84%E7%94%B5%E8%B7%AF%E7%9F%A9%E9%98%B5%E8%A1%A8%E7%A4%BA"><span class="nav-number">4.2.</span> <span class="nav-text">两个算符的电路矩阵表示</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%87%8D%E5%A4%8D%E5%90%8E%E6%97%A0%E6%B3%95%E6%9C%89%E6%95%88%E6%90%9C%E7%B4%A2%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="nav-number">5.</span> <span class="nav-text">重复后无法有效搜索的原因</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A2%8E%E7%A2%8E%E5%BF%B5"><span class="nav-number">6.</span> <span class="nav-text">碎碎念</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%87%8F%E5%AD%90%E6%AF%94%E7%89%B9"><span class="nav-number">1.</span> <span class="nav-text">量子比特</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%B5%E8%B7%AF%E5%85%83%E4%BB%B6%E7%9A%84%E7%9F%A9%E9%98%B5%E8%A1%A8%E7%A4%BA"><span class="nav-number">2.</span> <span class="nav-text">电路元件的矩阵表示</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#not-gate"><span class="nav-number">2.1.</span> <span class="nav-text">NOT Gate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#h-gate"><span class="nav-number">2.2.</span> <span class="nav-text">H Gate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#s-gate"><span class="nav-number">2.3.</span> <span class="nav-text">S Gate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#z-gate"><span class="nav-number">2.4.</span> <span class="nav-text">Z Gate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cz-gate"><span class="nav-number">2.5.</span> <span class="nav-text">CZ Gate</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%87%8F%E5%AD%90%E7%94%B5%E8%B7%AF%E9%87%8C%E7%9A%84%E7%9F%A9%E9%98%B5%E8%BF%90%E7%AE%97"><span class="nav-number">3.</span> <span class="nav-text">量子电路里的矩阵运算</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E5%8F%B3%E5%88%B0%E5%B7%A6"><span class="nav-number">3.1.</span> <span class="nav-text">从右到左</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E4%B8%8B%E5%88%B0%E4%B8%8A"><span class="nav-number">3.2.</span> <span class="nav-text">从下到上</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%8B%E7%BD%97%E5%86%85%E5%85%8B%E7%A7%AF-kronecker-product"><span class="nav-number">3.2.1.</span> <span class="nav-text">克罗内克积 (Kronecker
+product)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#grover-search-algorithm"><span class="nav-number">4.</span> <span class="nav-text">Grover Search Algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%A4%E4%B8%AA%E7%AE%97%E7%AC%A6%E7%9A%84%E7%9F%A9%E9%98%B5%E8%A1%A8%E7%A4%BA"><span class="nav-number">4.1.</span> <span class="nav-text">两个算符的矩阵表示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%A4%E4%B8%AA%E7%AE%97%E7%AC%A6%E7%9A%84%E7%94%B5%E8%B7%AF%E7%9F%A9%E9%98%B5%E8%A1%A8%E7%A4%BA"><span class="nav-number">4.2.</span> <span class="nav-text">两个算符的电路矩阵表示</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%87%8D%E5%A4%8D%E5%90%8E%E6%97%A0%E6%B3%95%E6%9C%89%E6%95%88%E6%90%9C%E7%B4%A2%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="nav-number">5.</span> <span class="nav-text">重复后无法有效搜索的原因</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A2%8E%E7%A2%8E%E5%BF%B5"><span class="nav-number">6.</span> <span class="nav-text">碎碎念</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -273,14 +274,16 @@ daovoice('update');
     <div class="post-body" itemprop="articleBody">
         <p>急匆匆把电路搭完，却连哪条线对应的是哪个比特都不知道。</p>
 <h1 id="量子比特">量子比特</h1>
-<p>经典计算机里的一个比特有两个状态——0和1。与之类似，一个量子比特 (qubit) 存在两个计算基本状态，<span class="math inline">\(|0\rangle\)</span>和<span class="math inline">\(|1\rangle\)</span>，它们可以写作如下的向量形式： <span class="math display">\[
+<p>经典计算机里的一个比特有两个状态——0和1。与之类似，一个量子比特
+(qubit) 存在两个计算基本状态，<span class="math inline">\(|0\rangle\)</span>和<span class="math inline">\(|1\rangle\)</span>，它们可以写作如下的向量形式：
+<span class="math display">\[
 \begin{align}
-|0\rangle = 
+|0\rangle =
 \begin{bmatrix}
 1 \\
 0
-\end{bmatrix}, 
-|1\rangle = 
+\end{bmatrix},
+|1\rangle =
 \begin{bmatrix}
 0 \\
 1
@@ -291,13 +294,16 @@ daovoice('update');
 \begin{align}
 |\psi\rangle = a|0\rangle + b|1\rangle
 \end{align}
-\]</span> 其中<span class="math inline">\(a\)</span>和<span class="math inline">\(b\)</span>为满足<span class="math inline">\(a^2+b^2 = 1\)</span>的复数，笔者没学过复分析，对这方面知识并不了解。在这篇blog中先将<span class="math inline">\(a\)</span>与<span class="math inline">\(b\)</span>视为实数，以简化分析过程。<span class="math inline">\(a^2\)</span>表示这个qubit经过一次测量之后，得到的是<span class="math inline">\(|0\rangle\)</span>的概率，同理，<span class="math inline">\(b^2\)</span>表示这个qubit经过一次测量之后，得到的是<span class="math inline">\(|1\rangle\)</span>的概率。</p>
-<p>知道了上述的知识之后，我们就可以在IBM Quantum Experience上开始玩耍了。我们可以先放一个<span class="math inline">\(|0\rangle\)</span>到电路上。</p>
+\]</span> 其中<span class="math inline">\(a\)</span>和<span class="math inline">\(b\)</span>为满足<span class="math inline">\(a^2+b^2 =
+1\)</span>的复数，笔者没学过复分析，对这方面知识并不了解。在这篇blog中先将<span class="math inline">\(a\)</span>与<span class="math inline">\(b\)</span>视为实数，以简化分析过程。<span class="math inline">\(a^2\)</span>表示这个qubit经过一次测量之后，得到的是<span class="math inline">\(|0\rangle\)</span>的概率，同理，<span class="math inline">\(b^2\)</span>表示这个qubit经过一次测量之后，得到的是<span class="math inline">\(|1\rangle\)</span>的概率。</p>
+<p>知道了上述的知识之后，我们就可以在IBM Quantum
+Experience上开始玩耍了。我们可以先放一个<span class="math inline">\(|0\rangle\)</span>到电路上。</p>
 <p><img src="/2021/12/11/matrixCircuit/qubit0.png"></p>
 <p>这个时候呢，我们已经初始化了一个qubit，它的状态为<span class="math inline">\(|0\rangle\)</span>。</p>
 <p>那如果我们在下面加一条线，也加上一个<span class="math inline">\(|0\rangle\)</span>呢？</p>
 <p><img src="/2021/12/11/matrixCircuit/qubit02.png"></p>
-<p>这个时候，我们可以通过IBM Quantum Experience提供的可视化看到，这两个比特就构成了<span class="math inline">\(|00\rangle\)</span>。这个时候就有一个问题了，线路0上的qubit对应的到底是<span class="math inline">\(|00\rangle\)</span>左边这个0，还是右边这个0呢？按照从上到下，从左到右，或许很多人会很“自然”地认为线路0上的qubit对应的就是<span class="math inline">\(|00\rangle\)</span>左边的那一位。事实到底如何呢？实践出真知。我们可以在线路0那里加上一个非门，起到把<span class="math inline">\(|0\rangle\)</span>变成<span class="math inline">\(|1\rangle\)</span>的作用。</p>
+<p>这个时候，我们可以通过IBM Quantum
+Experience提供的可视化看到，这两个比特就构成了<span class="math inline">\(|00\rangle\)</span>。这个时候就有一个问题了，线路0上的qubit对应的到底是<span class="math inline">\(|00\rangle\)</span>左边这个0，还是右边这个0呢？按照从上到下，从左到右，或许很多人会很“自然”地认为线路0上的qubit对应的就是<span class="math inline">\(|00\rangle\)</span>左边的那一位。事实到底如何呢？实践出真知。我们可以在线路0那里加上一个非门，起到把<span class="math inline">\(|0\rangle\)</span>变成<span class="math inline">\(|1\rangle\)</span>的作用。</p>
 <p><img src="/2021/12/11/matrixCircuit/qubit03.png"></p>
 <p>这个时候的结果如何？</p>
 <p><img src="/2021/12/11/matrixCircuit/qubit04.png"></p>
@@ -337,7 +343,8 @@ X = \begin{bmatrix}
 \end{bmatrix}
 \]</span></p>
 <h2 id="h-gate">H Gate</h2>
-<p>到现在为止，我们还是在用一个qubit表示<span class="math inline">\(|0\rangle\)</span>和<span class="math inline">\(|1\rangle\)</span>，与传统计算机没有差别。而H门就可以让一个qubit变为叠加态。 <span class="math display">\[
+<p>到现在为止，我们还是在用一个qubit表示<span class="math inline">\(|0\rangle\)</span>和<span class="math inline">\(|1\rangle\)</span>，与传统计算机没有差别。而H门就可以让一个qubit变为叠加态。
+<span class="math display">\[
 H = \frac{1}{\sqrt{2}}\begin{bmatrix}
 1 &amp; 1 \\
 1 &amp; -1
@@ -392,14 +399,15 @@ CZ = \begin{bmatrix}
 <h2 id="从右到左">从右到左</h2>
 <p>每个新出现的元件，都对前面所获得的向量进行左乘操作。</p>
 <h2 id="从下到上">从下到上</h2>
-<p>在介绍这部分的运算规则之前，不妨首先想一想，我们应该怎么样表示<span class="math inline">\(|01\rangle\)</span>这两个qubits。在有两个qubits的情况下，计算的基态一共有四种，即<span class="math inline">\(|00\rangle\)</span>，<span class="math inline">\(|01\rangle\)</span>，<span class="math inline">\(|10\rangle\)</span>和<span class="math inline">\(|11\rangle\)</span>。根据线性代数的方式，我们将它们视为四个基向量，它们的所有线性组合，会span出来一个四维空间。所以，基于<span class="math inline">\(|0\rangle\)</span>和<span class="math inline">\(|1\rangle\)</span>，我们需要得到以下四个向量。 <span class="math display">\[
+<p>在介绍这部分的运算规则之前，不妨首先想一想，我们应该怎么样表示<span class="math inline">\(|01\rangle\)</span>这两个qubits。在有两个qubits的情况下，计算的基态一共有四种，即<span class="math inline">\(|00\rangle\)</span>，<span class="math inline">\(|01\rangle\)</span>，<span class="math inline">\(|10\rangle\)</span>和<span class="math inline">\(|11\rangle\)</span>。根据线性代数的方式，我们将它们视为四个基向量，它们的所有线性组合，会span出来一个四维空间。所以，基于<span class="math inline">\(|0\rangle\)</span>和<span class="math inline">\(|1\rangle\)</span>，我们需要得到以下四个向量。
+<span class="math display">\[
 \begin{align}
 \begin{bmatrix}
 1 \\
 0 \\
 0 \\
 0
-\end{bmatrix}, 
+\end{bmatrix},
 \begin{bmatrix}
 0 \\
 1 \\
@@ -420,7 +428,8 @@ CZ = \begin{bmatrix}
 \end{bmatrix}
 \end{align}
 \]</span> But how？</p>
-<h3 id="克罗内克积-kronecker-product">克罗内克积 (Kronecker product)</h3>
+<h3 id="克罗内克积-kronecker-product">克罗内克积 (Kronecker
+product)</h3>
 <p>克罗内克积的运算非常直观。假设<span class="math inline">\(A\)</span>是一个<span class="math inline">\(m\times n\)</span>的矩阵，<span class="math inline">\(B\)</span>是一个<span class="math inline">\(p\times q\)</span>的矩阵。那么</p>
 <p><span class="math display">\[
 \begin{align}
@@ -444,7 +453,7 @@ a_{m1}B &amp; a_{m2}B &amp; \cdots &amp; a_{mn}B
 \begin{bmatrix}
 1 \\
 0
-\end{bmatrix} = 
+\end{bmatrix} =
 \begin{bmatrix}
 1 \\
 0 \\
@@ -459,7 +468,7 @@ a_{m1}B &amp; a_{m2}B &amp; \cdots &amp; a_{mn}B
 \begin{bmatrix}
 0 \\
 1
-\end{bmatrix} = 
+\end{bmatrix} =
 \begin{bmatrix}
 0 \\
 1 \\
@@ -470,7 +479,10 @@ a_{m1}B &amp; a_{m2}B &amp; \cdots &amp; a_{mn}B
 \]</span></p>
 <p>其余同理。那么对于纵向的电路元件的计算，也不难推理，就是从下到上一直计算克罗内克积。</p>
 <h1 id="grover-search-algorithm">Grover Search Algorithm</h1>
-<p>Grover Search algorithm可以实现对无序列表中的某个item的搜索。这个算法呢，把所有的物体用不同的基态表示，再生成这些基态的叠加态（线性组合），用来表示整个列表。前面已经提到，线性组合中的系数其实与测量得到对应基态的概率有关。事实上，这个Grover Search algorithm就是通过提高对应基态的概率，达到搜索的效果。接着我们来看一下具体是怎么实现的。</p>
+<p>Grover Search
+algorithm可以实现对无序列表中的某个item的搜索。这个算法呢，把所有的物体用不同的基态表示，再生成这些基态的叠加态（线性组合），用来表示整个列表。前面已经提到，线性组合中的系数其实与测量得到对应基态的概率有关。事实上，这个Grover
+Search
+algorithm就是通过提高对应基态的概率，达到搜索的效果。接着我们来看一下具体是怎么实现的。</p>
 <p>用<span class="math inline">\(|\omega\rangle\)</span>表示要搜索的目标，用<span class="math inline">\(|s\rangle\)</span>表示叠加态。那么<span class="math inline">\(|s\rangle\)</span>就肯定可以分解为<span class="math inline">\(|\omega\rangle\)</span>方向上的分量和垂直于<span class="math inline">\(|\omega\rangle\)</span>的分量<span class="math inline">\(|s^\prime\rangle\)</span>。如下图，</p>
 <p><img src="/2021/12/11/matrixCircuit/initial.jpeg"></p>
 <p>随后对<span class="math inline">\(|s\rangle\)</span>进行关于<span class="math inline">\(|s^\prime\rangle\)</span>的翻转，如下图。这个操作我们称为Oracle，用<span class="math inline">\(U_\omega\)</span>表示。</p>
@@ -479,9 +491,10 @@ a_{m1}B &amp; a_{m2}B &amp; \cdots &amp; a_{mn}B
 <p><img src="/2021/12/11/matrixCircuit/reflection2.jpeg"></p>
 <p>这样，我们就增大了<span class="math inline">\(|\omega\rangle\)</span>方向上的分量的大小，即<span class="math inline">\(|\omega\rangle\)</span>对应的系数。从而增大了一次测量中，得到<span class="math inline">\(|\omega\rangle\)</span>的概率。一般来说，我们会重复这两个“翻转”的过程，使得这个概率足够大，当然，这里面也存在一些问题，后面会提到。</p>
 <h2 id="两个算符的矩阵表示">两个算符的矩阵表示</h2>
-<p>以在两个比特的叠加态中搜索<span class="math inline">\(|01\rangle\)</span>为例。<span class="math inline">\(U_\omega\)</span>的目的是翻转<span class="math inline">\(|\omega\rangle\)</span>方向上的分量，其实就相当于把系数乘以-1。在这个例子中，这个操作算符可以写为， <span class="math display">\[
+<p>以在两个比特的叠加态中搜索<span class="math inline">\(|01\rangle\)</span>为例。<span class="math inline">\(U_\omega\)</span>的目的是翻转<span class="math inline">\(|\omega\rangle\)</span>方向上的分量，其实就相当于把系数乘以-1。在这个例子中，这个操作算符可以写为，
+<span class="math display">\[
 \begin{align}
-U_\omega = 
+U_\omega =
     \begin{bmatrix}
     1 &amp; 0 &amp; 0 &amp; 0\\
     0 &amp; -1 &amp; 0 &amp; 0\\
@@ -490,7 +503,8 @@ U_\omega =
     \end{bmatrix}.
 \end{align}
 \]</span></p>
-<p>那么对于第二次的翻转，可以理解为向<span class="math inline">\(|s\rangle\)</span>方向上投影，然后延长两倍，再减去自身，可以写为， <span class="math display">\[
+<p>那么对于第二次的翻转，可以理解为向<span class="math inline">\(|s\rangle\)</span>方向上投影，然后延长两倍，再减去自身，可以写为，
+<span class="math display">\[
 \begin{align}
     U_s &amp;= 2|s\rangle\langle s| - I
     =\begin{bmatrix}

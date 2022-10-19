@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/dragon64.png">
@@ -268,42 +268,61 @@ L(\theta) = \frac{1}{m}\sum_{i=1}^mCost(h_\theta(x^{(i)}),y^{(i)})
 g(z) = \frac{1}{1+e^{-z}}
 \]</span></p>
 <h1 id="梯度下降">梯度下降</h1>
-<p>已经有了Loss函数，那么我们要做的事情就是通过梯度下降的方法来确定最佳参数<span class="math inline">\(\theta\)</span>，使得对于训练集的所有数据，Loss函数值最小。那么我们就来对这看似复杂的函数进行一下求导吧。 ## 对Loss函数求偏导 我们知道函数有以下形式： <span class="math display">\[
-L(\theta) = \frac{1}{m}\sum_{i=1}^m[-y^{(i)}log(h_\theta(x^{(i)}))-(1-y^{(i)})log(1-h_\theta(x^{(i)}))]
+<p>已经有了Loss函数，那么我们要做的事情就是通过梯度下降的方法来确定最佳参数<span class="math inline">\(\theta\)</span>，使得对于训练集的所有数据，Loss函数值最小。那么我们就来对这看似复杂的函数进行一下求导吧。
+## 对Loss函数求偏导 我们知道函数有以下形式： <span class="math display">\[
+L(\theta) =
+\frac{1}{m}\sum_{i=1}^m[-y^{(i)}log(h_\theta(x^{(i)}))-(1-y^{(i)})log(1-h_\theta(x^{(i)}))]
 \]</span> <span class="math inline">\(\frac{1}{m}\)</span>是常数，我们可以先放至一边。括号里面的<span class="math inline">\(y^{(i)}\)</span>和<span class="math inline">\((1-y^{(i)})\)</span>都是常数，对导数的形式并无影响。Loss函数对<span class="math inline">\(\theta\)</span>求偏导有以下形式： <span class="math display">\[
-\frac{\partial L(\theta)}{\partial \theta_j}=\frac{1}{m}\sum_{i=1}^m[-y^{(i)}\frac{\partial log(h_\theta(x^{(i)}))}{\partial \theta_j}-(1-y^{(i)})\frac{\partial log(1-h_\theta(x^{(i)}))}{\partial \theta_j}]
-\]</span> 显然，要计算<span class="math inline">\(\frac{\partial L(\theta)}{\partial \theta_j}\)</span>，我们就只需要计算<span class="math inline">\(\frac{\partial log(h_\theta(x^{(i)}))}{\partial \theta_j}\)</span>以及<span class="math inline">\(\frac{\partial log(1-h_\theta(x^{(i)}))}{\partial \theta_j}\)</span>。</p>
+\frac{\partial L(\theta)}{\partial
+\theta_j}=\frac{1}{m}\sum_{i=1}^m[-y^{(i)}\frac{\partial
+log(h_\theta(x^{(i)}))}{\partial \theta_j}-(1-y^{(i)})\frac{\partial
+log(1-h_\theta(x^{(i)}))}{\partial \theta_j}]
+\]</span> 显然，要计算<span class="math inline">\(\frac{\partial
+L(\theta)}{\partial \theta_j}\)</span>，我们就只需要计算<span class="math inline">\(\frac{\partial log(h_\theta(x^{(i)}))}{\partial
+\theta_j}\)</span>以及<span class="math inline">\(\frac{\partial
+log(1-h_\theta(x^{(i)}))}{\partial \theta_j}\)</span>。</p>
 <p>这看起来还是非常吓人呢，不过没关系，笔者高中数学老师曾告诉过我们，一切反动派都是纸老虎。先让我们回到<span class="math inline">\(h_\theta(x^{(i)})\)</span>的表达式，令<span class="math inline">\(z=\theta^TX\)</span></p>
-<p><span class="math display">\[h_{\theta}(x) = g(z) =\frac{1}{1+e^{-z}}\]</span></p>
+<p><span class="math display">\[h_{\theta}(x) = g(z)
+=\frac{1}{1+e^{-z}}\]</span></p>
 <p>根据复合函数的求导，我们可以知道： <span class="math display">\[
 \begin{aligned}
 \frac{\partial log(h_\theta(x^{(i)}))}{\partial \theta_j}&amp;=
 \frac{\partial log(g(z))}{\partial \theta_j}\\
 &amp;= \frac{1}{g(z)} \frac{\partial g(z)}{\partial \theta_j}\\
-&amp;= \frac{1}{g(z)} \frac{\partial g(z)}{\partial z} \frac{\partial z}{\partial \theta_j}
+&amp;= \frac{1}{g(z)} \frac{\partial g(z)}{\partial z} \frac{\partial
+z}{\partial \theta_j}
 \end{aligned}
 \]</span> 一项一项拆解： <span class="math display">\[
 \frac{1}{g(z)} = 1+e^{-z}
 \]</span></p>
 <p><span class="math display">\[
-\frac{\partial g(z)}{\partial z} = -\frac{-e^{-z}}{(1+e^{-z})^2}=\frac{e^{-z}}{(1+e^{-z})^2}
+\frac{\partial g(z)}{\partial z} =
+-\frac{-e^{-z}}{(1+e^{-z})^2}=\frac{e^{-z}}{(1+e^{-z})^2}
 \]</span></p>
 <p><span class="math display">\[
 \frac{\partial z}{\partial \theta_j}=x_j
 \]</span></p>
 <p>那么我们就可以得到<span class="math inline">\(log(h_\theta(x^{(i)}))\)</span>对<span class="math inline">\(\theta_j\)</span>的偏导： <span class="math display">\[
-\frac{\partial log(h_\theta(x^{(i)}))}{\partial \theta_j}=\frac{e^{-z}}{1+e^{-z}}\cdot x_j = (1-g(z))x_j
-\]</span> 接着我们继续看<span class="math inline">\(log(1-h_\theta(x^{(i)}))\)</span>对<span class="math inline">\(\theta_j\)</span>的偏导，事实上，依旧是根据复合函数的求导： <span class="math display">\[
+\frac{\partial log(h_\theta(x^{(i)}))}{\partial
+\theta_j}=\frac{e^{-z}}{1+e^{-z}}\cdot x_j = (1-g(z))x_j
+\]</span> 接着我们继续看<span class="math inline">\(log(1-h_\theta(x^{(i)}))\)</span>对<span class="math inline">\(\theta_j\)</span>的偏导，事实上，依旧是根据复合函数的求导：
+<span class="math display">\[
 \begin{aligned}
 \frac{\partial log(1-h_\theta(x^{(i)}))}{\partial \theta_j} &amp;=
-\frac{-1}{1-h_\theta(x^{(i)})} \frac{\partial h_\theta(x^{(i)})}{\partial \theta_j}\\
+\frac{-1}{1-h_\theta(x^{(i)})} \frac{\partial
+h_\theta(x^{(i)})}{\partial \theta_j}\\
 &amp;= -\frac{1}{1-g(z)}\frac{\partial g(z)}{\partial \theta_j}\\
-&amp;= -\frac{1+e^{-z}}{e^{-z}}\cdot \frac{e^{-z}}{(1+e^{-z})^2} \cdot x_j\\
+&amp;= -\frac{1+e^{-z}}{e^{-z}}\cdot \frac{e^{-z}}{(1+e^{-z})^2} \cdot
+x_j\\
 &amp;= -g(z)\cdot x_j
 \end{aligned}
-\]</span> OK，那么我们把得到的这两个式子代回Loss函数的偏导形式中，得到： <span class="math display">\[
+\]</span> OK，那么我们把得到的这两个式子代回Loss函数的偏导形式中，得到：
+<span class="math display">\[
 \begin{aligned}
-\frac{\partial L(\theta)}{\partial \theta_j}&amp;=\frac{1}{m}\sum_{i=1}^m[-y^{(i)}\frac{\partial log(h_\theta(x^{(i)}))}{\partial \theta_j}-(1-y^{(i)})\frac{\partial log(1-h_\theta(x^{(i)}))}{\partial \theta_j}]\\
+\frac{\partial L(\theta)}{\partial
+\theta_j}&amp;=\frac{1}{m}\sum_{i=1}^m[-y^{(i)}\frac{\partial
+log(h_\theta(x^{(i)}))}{\partial \theta_j}-(1-y^{(i)})\frac{\partial
+log(1-h_\theta(x^{(i)}))}{\partial \theta_j}]\\
 &amp;= \frac{1}{m}\sum_{i=1}^m[-y^{(i)}(1-g(z))x_j+(1-y^{(i)})g(z)x_j]\\
 &amp;= \frac{1}{m}\sum_{i=1}^m[g(z)-y^{(i)}]x_j\\
 &amp;= \frac{1}{m}\sum_{i=1}^m[h_{\theta}(x^{(i)})-y^{(i)}]x^{(i)}_j
@@ -314,7 +333,8 @@ L(\theta) = \frac{1}{m}\sum_{i=1}^m[-y^{(i)}log(h_\theta(x^{(i)}))-(1-y^{(i)})lo
 <p>与线性回归同理，我们依旧是按照如下式子进行参数的更新： <span class="math display">\[
 \theta_j := \theta_j - \eta \frac{\partial}{\partial \theta_j}L(\theta)
 \]</span> 将前面求得的表达式代入得： <span class="math display">\[
-\theta_j := \theta_j - \eta \frac{1}{m}\sum_{i=1}^m[h_{\theta}(x^{(i)})-y^{(i)}]x^{(i)}_j
+\theta_j := \theta_j - \eta
+\frac{1}{m}\sum_{i=1}^m[h_{\theta}(x^{(i)})-y^{(i)}]x^{(i)}_j
 \]</span></p>
 <h1 id="多分类问题">多分类问题</h1>
 <p>目前为止我们也只是提出了一种解决二分类问题的方法，但是日常生活中，我们常常需要进行更多种的分类，比如除了猫和狗，我们还希望计算机能识别出老鼠等更多动物；除了分辨诈骗和非诈骗邮件，我们还希望计算机能自动分出哪些邮件是家人发的，哪些是朋友发的等等。那么，我们讨论过的逻辑回归算法，能不能应用在多分类上呢？答案是肯定的。以三分类为例子，我们用圆形、正方形和三角形来表示。如下图：</p>

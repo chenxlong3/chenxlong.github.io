@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
+<meta name="generator" content="Hexo 5.4.2">
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/dragon64.png">
@@ -129,7 +129,10 @@ daovoice('update');
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E4%B8%8D%E7%AD%89%E5%BC%8F-the-markov-inequality"><span class="nav-number">1.</span> <span class="nav-text">马尔可夫不等式 (The Markov Inequality)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%87%E6%AF%94%E9%9B%AA%E5%A4%AB%E4%B8%8D%E7%AD%89%E5%BC%8F-the-chebyshev-inequality"><span class="nav-number">2.</span> <span class="nav-text">切比雪夫不等式 (The Chebyshev Inequality)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%B1%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B-weak-law-of-large-numbers-wlln"><span class="nav-number">3.</span> <span class="nav-text">弱大数定律 (Weak Law of Large Numbers, WLLN)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%81%E6%98%8E"><span class="nav-number">3.1.</span> <span class="nav-text">证明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B%E4%B8%8E%E4%BA%8B%E4%BB%B6%E6%A6%82%E7%8E%87%E4%BC%B0%E8%AE%A1"><span class="nav-number">3.2.</span> <span class="nav-text">大数定律与事件概率估计</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%BA%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B"><span class="nav-number">4.</span> <span class="nav-text">强大数定律</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E4%B8%8D%E7%AD%89%E5%BC%8F-the-markov-inequality"><span class="nav-number">1.</span> <span class="nav-text">马尔可夫不等式 (The Markov
+Inequality)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%87%E6%AF%94%E9%9B%AA%E5%A4%AB%E4%B8%8D%E7%AD%89%E5%BC%8F-the-chebyshev-inequality"><span class="nav-number">2.</span> <span class="nav-text">切比雪夫不等式 (The
+Chebyshev Inequality)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%B1%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B-weak-law-of-large-numbers-wlln"><span class="nav-number">3.</span> <span class="nav-text">弱大数定律 (Weak Law
+of Large Numbers, WLLN)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%81%E6%98%8E"><span class="nav-number">3.1.</span> <span class="nav-text">证明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B%E4%B8%8E%E4%BA%8B%E4%BB%B6%E6%A6%82%E7%8E%87%E4%BC%B0%E8%AE%A1"><span class="nav-number">3.2.</span> <span class="nav-text">大数定律与事件概率估计</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%BA%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B"><span class="nav-number">4.</span> <span class="nav-text">强大数定律</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -257,8 +260,10 @@ daovoice('update');
         <p>样本数目足够多的情况下，样本均值会趋于期望。</p>
 <p>样本数目足够多的情况下，事件发生的频率趋于概率。</p>
 <p>为何两种说法都称为大数定律，样本均值与频率又到底是什么关系呢？</p>
-<h1 id="马尔可夫不等式-the-markov-inequality">马尔可夫不等式 (The Markov Inequality)</h1>
-<p>Markov Inequality描述了一个非常简单的想法：如果随机变量恒大于零，且该随机变量的期望较小，那么我们随机做一次实验，所得到的<span class="math inline">\(X\)</span>也不太可能会很大。举个例子，如果全国十四亿人口的平均身高为1.67米，那么我们随机抽一个人，他/她的身高不会偏离这个数字太远，他/她的身高为2米的概率是比较低的。</p>
+<h1 id="马尔可夫不等式-the-markov-inequality">马尔可夫不等式 (The Markov
+Inequality)</h1>
+<p>Markov
+Inequality描述了一个非常简单的想法：如果随机变量恒大于零，且该随机变量的期望较小，那么我们随机做一次实验，所得到的<span class="math inline">\(X\)</span>也不太可能会很大。举个例子，如果全国十四亿人口的平均身高为1.67米，那么我们随机抽一个人，他/她的身高不会偏离这个数字太远，他/她的身高为2米的概率是比较低的。</p>
 <p><span class="math inline">\(P(X\geq a)\)</span>: 随机变量<span class="math inline">\(X\)</span>不小于<span class="math inline">\(a\)</span> 的概率</p>
 <p><span class="math inline">\(E[X]\)</span>: 随机变量<span class="math inline">\(X\)</span>的期望</p>
 <p><span class="math inline">\(a\)</span>: 任一正数 <span class="math display">\[
@@ -273,7 +278,8 @@ E[X] &amp;= \int^{\infty}_{-\infty} xf(x)dx\\
 \\
 P(X\geq a) &amp;\leq \frac{E[x]}{a}
 \end{align*}
-\]</span> 除此之外，还有一种证明方法，但两者的内在思想是一样的，也在此简述一下。</p>
+\]</span>
+除此之外，还有一种证明方法，但两者的内在思想是一样的，也在此简述一下。</p>
 <p><span class="math inline">\(Proof\ 2\)</span>:</p>
 <p>假设我们有另外一个随机变量<span class="math inline">\(Y\)</span>，如下： <span class="math display">\[
 \begin{equation*}
@@ -284,35 +290,48 @@ a, &amp;\quad X\geq a\\
 \end{aligned}
 \right.
 \end{equation*}
-\]</span> 显然这是一个离散型随机变量，那么我们可以用以下公式计算出它的期望： <span class="math display">\[
+\]</span>
+显然这是一个离散型随机变量，那么我们可以用以下公式计算出它的期望： <span class="math display">\[
 \begin{align*}
 E[Y] &amp;= aP(X\geq a) + 0\cdot P(X&lt;a)\\
 &amp;= aP(X\geq a)
 \end{align*}
-\]</span> 因为当<span class="math inline">\(X\geq a\)</span>时，<span class="math inline">\(Y=a\)</span>，而当<span class="math inline">\(X&lt;a\)</span>时，<span class="math inline">\(Y = 0\)</span>。所以很显然可以得到：<span class="math inline">\(Y\leq X\)</span>。那么也就有<span class="math inline">\(E[Y] \leq E[X]\)</span>。则： <span class="math display">\[
+\]</span> 因为当<span class="math inline">\(X\geq a\)</span>时，<span class="math inline">\(Y=a\)</span>，而当<span class="math inline">\(X&lt;a\)</span>时，<span class="math inline">\(Y =
+0\)</span>。所以很显然可以得到：<span class="math inline">\(Y\leq
+X\)</span>。那么也就有<span class="math inline">\(E[Y] \leq
+E[X]\)</span>。则： <span class="math display">\[
 \begin{align*}
 E[Y] = aP(&amp;X\geq a) \leq E[X] \\
 \\P(X\geq a) &amp; \leq \frac{E[X]}{a}
 \end{align*}
-\]</span> 可是稍微往深处想一想，就会觉得这个不等式非常鸡肋。从不等式上来看，随机变量大于或等于<span class="math inline">\(k\)</span>倍期望的概率不超过<span class="math inline">\(\frac{1}{k}\)</span>。这样说或许还不直观，我们再举回那个身高的例子，全国十四亿人口的平均身高为1.67米。这个不等式告诉我们，如果随机抽一个人，他/她的身高不小于3.34米的概率不超过<span class="math inline">\(1/2\)</span>……</p>
-<p>根据我们的常识，这个概率何止是不超过<span class="math inline">\(1/2\)</span>，说是远小于1%也不为过。这其实就是这个Markov Inequality的一个缺点——它的上界定得太大了。</p>
-<h1 id="切比雪夫不等式-the-chebyshev-inequality">切比雪夫不等式 (The Chebyshev Inequality)</h1>
-<p>Chebyshev Inequality把方差也考虑了进来。这个不等式阐述的想法就是：如果一个随机变量的方差不大，那么这个随机变量不会离它的均值太远。不等式的形式如下： <span class="math display">\[
+\]</span>
+可是稍微往深处想一想，就会觉得这个不等式非常鸡肋。从不等式上来看，随机变量大于或等于<span class="math inline">\(k\)</span>倍期望的概率不超过<span class="math inline">\(\frac{1}{k}\)</span>。这样说或许还不直观，我们再举回那个身高的例子，全国十四亿人口的平均身高为1.67米。这个不等式告诉我们，如果随机抽一个人，他/她的身高不小于3.34米的概率不超过<span class="math inline">\(1/2\)</span>……</p>
+<p>根据我们的常识，这个概率何止是不超过<span class="math inline">\(1/2\)</span>，说是远小于1%也不为过。这其实就是这个Markov
+Inequality的一个缺点——它的上界定得太大了。</p>
+<h1 id="切比雪夫不等式-the-chebyshev-inequality">切比雪夫不等式 (The
+Chebyshev Inequality)</h1>
+<p>Chebyshev
+Inequality把方差也考虑了进来。这个不等式阐述的想法就是：如果一个随机变量的方差不大，那么这个随机变量不会离它的均值太远。不等式的形式如下：
+<span class="math display">\[
 \begin{align*}
 P(|X-\mu|\geq c)\leq \frac{\sigma^2}{c^2}
 \end{align*}
 \]</span> 同样地，我们来证明一下这个不等式。</p>
-<p>首先，绝对值这个东西有点碍眼，它的存在往往意味着分类讨论，我们可以先把它去掉，两边同时进行平方运算。 <span class="math display">\[
+<p>首先，绝对值这个东西有点碍眼，它的存在往往意味着分类讨论，我们可以先把它去掉，两边同时进行平方运算。
+<span class="math display">\[
 \begin{align*}
 P(|X-\mu|\geq c) = P((X-\mu)^2\geq c^2)
 \end{align*}
-\]</span> 然后，把<span class="math inline">\((X-\mu)^2\)</span>看作一个新的随机变量，利用Markov Inequality得到， <span class="math display">\[
+\]</span> 然后，把<span class="math inline">\((X-\mu)^2\)</span>看作一个新的随机变量，利用Markov
+Inequality得到， <span class="math display">\[
 \begin{align*}
-P(|X-\mu|\geq c) = P((X-\mu)^2 \geq c^2) &amp;\leq \frac{E[(X-\mu)^2]}{c^2} = \frac{\sigma^2}{c^2}
+P(|X-\mu|\geq c) = P((X-\mu)^2 \geq c^2) &amp;\leq
+\frac{E[(X-\mu)^2]}{c^2} = \frac{\sigma^2}{c^2}
 \end{align*}
 \]</span> 证毕。</p>
 <p>假设平均身高为167<span class="math inline">\(cm\)</span>，方差为100<span class="math inline">\(cm^2\)</span>，那么抽到一个人身高大于或等于3.34米的概率会小于或等于0.0035。这样看倒也科学不少。</p>
-<h1 id="弱大数定律-weak-law-of-large-numbers-wlln">弱大数定律 (Weak Law of Large Numbers, WLLN)</h1>
+<h1 id="弱大数定律-weak-law-of-large-numbers-wlln">弱大数定律 (Weak Law
+of Large Numbers, WLLN)</h1>
 <h2 id="证明">证明</h2>
 <p>接着我们来看一下这篇文章真正的主角——大数定律。更准确地说，是弱大数定律，也称为辛钦大数定律。至于强大数定律，会在这篇blog的结尾提一嘴，它的证明有点超出我的知识范畴了，我也就偷个懒吧。</p>
 <p>先给出来大数定律的形式：</p>
@@ -325,7 +344,8 @@ P(|M_n-\mu|\geq \epsilon) \rightarrow 0, \ as\ n \rightarrow \infty
 M_n = \frac{X_1 + X_2+\cdots + X_n}{n}
 \]</span> <span class="math inline">\(\mu\)</span>: 随机变量的期望</p>
 <p><span class="math inline">\(n\)</span>: 样本数量</p>
-<p><span class="math inline">\(X_1\cdots X_n\)</span>: 独立同分布的随机变量</p>
+<p><span class="math inline">\(X_1\cdots X_n\)</span>:
+独立同分布的随机变量</p>
 <p>接下来我们给出弱大数定律的证明：</p>
 <p>$Proof: $</p>
 <p>根据均值及方差的线性性 (Linearity):</p>
@@ -355,7 +375,8 @@ Var(M_n) &amp;= Var(\frac{X_1+\cdots+X_n}{n})\\
 P(|M_n - \mu| \geq \epsilon) &amp;\leq \frac{Var(M_n)}{\epsilon^2}
 = \frac{\sigma^2}{n\epsilon^2}\\
 \\
-0\leq \lim_{n \to \infty} P(|M_n - \mu| &amp;\geq \epsilon)\leq \lim_{n \to \infty} \frac{\sigma^2}{n\epsilon^2} = 0
+0\leq \lim_{n \to \infty} P(|M_n - \mu| &amp;\geq \epsilon)\leq \lim_{n
+\to \infty} \frac{\sigma^2}{n\epsilon^2} = 0
 \end{align*}
 \]</span> 根据夹逼定理， <span class="math display">\[
 \begin{align*}
@@ -364,7 +385,8 @@ P(|M_n - \mu| \geq \epsilon) &amp;\leq \frac{Var(M_n)}{\epsilon^2}
 \]</span> 证毕。</p>
 <p>WLLN描述的实际上就是我们在开头讲的，样本数目足够多的情况下，样本均值会趋于期望。那这个描述样本均值的定律，是怎么和频率扯上关系的呢？</p>
 <h2 id="大数定律与事件概率估计">大数定律与事件概率估计</h2>
-<p>我们在讨论<span class="math inline">\(X_1\cdots X_n\)</span>时，实际上讨论的是某一试验的多次重复。不妨用<span class="math inline">\(X_i\)</span>来表示某事件<span class="math inline">\(A\)</span>是否发生，即：</p>
+<p>我们在讨论<span class="math inline">\(X_1\cdots
+X_n\)</span>时，实际上讨论的是某一试验的多次重复。不妨用<span class="math inline">\(X_i\)</span>来表示某事件<span class="math inline">\(A\)</span>是否发生，即：</p>
 <p><span class="math display">\[
 \begin{equation}
 X_i = \left\{
@@ -374,7 +396,8 @@ X_i = \left\{
 \end{aligned}
 \right.
 \end{equation}
-\]</span> 那么，经过多次重复实验，得到的样本均值实际上就是事情发生的频率。</p>
+\]</span>
+那么，经过多次重复实验，得到的样本均值实际上就是事情发生的频率。</p>
 <p><span class="math display">\[
 \begin{align*}
 M_n &amp;= \frac{\sum^{n}_{i=1} X_i}{n} \\
@@ -388,7 +411,8 @@ M_n &amp;= \frac{\sum^{n}_{i=1} X_i}{n} \\
 \]</span> 所以，根据大数定律：</p>
 <p><span class="math display">\[
 \begin{align*}
-\lim_{n \to \infty} P(|M_n - \mu| &amp;\geq \epsilon) = \lim_{n \to \infty}P(frequency-P(A)) = 0
+\lim_{n \to \infty} P(|M_n - \mu| &amp;\geq \epsilon) = \lim_{n \to
+\infty}P(frequency-P(A)) = 0
 \end{align*}
 \]</span> 也就是说，频率趋于概率。</p>
 <h1 id="强大数定律">强大数定律</h1>
@@ -396,7 +420,8 @@ M_n &amp;= \frac{\sum^{n}_{i=1} X_i}{n} \\
 \begin{align*}
 P(\lim_{n \to \infty} |M_n - \mu| \geq \epsilon) &amp;= 0
 \end{align*}
-\]</span> 实际上就是把极限符号给放进去了，虽然只有一点变化，但是表示的意思就更强烈了一点。</p>
+\]</span>
+实际上就是把极限符号给放进去了，虽然只有一点变化，但是表示的意思就更强烈了一点。</p>
 <blockquote>
 <p>弱大数定律指的是样本均值依概率收敛于期望，而强大数定律则指出样本均值几乎处处收敛于期望。</p>
 </blockquote>
